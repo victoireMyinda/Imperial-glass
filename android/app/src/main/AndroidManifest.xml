@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.imperial.cream">
+    package="com.imperial.glass">
    <application
         android:label="Imperial glass"
         android:name="${applicationName}"
