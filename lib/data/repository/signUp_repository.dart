@@ -59,6 +59,14 @@ class SignUpRepository {
 
 
 
+
+
+
+
+
+
+
+
   static Future<Map<String, dynamic>> login(String login, String pwd) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -271,15 +279,15 @@ class SignUpRepository {
     }
   }
 
-  static Future<Map<String, dynamic>> getProvinceKelasi() async {
+  static Future<Map<String, dynamic>> getProvinceCream() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString("token");
+    // String? token = prefs.getString("token");
 
-    var headers = {'Authorization': 'Bearer $token'};
+    // var headers = {'Authorization': 'Bearer $token'};
     var request = http.Request(
-        'GET', Uri.parse("${StringFormat.baseUrl}api/address.php"));
+        'GET', Uri.parse("${StringFormat.baseUrlCream}api/v1/address"));
 
-    request.headers.addAll(headers);
+    // request.headers.addAll(headers);
     request.body = json.encode({"idParent": ""});
 
     http.StreamedResponse response = await request.send();
@@ -296,15 +304,15 @@ class SignUpRepository {
     }
   }
 
-  static Future<Map<String, dynamic>> getVilleKelasi(String idProvince) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString("token");
+  static Future<Map<String, dynamic>> getVilleCream(String idProvince) async {
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // String? token = prefs.getString("token");
 
-    var headers = {'Authorization': 'Bearer $token'};
+    // var headers = {'Authorization': 'Bearer $token'};
     var request = http.Request(
-        'GET', Uri.parse("${StringFormat.baseUrl}api/address.php"));
+        'GET', Uri.parse("${StringFormat.baseUrl}api/v1/address"));
 
-    request.headers.addAll(headers);
+    // request.headers.addAll(headers);
     request.body = json.encode({"province_id": idProvince});
 
     http.StreamedResponse response = await request.send();
@@ -321,15 +329,15 @@ class SignUpRepository {
     }
   }
 
-  static Future<Map<String, dynamic>> getCommuneKelasi(String idVille) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString("token");
+  static Future<Map<String, dynamic>> getCommuneCream(String idVille) async {
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // String? token = prefs.getString("token");
 
-    var headers = {'Authorization': 'Bearer $token'};
+    // var headers = {'Authorization': 'Bearer $token'};
     var request = http.Request(
-        'GET', Uri.parse("${StringFormat.baseUrl}api/address.php"));
+        'GET', Uri.parse("${StringFormat.baseUrlCream}api/v1/address"));
 
-    request.headers.addAll(headers);
+    // request.headers.addAll(headers);
     request.body = json.encode({"ville_id": idVille});
 
     http.StreamedResponse response = await request.send();

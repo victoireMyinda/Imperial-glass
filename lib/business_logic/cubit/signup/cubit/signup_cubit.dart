@@ -85,31 +85,31 @@ class SignupCubit extends Cubit<SignupState> {
     emit(SignupState(field: {...state.field!, "communeData": communeData}));
   }
 
-  loadProvincesKelasi() async {
-    var response= await SignUpRepository.getProvinceKelasi();
-    List? provincesDataKelasi = response["data"];
+  loadProvincesCream() async {
+    var response= await SignUpRepository.getProvinceCream();
+    List? provincesDataCream = response["data"];
     emit(SignupState(field: {
       ...state.field!,
-      "provinceDataKelasi": provincesDataKelasi,
+      "provincesDataCream": provincesDataCream,
     }));
   }
 
 
-    loadVillesKelasi() async {
-    var response= await SignUpRepository.getVilleKelasi(state.field!["province"]);
-    List? villeDataKelasi = response["data"];
+   loadVillesCream() async {
+    var response= await SignUpRepository.getVilleCream(state.field!["province"]);
+    List? villesDataCream = response["data"];
       emit(SignupState(field: {
         ...state.field!,
-        "villeDataKelasi": villeDataKelasi,
+        "villesDataCream": villesDataCream,
       }));
     }
 
-  loadCommunesKelasi() async {
-    var response= await SignUpRepository.getCommuneKelasi(state.field!["ville"]);
-    List? communeDataKelasi = response["data"];
+  loadCommunesCream() async {
+    var response= await SignUpRepository.getCommuneCream(state.field!["ville"]);
+    List? communesDataCream = response["data"];
     emit(SignupState(field: {
       ...state.field!,
-      "communeDataKelasi": communeDataKelasi,
+      "communesDataCream": communesDataCream,
     }));
   }
 
@@ -131,10 +131,10 @@ class SignupCubit extends Cubit<SignupState> {
       loadPromotionData();
     }
     if (field == 'province') {
-      loadVillesKelasi();
+      loadVillesCream();
     }
     if (field == 'ville') {
-      loadCommunesKelasi();
+      loadCommunesCream();
     }
 
     if (field == 'section') {
