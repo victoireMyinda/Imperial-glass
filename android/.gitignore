@@ -12,3 +12,80 @@ GeneratedPluginRegistrant.java
 #key.properties
 #**/*.keystore
 #**/*.jks
+
+# Flutter/Dart specific
+*.iml
+.idea
+.vscode/
+*.code-workspace
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.dart_tool/
+/flutter_assets/
+
+# iOS
+Pods/
+ios/Pods/
+ios/Podfile.lock
+ios/Runner.xcworkspace/
+ios/Runner.xcodeproj/
+*.xcuserdatad/
+*.xcworkspace/
+
+# Android
+build/
+android/app/build/
+android/build/
+android/gradle/
+android/local.properties
+android/gradlew
+android/gradlew.bat
+android/gradle-wrapper.properties
+android/gradle-wrapper.jar
+android/gradle.properties
+android/captures/
+
+# IntelliJ/Android Studio
+*.iml
+*.ipr
+*.iws
+.idea/
+.android/
+.build/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Flutter create
+ios/Flutter/AppFrameworkInfo.plist
+ios/Flutter/Debug.xcconfig
+ios/Flutter/Release.xcconfig
+
+# Flutter analysis
+.dart_tool/
+.dart_comment_store/
+
+# Web
+webdev/
+web/build/
+web/.dart_tool/
+web/packages/
+web/*.dart.js
+web/*.dart.js.map
+
+# Test
+test/*.dart
+test/*.vm_test.dart
+
