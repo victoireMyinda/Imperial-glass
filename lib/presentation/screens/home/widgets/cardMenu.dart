@@ -36,8 +36,8 @@ class _CardMenuState extends State<CardMenu> {
         ],
       ),
       child: Container(
-        height: 200,
-        width: 300,
+        height: 150,
+        width: 200,
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(20),)
