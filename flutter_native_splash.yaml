@@ -1,0 +1,7 @@
+flutter_native_splash:
+  #image: assets/graphics/logo.png
+  image: assets/images/splash-first.png
+  color: "ffffff"
+  #android_disable_fullscreen: true
+  # android_gravity: fill
+  # ios_content_mode: fill

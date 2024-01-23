@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 30" width="15" height="30">
+	<title>rowback-icon</title>
+	<defs>
+		<image  width="15" height="30" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAeCAMAAADEgrRGAAAAAXNSR0IB2cksfwAAAEVQTFRFAAAAIEqVIFCXIFCZIE+XIE2WIEyTIE+XIE+XIFCXIFCfIE6XIE6YIFCXIE6VIFCPIE+YIE+XIE+WIFCZIE+XIE6WIFCVEc73HAAAABd0Uk5TADAgf/9wQL/fYBCQj0CAEM+f73DvoDAzb3zCAAAAZElEQVR4nMXRSRKAIAxE0RhbBRTF8f5HNbiQ5gLK7oWqXwwitBplSQt0xB7AUKjO7F+GzLFsT0YXuAVX8rmFWLfmT1pLMq90Ld1Q3zPmXk+D3Xzw05w2SOU8PzbpP56mZ4tecgPQCASATyitmQAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="0" y="0"/>
+</svg>

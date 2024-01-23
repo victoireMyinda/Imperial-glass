@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "462205201821",
+    "project_id": "trans-academia",
+    "storage_bucket": "trans-academia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462205201821:android:1085d6b3ce3a189e641374",
+        "android_client_info": {
+          "package_name": "com.imperial.cream"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "462205201821-44dh4c9tniqbo8psdls685jvoeno8jsj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCR6SUDcw2trA8hny8AuWqZIGd0ctpFTQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "462205201821-44dh4c9tniqbo8psdls685jvoeno8jsj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "462205201821-6edb2458rkjjg6f6ltbgo9vrveg08k7v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.imperial.cream"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462205201821:android:66c333256ffe4e46641374",
+        "android_client_info": {
+          "package_name": "com.imperial.cream_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "462205201821-44dh4c9tniqbo8psdls685jvoeno8jsj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCR6SUDcw2trA8hny8AuWqZIGd0ctpFTQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "462205201821-44dh4c9tniqbo8psdls685jvoeno8jsj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "462205201821-6edb2458rkjjg6f6ltbgo9vrveg08k7v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.imperial.cream"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

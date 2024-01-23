@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+	<title>icons8-qr-code-80</title>
+	<defs>
+		<image  width="60" height="60" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8BAMAAADI0sRBAAAAAXNSR0IB2cksfwAAAA9QTFRFc3NzAAAAc3Nzc3NzcnJyQVcvAQAAAAV0Uk5T/wDFw8IK1rKHAAABK0lEQVR4nKWUgY3DMAhFfRv0X0fwBJWywO2/1MUGwweSJmoJlSK+gp9/sVvzgEY7jl3pI3NRP9p/20gqJTm+TLnr0/D7Ggkq7fKmT8PzbySodN2cq0Ke1gZWVcmtNNd+tB/eD5Vm8/EOJrdSkI2c5T7fOze30lwbIC87qFT3/Y3na+0Tz9e+P/IcxfM8N9ubWSvfgELJKYKs5Gdyjaa0OYO8lbzZPNHKwFi2RCsDY3lNzqh5Cy2i5i3cIK/pckLVUSe0C3KO4nn864vnJ5NhMq0jzMFzloU5eM6n5LC5n5LFTJ6XWxHB84NDFJv7zWTkEkLuN5ORSwi5Xz0ntrjMYwMh55uJxwZCnm6m2nxtjD03cpfZcyP/xHMYuTcnz2HkLNfmNExHnpNcPf8HXqd/hVVNcOUAAAAASUVORK5CYII="/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="10" y="10"/>
+</svg>

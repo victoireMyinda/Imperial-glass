@@ -1,0 +1,407 @@
+{
+	"info": {
+		"_postman_id": "12261223-2f9f-4837-82d2-f72cc3935dd2",
+		"name": "Orange SMS MEA",
+		"description": "Set of essential API calls and environement variables to test the Orange SMS MEA APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11729982"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"if (responseCode.code === 200) {",
+							"    var data = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable(\"access_token\", data.access_token);",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"if (!pm.environment.get(\"authorization_header\")) { ",
+							"    throw new Error(\"Please set the current value of the {{authorization_header}} variable in your Environment, with your Orange Developer app credentials. Thank you.\"); ",
+							"}",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{authorization_header}}",
+						"description": "credentials from developer.orange.com portal ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.orange.com/oauth/v3/token",
+					"protocol": "https",
+					"host": [
+						"api",
+						"orange",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"v3",
+						"token"
+					]
+				},
+				"description": "Request a token for further API calls,\naccording to OAuth 2.0 standard "
+			},
+			"response": []
+		},
+		{
+			"name": "Send SMS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"if (responseCode.code === 201) { // Created ",
+							"    var data = JSON.parse(responseBody);",
+							"    // extract ressource id at the end of resourceURL, after last /",
+							"    var resourceID = /[^/]*$/.exec(data.resourceURL)[0]; ",
+							"    postman.setEnvironmentVariable(\"resource_id\", resourceID);",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"outboundSMSMessageRequest\": {\n\t\t\"address\": \"tel:+{{recipientPhoneNumber}}\",\n\t\t\"senderAddress\":\"tel:+{{devPhoneNumber}}\",\n\t\t\"outboundSMSTextMessage\": {\n\t\t\t\"message\": \"Hello!\"\n\t\t}\n\t}\n} "
+				},
+				"url": {
+					"raw": "https://api.orange.com/smsmessaging/v1/outbound/tel%3A%2B{{devPhoneNumber}}/requests",
+					"protocol": "https",
+					"host": [
+						"api",
+						"orange",
+						"com"
+					],
+					"path": [
+						"smsmessaging",
+						"v1",
+						"outbound",
+						"tel%3A%2B{{devPhoneNumber}}",
+						"requests"
+					]
+				},
+				"description": "Send a SMS to {{recipient_phone_number}} \nBased on your {{sender_phone_number}} info"
+			},
+			"response": []
+		},
+		{
+			"name": "View SMS balance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"if (responseCode.code === 200) { // OK ",
+							"    var data = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable(\"partner_id\", data.partnerContracts.partnerId);",
+							"}"
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api.orange.com/sms/admin/v1/contracts",
+					"protocol": "https",
+					"host": [
+						"api",
+						"orange",
+						"com"
+					],
+					"path": [
+						"sms",
+						"admin",
+						"v1",
+						"contracts"
+					]
+				},
+				"description": "From your application, or inside your own administration zone, you may have the need to check and display how many SMS you can still send to your customers."
+			},
+			"response": []
+		},
+		{
+			"name": "View SMS usage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"if (responseCode.code === 200) { // OK ",
+							"    var data = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable(\"partner_id\", data.partnerStatistics.partnerId);",
+							"}"
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api.orange.com/sms/admin/v1/statistics",
+					"protocol": "https",
+					"host": [
+						"api",
+						"orange",
+						"com"
+					],
+					"path": [
+						"sms",
+						"admin",
+						"v1",
+						"statistics"
+					]
+				},
+				"description": "From your application or inside your own administration zone, you may need to track how many SMS has been sent per application and/or country."
+			},
+			"response": []
+		},
+		{
+			"name": "View Purchase history",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api.orange.com/sms/admin/v1/purchaseorders",
+					"protocol": "https",
+					"host": [
+						"api",
+						"orange",
+						"com"
+					],
+					"path": [
+						"sms",
+						"admin",
+						"v1",
+						"purchaseorders"
+					]
+				},
+				"description": "you may also need to track all the purchased orders you did with your account."
+			},
+			"response": []
+		},
+		{
+			"name": "https://api.trans-academia.cd/All_paiement_operator.php",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "gatewayMode",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "currency",
+							"value": "CDF",
+							"type": "text"
+						},
+						{
+							"key": "chanel",
+							"value": "MOBILEMONEY",
+							"type": "text"
+						},
+						{
+							"key": "provider",
+							"value": "ORANGE",
+							"type": "text"
+						},
+						{
+							"key": "walletID",
+							"value": "243842613999",
+							"type": "text"
+						},
+						{
+							"key": "IDetudiant",
+							"value": "143",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.trans-academia.cd/All_paiement_operator.php",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trans-academia",
+						"cd"
+					],
+					"path": [
+						"All_paiement_operator.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api.trans-academia.cd/All_paiement_operator.php Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "gatewayMode",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "currency",
+							"value": "CDF",
+							"type": "text"
+						},
+						{
+							"key": "chanel",
+							"value": "MOBILEMONEY",
+							"type": "text"
+						},
+						{
+							"key": "provider",
+							"value": "ORANGE",
+							"type": "text"
+						},
+						{
+							"key": "walletID",
+							"value": "243842613999",
+							"type": "text"
+						},
+						{
+							"key": "IDetudiant",
+							"value": "143",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.trans-academia.cd/All_paiement_operator.php",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trans-academia",
+						"cd"
+					],
+					"path": [
+						"All_paiement_operator.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

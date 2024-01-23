@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
+	<title>icons8-qr-code-40</title>
+	<defs>
+		<image  width="36" height="36" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkAQMAAADbzgrbAAAAAXNSR0IB2cksfwAAAAZQTFRFR4jHAAAA3Tau9wAAAAJ0Uk5T/wDltzBKAAAAY0lEQVR4nEXOwQmDMQyDUQ1gyCqGDODVA70atIrB14DbP3VaHd5N8AGS+OxoHLZa9dS//Gk+7Qqp832snRVtKn21EEBbd85rJrna2q8ZLYbsqzmfqqPSPK7O1NYYEi0GS7++AUubXKcy9HG+AAAAAElFTkSuQmCC"/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="2" y="2"/>
+</svg>

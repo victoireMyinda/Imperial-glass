@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
+	<title>icons8-rappels-de-rendez-vous-40</title>
+	<defs>
+		<image  width="30" height="38" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAmCAMAAADkx9tQAAAAAXNSR0IB2cksfwAAASBQTFRFAAAAVX/UTY3JTYzITYzJTo7JUI7JbqTVz+X4bqPVTYzJ3/D+zuT4RIjMSIjGR4jHSH/IP3+/S4vJTYvIc6bXrc7sTYzHSovFTo7KcqbXzOP3cqXWT47JRoPKTovJmsHlmL7kTYvJSIjISJG2TYzJmcDll77jT4zKTIrJcKTWcKPWTYzKS4vIzeT3TIzITonESInHdqjXdKbXR4jGUo/LqsvqqcrqUY/KTo3JyuL3yuL2T47JSYnH2ez8S4rISorHR4jGaJ7TZ53SRonFQ4bJTYvJutfwUI7KS4fDTY3IlL3klLziTYzISIfGbKHVt9TvttTvbKHUSYnIqtT4ttz+q9P4SYnITovKgLPjgLPiTYzKR4nES4rJSovITYzKSYrI8IQmnQAAAGB0Uk5TAAaQ8O+Pj/X/9fD//w9j/w4IgPXz/30f2fX/9dcd6/v76hwH3Pv72oX09YP1//QNavTzZ7z//7nr///p+v/6+lbx8VAT7f/lEev3+exV7///7/f////2uvv7tCfx8LX3nSp+lwAAAPdJREFUeJzt0slawjAUhuEgoIUjpIxqoSDIIDggziBIVURlRuZBuf+7oDxKTNtEVu78tu/mP3mCEJVpw2yxmhCvzS1BsFm5bBcAti0cdDgxqGGnyECX2+P1Ldnn9fhdet3Z3ZPgOykQlLUqh8JAtR+J0noQi4OmRJK+7zAFutJH1ObjEz1LpxnCZ1m9ApxfEL68MvL1DeHbnJHzd4QLRSMXC4SxUdXH/ec/ZMc9i0ur/6A8sPjx6UvLzxUWV15eVRSVtypLAWr1hohws8VWgHYHs1f/rF/Hv4ao3rs9tf4AsRuOljyecHg6G3X7448oh5H8OZ9PNLoARQIz6fZwa9gAAAAASUVORK5CYII="/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="5" y="1"/>
+</svg>
