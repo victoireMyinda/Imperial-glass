@@ -95,6 +95,13 @@ dependencies:
   fl_chart: ^0.40.0
   percent_indicator: ^4.2.3
   # flutter_barcode_scanner: ^2.0.0
+
+  mac_address: ^1.0.0
+  device_imei: ^0.0.1
+  device_info_plus: ^8.2.2
+  macadress_gen: ^0.0.4
+  device_information: ^0.0.4
+  unique_identifier: ^0.3.0
   
 
 
