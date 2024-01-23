@@ -10,6 +10,55 @@ import 'package:dio/dio.dart';
 import 'package:icecream_service/utils/string.util.dart';
 
 class SignUpRepository {
+
+ static Future<Map<String, dynamic>> signupAgentCream( Map data, BuildContext context) async {
+    // Vérifier la connexion Internet
+    try {
+      final response = await InternetAddress.lookup('www.google.com');
+      if (response.isNotEmpty) {
+        if (kDebugMode) {
+          print("connected");
+        }
+      }
+    } on SocketException catch (err) {
+      return {"status": 0, "message": "Pas de connexion internet"};
+    }
+
+    var headers = {'Content-Type': 'application/json'};
+
+    var request = http.Request(
+        'POST', Uri.parse("${StringFormat.baseUrlCream}/auth/signup"));
+
+    request.body = json.encode(data);
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    String responseBody = await response.stream.bytesToString();
+
+    Map<String, dynamic> responseJson = json.decode(responseBody);
+
+    int statusCode = responseJson['code'];
+
+    if (statusCode == 201) {
+      Map? responseData = responseJson['data'];
+      String? message = responseJson['message'];
+      //prefs.setString("token", token.toString());
+      return {"status": statusCode, "data": responseData, "message": message};
+    } else if (statusCode == 400) {
+      String? message = responseJson['message'];
+      return {"status": statusCode, "message": message};
+    } else {
+      String? message = responseJson['message'];
+      return {"status": statusCode, "message": message};
+    }
+  }
+
+
+
+
+
   static Future<Map<String, dynamic>> login(String login, String pwd) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 

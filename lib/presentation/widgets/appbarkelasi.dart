@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:icecream_service/presentation/screens/ventejournaliere/ventejournaliere.dart';
+import 'package:icecream_service/presentation/screens/agentAdmin/ventejournaliere/ventejournaliere.dart';
 
 class AppBarKelasi extends StatefulWidget implements PreferredSizeWidget {
   final Color? color, backgroundColor;
@@ -42,13 +42,13 @@ class _AppBarKelasiState extends State<AppBarKelasi> {
             child: SvgPicture.asset(
               widget.leftIcon.toString(),
               width: widget.sizeleftIcon,
-              color: widget.color,
+               color: widget.color ?? Colors.brown,
             ),
           ),
           Text(
             widget.title.toString(),
             style: TextStyle(
-              color: widget.color ?? Colors.white,
+              color: widget.color ?? Colors.brown,
               fontWeight: FontWeight.w600,
               fontSize: 18,
             ),

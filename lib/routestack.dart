@@ -6,8 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:icecream_service/presentation/screens/abonnement/abonnement.dart';
 // import 'package:icecream_service/responsive.dart';
 import 'package:icecream_service/presentation/screens/home/home_screen.dart';
-import 'package:icecream_service/presentation/screens/login/login_screen.dart';
-import 'package:icecream_service/presentation/screens/ventejournaliere/ventejournaliere.dart';
 import 'package:icecream_service/presentation/screens/qrcode/qrcode.dart';
 import 'package:icecream_service/presentation/screens/setting/setting.dart';
 import 'package:icecream_service/sizeconfig.dart';
