@@ -85,56 +85,59 @@ class SignupCubit extends Cubit<SignupState> {
     emit(SignupState(field: {...state.field!, "communeData": communeData}));
   }
 
-  loadProvincesCream() async {
-    var response= await SignUpRepository.getProvinceCream();
-    List? provincesDataCream = response["data"];
+ loadProvincesKelasi() async {
+  var response = await SignUpRepository.getProvinceKelasi();
+  int statusCode = response["status"];
+
+  if (statusCode == 200) {
+    List<Map<String, dynamic>> provincesDataKelasi = response["data"];
     emit(SignupState(field: {
       ...state.field!,
-      "provincesDataCream": provincesDataCream,
+      "provinceDataKelasi": provincesDataKelasi,
+    }));
+  } else {
+   print("erreur de l'obtention de data");
+  }
+}
+
+
+  loadVillesKelasi() async {
+    var response =
+        await SignUpRepository.getVilleKelasi(state.field!["province"]);
+    List? villeDataKelasi = response["data"];
+    emit(SignupState(field: {
+      ...state.field!,
+      "villeDataKelasi": villeDataKelasi,
     }));
   }
 
-
-   loadVillesCream() async {
-    var response= await SignUpRepository.getVilleCream(state.field!["province"]);
-    List? villesDataCream = response["data"];
-      emit(SignupState(field: {
-        ...state.field!,
-        "villesDataCream": villesDataCream,
-      }));
-    }
-
-  loadCommunesCream() async {
-    var response= await SignUpRepository.getCommuneCream(state.field!["ville"]);
-    List? communesDataCream = response["data"];
+  loadCommunesKelasi() async {
+    var response =
+        await SignUpRepository.getCommuneKelasi(state.field!["ville"]);
+    List? communeDataKelasi = response["data"];
     emit(SignupState(field: {
       ...state.field!,
-      "communesDataCream": communesDataCream,
+      "communeDataKelasi": communeDataKelasi,
     }));
   }
 
-  void updateField(context, {required String field, String? data}) {
+   void updateField(context, {required String field, data}) {
     emit(SignupState(field: {
       ...state.field!,
       field: data,
     }));
 
+    
+
     if (field == 'universite') {
       loadFaculteData();
     }
 
-    if (field == 'faculte') {
-      loadDepartementData();
-    }
-
-    if (field == 'departement') {
-      loadPromotionData();
-    }
     if (field == 'province') {
-      loadVillesCream();
+      loadVillesKelasi();
     }
     if (field == 'ville') {
-      loadCommunesCream();
+      loadCommunesKelasi();
     }
 
     if (field == 'section') {

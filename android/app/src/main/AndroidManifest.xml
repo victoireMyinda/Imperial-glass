@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.imperial.cream">
    <application
-        android:label="Imperial glass"
+        android:label="Imperial Cream"
         android:name="${applicationName}"
         android:icon="@mipmap/icon">
         <activity

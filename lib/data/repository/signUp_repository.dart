@@ -11,7 +11,7 @@ import 'package:icecream_service/utils/string.util.dart';
 
 class SignUpRepository {
 
- static Future<Map<String, dynamic>> signupAgentCream( Map data, BuildContext context) async {
+ static Future<Map<String, dynamic>> signupAgentCream(Map data) async {
     // Vérifier la connexion Internet
     try {
       final response = await InternetAddress.lookup('www.google.com');
@@ -51,6 +51,43 @@ class SignUpRepository {
       return {"status": statusCode, "message": message};
     } else {
       String? message = responseJson['message'];
+      return {"status": statusCode, "message": message};
+    }
+  }
+
+
+   static Future<Map<String, dynamic>> loginCream(String login, String pwd) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    var headers = {'Content-Type': 'application/json'};
+    var request = http.Request(
+        'GET', Uri.parse("${StringFormat.baseUrlCream}auth/signup"));
+
+    request.body = json.encode({"login": login, "pwd": pwd});
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    String responseBody = await response.stream.bytesToString();
+
+    Map<String, dynamic> responseJson = json.decode(responseBody);
+
+    int statusCode = responseJson['code'];
+
+    if (statusCode == 200) {
+      // String? token = responseJson['token'];
+      String? message = responseJson['message'];
+      Map? data = responseJson['data'];
+
+      // prefs.setString("token", token.toString());
+      return {
+        // "token": token,
+        "status": statusCode,
+        "message": message,
+        "data": data
+      };
+    } else {
+      String message = responseJson['message'];
       return {"status": statusCode, "message": message};
     }
   }
@@ -279,38 +316,34 @@ class SignUpRepository {
     }
   }
 
-  static Future<Map<String, dynamic>> getProvinceCream() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // String? token = prefs.getString("token");
 
-    // var headers = {'Authorization': 'Bearer $token'};
-    var request = http.Request(
-        'GET', Uri.parse("${StringFormat.baseUrlCream}api/v1/address"));
+ static Future<Map<String, dynamic>> getProvinceKelasi() async {
+  var request = http.Request(
+      'GET', Uri.parse("${StringFormat.baseUrlCream}api/v1/address/province"));
 
-    // request.headers.addAll(headers);
-    request.body = json.encode({"idParent": ""});
+  request.body = json.encode({"idParent": ""});
 
-    http.StreamedResponse response = await request.send();
+  http.StreamedResponse response = await request.send();
+  String responseBody = await response.stream.bytesToString();
 
-    String responseBody = await response.stream.bytesToString();
+  Map<String, dynamic> responseJson = json.decode(responseBody);
 
-    List<dynamic> responseJson = json.decode(responseBody);
-
-    if (response.statusCode == 200) {
-      List? data = responseJson;
-      return {"status": response.statusCode, "data": data};
-    } else {
-      return {"status": response.statusCode};
-    }
+  if (response.statusCode == 200) {
+    List<Map<String, dynamic>> data = List<Map<String, dynamic>>.from(responseJson["data"]);
+    return {"status": response.statusCode, "data": data};
+  } else {
+    return {"status": response.statusCode};
   }
+}
 
-  static Future<Map<String, dynamic>> getVilleCream(String idProvince) async {
+
+ static Future<Map<String, dynamic>> getVilleKelasi(String idProvince) async {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // String? token = prefs.getString("token");
 
     // var headers = {'Authorization': 'Bearer $token'};
-    var request = http.Request(
-        'GET', Uri.parse("${StringFormat.baseUrl}api/v1/address"));
+    var request =
+        http.Request('GET', Uri.parse("${StringFormat.baseUrlCream}api/v1/address/province/${idProvince}"));
 
     // request.headers.addAll(headers);
     request.body = json.encode({"province_id": idProvince});
@@ -329,13 +362,13 @@ class SignUpRepository {
     }
   }
 
-  static Future<Map<String, dynamic>> getCommuneCream(String idVille) async {
+  static Future<Map<String, dynamic>> getCommuneKelasi(String idVille) async {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // String? token = prefs.getString("token");
 
     // var headers = {'Authorization': 'Bearer $token'};
-    var request = http.Request(
-        'GET', Uri.parse("${StringFormat.baseUrlCream}api/v1/address"));
+    var request =
+         http.Request('GET', Uri.parse("${StringFormat.baseUrlCream}api/v1/address/ville/${idVille}"));
 
     // request.headers.addAll(headers);
     request.body = json.encode({"ville_id": idVille});

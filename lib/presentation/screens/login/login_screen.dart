@@ -3,8 +3,15 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icecream_service/constants/my_colors.dart';
+import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogError.dart';
+import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogLoginPayment.dart';
+import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogSuccess.dart';
+import 'package:icecream_service/presentation/widgets/dialog/ValidationDialog.dart';
+import 'package:icecream_service/presentation/widgets/dialog/loading.dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:icecream_service/business_logic/cubit/abonnement/cubit/abonnement_cubit.dart';
 import 'package:icecream_service/business_logic/cubit/signup/cubit/signup_cubit.dart';
@@ -350,18 +357,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               //   int status;
                               //   try {
                               //     await http.post(Uri.parse(
-                              //         // "https://tag.trans-academia.cd/Trans_login.php"
+                                      
                               //         "https://tag.trans-academia.cd/API_login_crypte.php"), body: {
-                              //       'App_name': "app",
-                              //       'token': "2022",
-                              //       // ignore: prefer_interpolation_to_compose_strings
+                              //       // 'App_name': "app",
+                              //       // 'token': "2022",
                               //       'login': "0" + state.field!["phone"],
-                              //       // 'login': "243827244106",
                               //       'pass': state.field!["password"],
-                              //       // 'token': '2022',
-                              //       // 'App_name': 'app',
-                              //       // 'pass': 'mboso',
-                              //       // 'login': '0820000106'
+                                    
                               //     }).then((response) {
                               //       var data = json.decode(response.body);
 

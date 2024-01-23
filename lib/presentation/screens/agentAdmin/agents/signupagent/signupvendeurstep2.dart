@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icecream_service/business_logic/cubit/signup/cubit/signup_cubit.dart';
 import 'package:icecream_service/constants/my_colors.dart';
+import 'package:icecream_service/data/repository/signUp_repository.dart';
 import 'package:icecream_service/presentation/screens/agentAdmin/agents/signupagent/signupvendeurstep2.dart';
 import 'package:icecream_service/presentation/screens/agentAdmin/agents/signupagent/signupvendeurstep3.dart';
 import 'package:icecream_service/presentation/widgets/appbarkelasi.dart';
 import 'package:icecream_service/presentation/widgets/buttons/buttonTransAcademia.dart';
+import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogError.dart';
+import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogSuccess.dart';
 import 'package:icecream_service/presentation/widgets/dialog/ValidationDialog.dart';
+import 'package:icecream_service/presentation/widgets/dialog/loading.dialog.dart';
 import 'package:icecream_service/presentation/widgets/inputs/dateField.dart';
 import 'package:icecream_service/presentation/widgets/inputs/dropdownSexe.dart';
 import 'package:icecream_service/presentation/widgets/inputs/nameField.dart';
@@ -25,6 +29,8 @@ class SignupVendeurStep2 extends StatefulWidget {
 
 class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
   TextEditingController dateNaissanceController = TextEditingController();
+  TextEditingController dateEmbauche = TextEditingController();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -50,7 +56,7 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
         ),
         body: SingleChildScrollView(
           child: Container(
-            height: MediaQuery.of(context).size.height,
+            // height: MediaQuery.of(context).size.height,
             //padding: const EdgeInsets.all(3),
             color: const Color(0xffF2F2F2),
             child: Column(
@@ -77,7 +83,6 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
                             const SizedBox(
                               height: 30,
                             ),
-
                             Center(
                               child: Container(
                                 height: 80,
@@ -96,7 +101,6 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
                             const SizedBox(
                               height: 10,
                             ),
-
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 20.0),
@@ -114,8 +118,7 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
                                 ],
                               ),
                             ),
-                           
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 10),
                             BlocBuilder<SignupCubit, SignupState>(
                                 builder: (context, state) {
                               return Container(
@@ -134,7 +137,7 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
                                     ),
                                   ));
                             }),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 10),
                             BlocBuilder<SignupCubit, SignupState>(
                                 builder: (context, state) {
                               return Container(
@@ -153,9 +156,7 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
                                     ),
                                   ));
                             }),
-                            const SizedBox(height: 20),
-                           
-
+                            const SizedBox(height: 10),
                             BlocBuilder<SignupCubit, SignupState>(
                               builder: (context, state) {
                                 return Container(
@@ -177,7 +178,46 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
                                     ));
                               },
                             ),
-                             const SizedBox(height: 20),
+                            const SizedBox(height: 10),
+                            BlocBuilder<SignupCubit, SignupState>(
+                                builder: (context, state) {
+                              return Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20.0),
+                                  margin: const EdgeInsets.only(bottom: 10),
+                                  child: SizedBox(
+                                    height: 45.0,
+                                    child: TransAcademiaNameInput(
+                                      hintText: "Lieu de naissance",
+                                      field: "lieuNaissance",
+                                      label: "Lieu de naissance",
+                                      fieldValue: state.field!["lieuNaissance"],
+                                    ),
+                                  ));
+                            }),
+                            const SizedBox(height: 10),
+                            BlocBuilder<SignupCubit, SignupState>(
+                              builder: (context, state) {
+                                return Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20.0),
+                                    margin: const EdgeInsets.only(
+                                      bottom: 15,
+                                    ),
+                                    child: SizedBox(
+                                      height: 50.0,
+                                      child: TransAcademiaDatePicker(
+                                          controller: dateEmbauche,
+                                          hintText: "Date d'embauche",
+                                          color: Colors.white,
+                                          label: "Date d'embauche",
+                                          field: "dateNaissance",
+                                          fieldValue:
+                                              state.field!["dateNaissance"]),
+                                    ));
+                              },
+                            ),
+                            const SizedBox(height: 10),
                             BlocBuilder<SignupCubit, SignupState>(
                               builder: (context, state) {
                                 return Container(
@@ -198,16 +238,14 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
                               },
                             ),
                             const SizedBox(height: 10),
-
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: const [
-                              
                                 StepIndicatorWidget(
                                   color: Colors.black26,
                                 ),
-                                  SizedBox(
+                                SizedBox(
                                   width: 10.0,
                                 ),
                                 StepIndicatorWidget(
@@ -219,14 +257,11 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
                                 StepIndicatorWidget(
                                   color: Colors.black26,
                                 ),
-
                               ],
                             ),
-
                             SizedBox(
                               height: getProportionateScreenHeight(15),
                             ),
-
                             Container(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 20.0),
@@ -251,41 +286,76 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
                                   BlocBuilder<SignupCubit, SignupState>(
                                       builder: (context, state) {
                                     return GestureDetector(
-                                      onTap: () {
-                                        if (state.field!["nom"] == "") {
-                                          BlocProvider.of<SignupCubit>(context)
-                                              .updateField(context,
-                                                  field: "nomError",
-                                                  data: "error");
-                                          ValidationDialog.show(context,
-                                              "Vueillez renseigner le nom", () {
-                                            if (kDebugMode) {
-                                              print("modal");
-                                            }
-                                          });
-                                          return;
-                                        }
+                                      onTap: () async {
+                                        TransAcademiaLoadingDialog.show(
+                                            context);
 
-                                        if (state.field!["postnom"] == "") {
-                                          BlocProvider.of<SignupCubit>(context)
-                                              .updateField(context,
-                                                  field: "postnomError",
-                                                  data: "error");
-                                          ValidationDialog.show(context,
-                                              "Veuillez renseigner le postnom .",
-                                              () {
-                                            if (kDebugMode) {
-                                              print("modal");
-                                            }
+                                        Map data = {
+                                          "first_name": state.field!["nom"],
+                                          "second_name": state.field!["prenom"],
+                                          "third_name": state.field!["postnom"],
+                                          "phone": state.field!["phone"],
+                                          "statut": "A",
+                                          "OTP": 3899,
+                                          "pwd": state.field!["pwd"],
+                                          "pwd_confirm": state.field!["pwd"],
+                                          "sex": state.field!["sexe"],
+                                          "hired_at": state.field!["date"],
+                                          "function": state.field!["fonction"],
+                                          "Grade": state.field!["grade"],
+                                          "Id_service": 1,
+                                          "Id_direction": 1,
+                                          "Id_province": 1,
+                                          "Id_ville": 1,
+                                          "Id_commune": 1,
+                                          "birth_place": "Kikwit",
+                                          "born_at": state.field!["date"],
+                                          "email": state.field!["mail"],
+                                          "photo": "url",
+                                          "availability": 1
+                                        };
+
+                                        Map? response = await SignUpRepository
+                                            .signupAgentCream(data);
+                                        print(response);
+
+                                        int status = response["status"];
+                                        String? message = response["message"];
+
+                                        if (status == 201) {
+                                          //TransAcademiaLoadingDialog.stop(context);
+                                          String? messageSucces =
+                                              "Agent crée avec succès";
+                                          TransAcademiaDialogSuccess.show(
+                                              context, messageSucces, "Signup");
+
+                                          Future.delayed(
+                                              const Duration(
+                                                  milliseconds: 4000),
+                                              () async {
+                                            TransAcademiaDialogSuccess.stop(
+                                                context);
+                                            Navigator.of(context)
+                                                .pushNamedAndRemoveUntil(
+                                                    '/login',
+                                                    (Route<dynamic> route) =>
+                                                        false);
                                           });
-                                          return;
+                                        } else if (status == 403) {
+                                          String? messageSucces =
+                                              "Téléphone non connu ou inexistant. Rendez-vous à la direction pour vous enreigistrer";
+                                          TransAcademiaDialogError.show(
+                                              context, messageSucces, "Error");
+                                          Future.delayed(const Duration(
+                                              milliseconds: 4000));
+                                          TransAcademiaLoadingDialog.stop(
+                                              context);
+                                        } else {
+                                          TransAcademiaLoadingDialog.stop(
+                                              context);
+                                          TransAcademiaDialogError.show(
+                                              context, message, "login");
                                         }
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const SignupVendeurStep3()),
-                                        );
                                       },
                                       child: ButtonTransAcademia(
                                           width: MediaQuery.of(context)
@@ -299,14 +369,8 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
                               ),
                             ),
                             SizedBox(
-                              height: getProportionateScreenHeight(30),
+                              height: getProportionateScreenHeight(15),
                             ),
-
-                            // SizedBox(
-                            //   height: MediaQuery.of(context).size.height * 0.20,
-                            // ),
-                            //
-                            // Text("A propos",style:GoogleFonts.montserrat(color: Colors.white, fontSize: 12)),
                           ],
                         ),
                       ),
