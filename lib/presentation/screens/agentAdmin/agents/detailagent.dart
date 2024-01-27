@@ -24,24 +24,24 @@ class _DetailAgentScreenState extends State<DetailAgentScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    loadData();
+    // loadData();
   }
 
-  loadData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? idParent = prefs.getString("parentId");
-    Map? response =
-        await SignUpRepository.getEnfantsDuParent(idParent.toString());
-    List? recorded = response["data"]["recorded"];
+  // loadData() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String? idParent = prefs.getString("parentId");
+  //   Map? response =
+  //       await SignUpRepository.getEnfantsDuParent(idParent.toString());
+  //   List? recorded = response["data"]["recorded"];
 
-    print(response["data"]);
-    setState(() {
-      dataStudent = recorded;
-      isLoading = false;
-      dataStudentLength = recorded!.length;
-      dataStudent = recorded.reversed.toList(); // Inversion de l'ordre
-    });
-  }
+  //   print(response["data"]);
+  //   setState(() {
+  //     dataStudent = recorded;
+  //     isLoading = false;
+  //     dataStudentLength = recorded!.length;
+  //     dataStudent = recorded.reversed.toList(); // Inversion de l'ordre
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {

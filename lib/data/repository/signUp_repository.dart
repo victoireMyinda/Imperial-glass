@@ -92,27 +92,15 @@ class SignUpRepository {
     }
   }
 
+    static Future<Map<String, dynamic>> gettAllAgentCream() async {
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // String? token = prefs.getString("token");
 
-
-
-
-
-
-
-
-
-
-
-
-  static Future<Map<String, dynamic>> login(String login, String pwd) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    var headers = {'Content-Type': 'application/json'};
+    // var headers = {'Authorization': 'Bearer $token'};
     var request = http.Request(
-        'GET', Uri.parse("${StringFormat.baseUrl}api/user.php/parent"));
+        'GET', Uri.parse('https://iglace.eyanofinance.org/api/v1/user'));
 
-    request.body = json.encode({"login": login, "pwd": pwd});
-    request.headers.addAll(headers);
+    // request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
 
@@ -123,22 +111,62 @@ class SignUpRepository {
     int statusCode = responseJson['code'];
 
     if (statusCode == 200) {
-      String? token = responseJson['token'];
       String? message = responseJson['message'];
-      Map? data = responseJson['data'];
-
-      prefs.setString("token", token.toString());
-      return {
-        "token": token,
-        "status": statusCode,
-        "message": message,
-        "data": data
-      };
+      List? data = responseJson['data'];
+      return {"status": statusCode, "message": message, "data": data};
     } else {
       String message = responseJson['message'];
       return {"status": statusCode, "message": message};
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // static Future<Map<String, dynamic>> login(String login, String pwd) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  //   var headers = {'Content-Type': 'application/json'};
+  //   var request = http.Request(
+  //       'GET', Uri.parse("${StringFormat.baseUrl}api/user.php/parent"));
+
+  //   request.body = json.encode({"login": login, "pwd": pwd});
+  //   request.headers.addAll(headers);
+
+  //   http.StreamedResponse response = await request.send();
+
+  //   String responseBody = await response.stream.bytesToString();
+
+  //   Map<String, dynamic> responseJson = json.decode(responseBody);
+
+  //   int statusCode = responseJson['code'];
+
+  //   if (statusCode == 200) {
+  //     String? token = responseJson['token'];
+  //     String? message = responseJson['message'];
+  //     Map? data = responseJson['data'];
+
+  //     prefs.setString("token", token.toString());
+  //     return {
+  //       "token": token,
+  //       "status": statusCode,
+  //       "message": message,
+  //       "data": data
+  //     };
+  //   } else {
+  //     String message = responseJson['message'];
+  //     return {"status": statusCode, "message": message};
+  //   }
+  // }
 
   static Future<Map<String, dynamic>> getEtablissementsKelasi() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

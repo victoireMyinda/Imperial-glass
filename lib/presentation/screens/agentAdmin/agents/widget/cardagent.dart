@@ -8,8 +8,8 @@ import 'package:icecream_service/constants/my_colors.dart';
 import 'package:icecream_service/presentation/screens/agentAdmin/agents/detailagent.dart';
 
 class CartdAgent extends StatefulWidget {
-  // final Map? data;
-  const CartdAgent({super.key});
+ final Map? data;
+  const CartdAgent({super.key, required this.data});
 
   @override
   State<CartdAgent> createState() => _CartdAgentState();
@@ -41,12 +41,11 @@ class _CartdAgentState extends State<CartdAgent> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                // widget.data!["photo"] == null
-                //     ? SvgPicture.asset(
-                //         "assets/icons/avatarkelasi.svg",
-                //         width: 50,
-                //         color: kelasiColor,
-                //       ) :
+                widget.data!["photo_url"] == null
+                    ? SvgPicture.asset(
+                        "assets/icons/avatarkelasi.svg",
+                        width: 50,
+                      ) :
                 SvgPicture.asset(
                   "assets/icons/avatarkelasi.svg",
                   width: 50,
@@ -61,23 +60,19 @@ class _CartdAgentState extends State<CartdAgent> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Text(
-                        //   "${widget.data!["nom"]} ${widget.data!["postnom"]} ${widget.data!["prenom"]}  ",
-                        //   style: TextStyle(
-                        //       fontWeight: FontWeight.bold, fontSize: 11),
-                        // ),
                         Text(
-                          "Victoire Myinda Tshiaponyi",
+                          "${widget.data!["first_name"]} ${widget.data!["second_name"]} ${widget.data!["third_name"]}  ",
                           style: TextStyle(
-                              fontWeight: FontWeight.w400, fontSize: 11),
+                              fontWeight: FontWeight.bold, fontSize: 11),
                         ),
+                     
                         Container(
                           padding: const EdgeInsets.all(5),
                           decoration: const BoxDecoration(
                             color: Color.fromARGB(255, 237, 236, 236),
                             borderRadius: BorderRadius.all(Radius.circular(25)),
                           ),
-                          child: const Text("Affecté",
+                          child:  Text("${widget.data!["function"]}",
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: MyColors.myBrown,
@@ -92,13 +87,13 @@ class _CartdAgentState extends State<CartdAgent> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("243816644420",
+                        Text("${widget.data!["phone"]}",
                             style: TextStyle(
                                 fontWeight: FontWeight.w400, fontSize: 11)),
                         BlocBuilder<SignupCubit, SignupState>(
                           builder: (context, state) {
                             return Text(
-                              "Affecté à Masina sans-fils",
+                              "${widget.data!["grade"]}",
                               style: TextStyle(
                                   fontWeight: FontWeight.w400, fontSize: 11),
                             );
@@ -119,12 +114,13 @@ class _CartdAgentState extends State<CartdAgent> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Text(widget.data!["created_at"].toString(),
-                        //     style: TextStyle(
-                        //         fontWeight: FontWeight.w400, fontSize: 11)),
-                         Text("15/01/2024",
+                        Text("Date de creation",
                             style: TextStyle(
                                 fontWeight: FontWeight.w400, fontSize: 11)),
+                        Text(widget.data!["created_at"].toString(),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400, fontSize: 11)),
+                         
                       ],
                     ),
                   ),
