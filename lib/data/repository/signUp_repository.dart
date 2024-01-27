@@ -27,7 +27,7 @@ class SignUpRepository {
     var headers = {'Content-Type': 'application/json'};
 
     var request = http.Request(
-        'POST', Uri.parse("${StringFormat.baseUrlCream}/auth/signup"));
+        'POST', Uri.parse("https://iglace.eyanofinance.org/api/v1/auth/signup"));
 
     request.body = json.encode(data);
 
@@ -61,7 +61,7 @@ class SignUpRepository {
 
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'GET', Uri.parse("${StringFormat.baseUrlCream}auth/signup"));
+        'GET', Uri.parse("https://iglace.eyanofinance.org/api/v1/auth/login"));
 
     request.body = json.encode({"login": login, "pwd": pwd});
     request.headers.addAll(headers);

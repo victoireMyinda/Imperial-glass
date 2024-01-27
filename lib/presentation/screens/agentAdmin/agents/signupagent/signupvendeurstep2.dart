@@ -158,6 +158,23 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
                             }),
                             const SizedBox(height: 10),
                             BlocBuilder<SignupCubit, SignupState>(
+                                builder: (context, state) {
+                              return Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20.0),
+                                  margin: const EdgeInsets.only(bottom: 10),
+                                  child: SizedBox(
+                                    height: 45.0,
+                                    child: TransAcademiaNameInput(
+                                      hintText: "Lieu de naissance",
+                                      field: "lieuNaissance",
+                                      label: "Lieu de naissance",
+                                      fieldValue: state.field!["lieuNaissance"],
+                                    ),
+                                  ));
+                            }),
+                            const SizedBox(height: 10),
+                            BlocBuilder<SignupCubit, SignupState>(
                               builder: (context, state) {
                                 return Container(
                                     padding: const EdgeInsets.symmetric(
@@ -178,23 +195,6 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
                                     ));
                               },
                             ),
-                            const SizedBox(height: 10),
-                            BlocBuilder<SignupCubit, SignupState>(
-                                builder: (context, state) {
-                              return Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20.0),
-                                  margin: const EdgeInsets.only(bottom: 10),
-                                  child: SizedBox(
-                                    height: 45.0,
-                                    child: TransAcademiaNameInput(
-                                      hintText: "Lieu de naissance",
-                                      field: "lieuNaissance",
-                                      label: "Lieu de naissance",
-                                      fieldValue: state.field!["lieuNaissance"],
-                                    ),
-                                  ));
-                            }),
                             const SizedBox(height: 10),
                             BlocBuilder<SignupCubit, SignupState>(
                               builder: (context, state) {
@@ -251,12 +251,6 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
                                 StepIndicatorWidget(
                                   color: MyColors.myBrown,
                                 ),
-                                SizedBox(
-                                  width: 10.0,
-                                ),
-                                StepIndicatorWidget(
-                                  color: Colors.black26,
-                                ),
                               ],
                             ),
                             SizedBox(
@@ -291,6 +285,7 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
                                             context);
 
                                         Map data = {
+                                          "agent_id": 12,
                                           "first_name": state.field!["nom"],
                                           "second_name": state.field!["prenom"],
                                           "third_name": state.field!["postnom"],
@@ -300,18 +295,21 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
                                           "pwd": state.field!["pwd"],
                                           "pwd_confirm": state.field!["pwd"],
                                           "sex": state.field!["sexe"],
-                                          "hired_at": state.field!["date"],
-                                          "function": state.field!["fonction"],
-                                          "Grade": state.field!["grade"],
-                                          "Id_service": 1,
-                                          "Id_direction": 1,
-                                          "Id_province": 1,
-                                          "Id_ville": 1,
-                                          "Id_commune": 1,
-                                          "birth_place": "Kikwit",
-                                          "born_at": state.field!["date"],
-                                          "email": state.field!["mail"],
-                                          "photo": "url",
+                                          "hired_at":
+                                              state.field!["dateNaissance"],
+                                          "function": "Agent",
+                                          "Grade": "Directeur Info",
+                                          "ID_service": 1,
+                                          "ID_direction": 1,
+                                          "ID_province": 1,
+                                          "ID_commune": 3,
+                                          "ID_ville": 1,
+                                          "birth_place":
+                                              state.field!["lieuNaissance"],
+                                          "born_at":
+                                              state.field!["dateNaissance"],
+                                          "email": state.field!["email"],
+                                          "photo_url": "url",
                                           "availability": 1
                                         };
 
@@ -323,9 +321,9 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
                                         String? message = response["message"];
 
                                         if (status == 201) {
-                                          //TransAcademiaLoadingDialog.stop(context);
+                                          TransAcademiaLoadingDialog.stop(context);
                                           String? messageSucces =
-                                              "Agent crée avec succès";
+                                              "La création de l'agent a été effectuée avec succès";
                                           TransAcademiaDialogSuccess.show(
                                               context, messageSucces, "Signup");
 
@@ -341,15 +339,6 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
                                                     (Route<dynamic> route) =>
                                                         false);
                                           });
-                                        } else if (status == 403) {
-                                          String? messageSucces =
-                                              "Téléphone non connu ou inexistant. Rendez-vous à la direction pour vous enreigistrer";
-                                          TransAcademiaDialogError.show(
-                                              context, messageSucces, "Error");
-                                          Future.delayed(const Duration(
-                                              milliseconds: 4000));
-                                          TransAcademiaLoadingDialog.stop(
-                                              context);
                                         } else {
                                           TransAcademiaLoadingDialog.stop(
                                               context);
@@ -362,9 +351,9 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
                                                   .size
                                                   .width /
                                               3,
-                                          title: "Suivant"),
+                                          title: "Enregistrer"),
                                     );
-                                  }),
+                                  })
                                 ],
                               ),
                             ),

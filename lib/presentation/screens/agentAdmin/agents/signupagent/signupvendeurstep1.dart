@@ -132,7 +132,7 @@ class _SingupVendeurStep1State extends State<SingupVendeurStep1> {
                                     height: 45.0,
                                     child: TransAcademiaNameInput(
                                       // controller: phoneController,
-                                      isError: state.field!["prenomError"],
+                                      // isError: state.field!["prenomError"],
                                       hintText: "Prenom",
                                       field: "prenom",
                                       label: "Prenom",
@@ -208,12 +208,7 @@ class _SingupVendeurStep1State extends State<SingupVendeurStep1> {
                                 StepIndicatorWidget(
                                   color: MyColors.myBrown,
                                 ),
-                                SizedBox(
-                                  width: 10.0,
-                                ),
-                                StepIndicatorWidget(
-                                  color: Colors.black26,
-                                ),
+                               
                                 SizedBox(
                                   width: 10.0,
                                 ),
