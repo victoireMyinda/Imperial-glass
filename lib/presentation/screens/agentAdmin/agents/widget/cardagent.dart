@@ -23,7 +23,7 @@ class _CartdAgentState extends State<CartdAgent> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => DetailAgentScreen()),
+              builder: (context) => DetailAgentScreen(data: widget.data,)),
         );
       },
       child: Padding(

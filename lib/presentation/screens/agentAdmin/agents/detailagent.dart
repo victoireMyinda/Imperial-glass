@@ -7,8 +7,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:icecream_service/data/repository/signUp_repository.dart';
 
 class DetailAgentScreen extends StatefulWidget {
+  Map? data;
   DetailAgentScreen({
-    super.key,
+    super.key, required this.data
   });
 
   @override
@@ -16,30 +17,27 @@ class DetailAgentScreen extends StatefulWidget {
 }
 
 class _DetailAgentScreenState extends State<DetailAgentScreen> {
-  List? dataStudent = [];
-  bool isLoading = true;
-  int dataStudentLength = 0;
+  
+  // bool isLoading = true;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    // loadData();
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   loadData();
+  // }
 
   // loadData() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   String? idParent = prefs.getString("parentId");
+  //   String? agentId = prefs.getString("id");
   //   Map? response =
-  //       await SignUpRepository.getEnfantsDuParent(idParent.toString());
-  //   List? recorded = response["data"]["recorded"];
+  //       await SignUpRepository.getAgentById(agentId.toString());
+  //   List? agentById = response["data"];
 
-  //   print(response["data"]);
+  //   // print(response["data"]);
   //   setState(() {
-  //     dataStudent = recorded;
+  //     dataAgentById = agentById;
   //     isLoading = false;
-  //     dataStudentLength = recorded!.length;
-  //     dataStudent = recorded.reversed.toList(); // Inversion de l'ordre
   //   });
   // }
 
@@ -84,9 +82,9 @@ class _DetailAgentScreenState extends State<DetailAgentScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            "Victoire Myinda Tshiaponyi",
-                            style: TextStyle(
+                           Text(
+                            "${widget.data!["first_name"]} ${widget.data!["second_name"]} ${widget.data!["third_name"]}  ",
+                            style: const TextStyle(
                               fontSize: 20,
                               color: MyColors.myBrown,
                             ),
@@ -127,11 +125,11 @@ class _DetailAgentScreenState extends State<DetailAgentScreen> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text("Téléphone",
+                        children:  [
+                          const Text("Téléphone",
                               style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("+243816644420",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
+                          Text("${widget.data!["phone"]}",
+                              style: const TextStyle(fontWeight: FontWeight.w300)),
                         ],
                       ),
                       const Divider(

@@ -31,8 +31,7 @@ class _ListeAgentsScreenState extends State<ListeAgentsScreen> {
   loadData() async {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // String? idParent = prefs.getString("parentId");
-    Map? response =
-        await SignUpRepository.gettAllAgentCream();
+    Map? response = await SignUpRepository.gettAllAgentCream();
     List? allAgent = response["data"];
 
     // print(response["data"]);
@@ -40,7 +39,7 @@ class _ListeAgentsScreenState extends State<ListeAgentsScreen> {
       dataAgent = allAgent;
       isLoading = false;
       dataAgentLength = allAgent!.length;
-      dataAgent = allAgent.reversed.toList(); // Inversion de l'ordre
+      // dataAgent = allAgent.reversed.toList(); 
     });
   }
 
@@ -79,57 +78,54 @@ class _ListeAgentsScreenState extends State<ListeAgentsScreen> {
           ),
         ),
         backgroundColor: const Color.fromARGB(255, 245, 244, 244),
-        body: Column(
-          children: [
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "Nombre d'agents",
-                    style: TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                  Text(
-                    dataAgent!.length.toString(),
-                    style: const TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                ],
-              ),
-            ),
-            isLoading == true
-                ? SizedBox(
-                    // height: 400,
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      itemCount: 3, 
-                      itemBuilder: (BuildContext context, int index) {
-                        return const CardAgentPlaceholder();
-                      },
+        body: SafeArea(
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Nombre d'agents",
+                      style: TextStyle(fontWeight: FontWeight.w500),
                     ),
-                  )
-                : dataAgentLength == 0
-                    ? Column(
-                        children: [
-                          Lottie.asset(
-                              "assets/images/last-transaction.json",
-                              height: 200),
-                          const Text("Aucun agent n'a été enregistré.")
-                        ],
-                      )
-                    : SizedBox(
-                        // height: 400,
-                        child: ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            itemCount: dataAgent!
-                                .length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return CartdAgent(
-                                  data: dataAgent![index]);
-                            }),
-                      )
-          ],
+                    Text(
+                      dataAgent!.length.toString(),
+                      style: const TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ),
+              isLoading == true
+                  ? Flexible(
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: 3,
+                        itemBuilder: (BuildContext context, int index) {
+                          return const CardAgentPlaceholder();
+                        },
+                      ),
+                    )
+                  : dataAgentLength == 0
+                      ? Column(
+                          children: [
+                            Lottie.asset("assets/images/last-transaction.json",
+                                height: 200),
+                            const Text("Aucun agent n'a été enregistré.")
+                          ],
+                        )
+                      : Flexible(
+                          child: ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              itemCount: dataAgent!.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return CartdAgent(data: dataAgent![index]);
+                              }),
+                        )
+            ],
+          ),
         ),
       ),
     );
