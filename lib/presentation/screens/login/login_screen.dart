@@ -283,14 +283,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           BlocBuilder<SignupCubit, SignupState>(
                               builder: (context, state) {
                             return GestureDetector(
-                              // onTap: (() {
-                              //   Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => const HomeScreen()),
-                              //   );
-                              // }),
-
                               onTap: () async {
                                 SharedPreferences prefs =
                                     await SharedPreferences.getInstance();
@@ -369,10 +361,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                 Map? response =
                                     await SignUpRepository.loginCream(data);
-                                print(response);
+                                // print(response);
 
                                 if (response["status"] == 200) {
-                                   TransAcademiaLoadingDialog.stop(context);
+                                  TransAcademiaLoadingDialog.stop(context);
                                   String? messageSucces =
                                       "Authentification effectué avec succès";
                                   TransAcademiaDialogSuccess.show(
@@ -381,25 +373,29 @@ class _LoginScreenState extends State<LoginScreen> {
                                   SharedPreferences prefs =
                                       await SharedPreferences.getInstance();
                                   prefs.setString(
-                                      'id', response['data']["user_ID"]);
+                                      'id', response['data']["user_ID"].toString());
                                   prefs.setString(
                                       'fonction', response['data']["function"]);
-                                  prefs.setString(
-                                      'idAgent', response['data']["agent_ID"]);
 
-                                  prefs.setString(
-                                      'prenom', response['data']["last_name"]);
                                   prefs.setString(
                                       'nom', response['data']["first_name"]);
+                                  prefs.setString('postnom',
+                                      response['data']["second_name"]);
+                                  prefs.setString(
+                                      'prenom', response['data']["third_name"]);
 
-                                  Future.delayed(
-                                      const Duration(milliseconds: 4000),
-                                      () async {
-                                    TransAcademiaDialogSuccess.stop(context);
-                                    Navigator.of(context)
-                                        .pushNamedAndRemoveUntil('/home',
-                                            (Route<dynamic> route) => false);
-                                  });
+                                  try {
+                                    Future.delayed(
+                                        const Duration(milliseconds: 4000),
+                                        () async {
+                                      TransAcademiaDialogSuccess.stop(context);
+                                      Navigator.of(context)
+                                          .pushNamedAndRemoveUntil('/home',
+                                              (Route<dynamic> route) => false);
+                                    });
+                                  } catch (e) {
+                                    print("Exception during navigation: $e");
+                                  }
                                 } else if (response["status"] == 400) {
                                   TransAcademiaLoadingDialog.stop(context);
                                   TransAcademiaDialogError.show(
@@ -417,7 +413,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                       context, response["message"], "login");
                                 }
                               },
-
                               child: const ButtonTransAcademia(
                                   title: "Se connecter"),
                             );
