@@ -202,11 +202,11 @@ class _DetailAgentScreenState extends State<DetailAgentScreen> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text("Quartier",
+                        children: [
+                          const Text("Grade",
                               style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("Sans-fils",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
+                          Text("${widget.data!["grade"]}",
+                              style: const TextStyle(fontWeight: FontWeight.w300)),
                         ],
                       ),
                       const Divider(
@@ -217,11 +217,11 @@ class _DetailAgentScreenState extends State<DetailAgentScreen> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text("Avenue",
+                        children: [
+                          const Text("Fonction",
                               style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("ACP",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
+                          Text("${widget.data!["function"]}",
+                              style: const TextStyle(fontWeight: FontWeight.w300)),
                         ],
                       ),
                       const Divider(
@@ -232,11 +232,11 @@ class _DetailAgentScreenState extends State<DetailAgentScreen> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text("Numero",
+                        children:  [
+                         const  Text("Mail",
                               style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("10",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
+                          Text("${widget.data!["email"]}",
+                              style: const TextStyle(fontWeight: FontWeight.w300)),
                         ],
                       ),
                       const Divider(
@@ -247,11 +247,12 @@ class _DetailAgentScreenState extends State<DetailAgentScreen> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text("Date de mise à jour",
+                        children: [
+                          const Text("Date de mise à jour",
                               style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("15/05/1997",
-                              style: TextStyle(fontWeight: FontWeight.w300))
+                          Text("${widget.data!["updated_at"]}"
+                          ,
+                              style: const TextStyle(fontWeight: FontWeight.w300))
                         ],
                       ),
                     ],

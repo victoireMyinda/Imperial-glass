@@ -5,7 +5,9 @@ import 'package:icecream_service/presentation/screens/agentAdmin/produits/widget
 import 'package:icecream_service/presentation/widgets/imageview.dart';
 
 class CardProduitPlaceholder extends StatefulWidget {
-  const CardProduitPlaceholder({super.key});
+  
+
+  const CardProduitPlaceholder({super.key,});
 
   @override
   State<CardProduitPlaceholder> createState() => _CardProduitPlaceholderState();
@@ -15,13 +17,13 @@ class _CardProduitPlaceholderState extends State<CardProduitPlaceholder> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-                  Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) =>  DetailProduit()),
-          );
+      // onTap: () {
+      //             Navigator.push(
+      //       context,
+      //       MaterialPageRoute(builder: (context) =>  DetailProduit()),
+      //     );
         
-      },
+      // },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(

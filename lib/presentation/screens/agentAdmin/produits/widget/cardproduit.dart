@@ -21,7 +21,7 @@ class _CardProduitState extends State<CardProduit> {
           context,
           MaterialPageRoute(
               // builder: (context) => DetailEnfant(data: widget.data)),
-              builder: (context) => DetailProduit()),
+              builder: (context) => DetailProduit(data:  widget.data,)),
         );
       },
       child: Padding(
@@ -41,8 +41,7 @@ class _CardProduitState extends State<CardProduit> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Glace à creme",
+                  Text("${widget.data!["description"]}",
                     style: TextStyle(
                       fontSize: 15,
                       color: MyColors.myBrown,
@@ -62,10 +61,10 @@ class _CardProduitState extends State<CardProduit> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Nature",
+                    "Volume",
                     style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11),
                   ),
-                  Text("liquide",
+                  Text("${widget.data!["volume"]}",
                       style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
                 ],
               ),
@@ -75,9 +74,9 @@ class _CardProduitState extends State<CardProduit> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Quantité",
+                  Text("Prix unitaire",
                       style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
-                  Text("200 Litre",
+                  Text("${widget.data!["unit_price"]}",
                       style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
                 ],
               ),
@@ -87,8 +86,8 @@ class _CardProduitState extends State<CardProduit> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Prix", style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
-                  Text("500 fc /Litre",
+                  Text("Quantité disponible", style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
+                  Text("${widget.data!["unit_quatity"]}",
                       style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
                 ],
               ),
@@ -100,7 +99,7 @@ class _CardProduitState extends State<CardProduit> {
                 children: [
                   Text("Date de mise à jour",
                       style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
-                  Text("15/05/1997",
+                  Text("${widget.data!["updated_at"]}",
                       style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11))
                 ],
               ),

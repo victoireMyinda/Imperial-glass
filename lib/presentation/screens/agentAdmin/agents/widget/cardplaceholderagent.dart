@@ -15,13 +15,13 @@ class _CardAgentPlaceholderState extends State<CardAgentPlaceholder> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-                  Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) =>  DetailProduit()),
-          );
+      // onTap: () {
+      //             Navigator.push(
+      //       context,
+      //       MaterialPageRoute(builder: (context) =>  DetailProduit()),
+      //     );
         
-      },
+      // },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(

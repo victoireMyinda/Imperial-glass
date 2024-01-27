@@ -2,47 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:icecream_service/constants/my_colors.dart';
 import 'package:icecream_service/presentation/screens/agentAdmin/produits/signupproduit.dart';
 import 'package:icecream_service/presentation/widgets/appbarkelasi.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:icecream_service/data/repository/signUp_repository.dart';
-
 
 class DetailProduit extends StatefulWidget {
-  DetailProduit({
-    super.key,
-  });
+  final Map? data;
+  DetailProduit({super.key, required this.data});
 
   @override
   State<DetailProduit> createState() => _DetailProduitState();
 }
 
 class _DetailProduitState extends State<DetailProduit> {
-  List? dataStudent = [];
-  bool isLoading = true;
-  int dataStudentLength = 0;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    loadData();
-  }
-
-  loadData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? idParent = prefs.getString("parentId");
-    Map? response =
-        await SignUpRepository.getEnfantsDuParent(idParent.toString());
-    List? recorded = response["data"]["recorded"];
-
-    print(response["data"]);
-    setState(() {
-      dataStudent = recorded;
-      isLoading = false;
-      dataStudentLength = recorded!.length;
-      dataStudent = recorded.reversed.toList(); // Inversion de l'ordre
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -69,7 +38,7 @@ class _DetailProduitState extends State<DetailProduit> {
                     decoration: BoxDecoration(
                       image: const DecorationImage(
                         image: AssetImage('assets/images/icon.png'),
-                        fit: BoxFit.cover, 
+                        fit: BoxFit.cover,
                       ),
                       border: Border.all(color: MyColors.myBrown, width: 1),
                       shape: BoxShape.circle,
@@ -85,9 +54,9 @@ class _DetailProduitState extends State<DetailProduit> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            "Glace à creme",
-                            style: TextStyle(
+                          Text(
+                            "${widget.data!["description"]}",
+                            style: const TextStyle(
                               fontSize: 20,
                               color: MyColors.myBrown,
                             ),
@@ -128,13 +97,14 @@ class _DetailProduitState extends State<DetailProduit> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
-                            "Nature",
+                        children: [
+                          const Text(
+                            "Volume",
                             style: TextStyle(fontWeight: FontWeight.w300),
                           ),
-                          Text("liquide",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
+                          Text("${widget.data!["volume"]}",
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w300)),
                         ],
                       ),
                       const Divider(
@@ -145,11 +115,12 @@ class _DetailProduitState extends State<DetailProduit> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text("Quantité",
+                        children: [
+                          const Text("Prix unitaire",
                               style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("200 Litres",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
+                          Text("${widget.data!["unit_price"]}",
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w300)),
                         ],
                       ),
                       const Divider(
@@ -160,11 +131,12 @@ class _DetailProduitState extends State<DetailProduit> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text("Quantité disponible",
+                        children: [
+                          const Text("Quantité disponible",
                               style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("10 Litres",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
+                          Text("${widget.data!["unit_quatity"]}",
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w300)),
                         ],
                       ),
                       const Divider(
@@ -175,26 +147,12 @@ class _DetailProduitState extends State<DetailProduit> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text("Prix",
+                        children: [
+                          const Text("Date de mise à jour",
                               style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("500 fc /Litre",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
-                        ],
-                      ),
-                      const Divider(
-                        thickness: 1,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text("Date de mise à jour",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("15/05/1997",
-                              style: TextStyle(fontWeight: FontWeight.w300))
+                          Text("${widget.data!["updated_at"]}",
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w300))
                         ],
                       ),
                       const Divider(
@@ -205,16 +163,22 @@ class _DetailProduitState extends State<DetailProduit> {
                       ),
                       Center(
                         child: Column(
-                          children: const [
-                            Text("Statut produit : "),
-                            SizedBox(
+                          children: [
+                            const Text("Statut produit : "),
+                            const SizedBox(
                               height: 30,
                             ),
-                            Text(
-                              "Votre quantité restanre est faible. Vueillez vous approvisonner",
-                              style: TextStyle(
-                                  color: MyColors.myBrown, fontSize: 15),
-                            )
+                            widget.data!["unit_quantity"] <= 5
+                                ? const Text(
+                                    "Votre stock est faible. Vueillez vous approvisionner",
+                                    style: TextStyle(
+                                        color: MyColors.myBrown, fontSize: 15),
+                                  )
+                                : const Text(
+                                    "Votre stock est au bon niveau",
+                                    style: TextStyle(
+                                        color: MyColors.myBrown, fontSize: 15),
+                                  )
                           ],
                         ),
                       )
