@@ -76,7 +76,7 @@ class _CardProduitState extends State<CardProduit> {
                 children: [
                   Text("Prix unitaire",
                       style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
-                  Text("${widget.data!["unit_price"]}",
+                  Text("${widget.data!["unit_price"]} (CDF)",
                       style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
                 ],
               ),

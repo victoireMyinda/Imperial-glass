@@ -118,7 +118,7 @@ class _DetailProduitState extends State<DetailProduit> {
                         children: [
                           const Text("Prix unitaire",
                               style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("${widget.data!["unit_price"]}",
+                          Text("${widget.data!["unit_price"]} (CDF)",
                               style:
                                   const TextStyle(fontWeight: FontWeight.w300)),
                         ],
@@ -159,26 +159,26 @@ class _DetailProduitState extends State<DetailProduit> {
                         thickness: 1,
                       ),
                       const SizedBox(
-                        height: 10,
+                        height: 30,
                       ),
                       Center(
                         child: Column(
                           children: [
-                            const Text("Statut produit : "),
+                            const Text("Statut stock produit : "),
                             const SizedBox(
                               height: 30,
                             ),
-                            widget.data!["unit_quantity"] <= 5
+                            widget.data!["unit_quatity"] <= 1
                                 ? const Text(
-                                    "Votre stock est faible. Vueillez vous approvisionner",
+                                    "Votre stock est faible. Veuillez vous approvisionner.",
                                     style: TextStyle(
                                         color: MyColors.myBrown, fontSize: 15),
                                   )
                                 : const Text(
-                                    "Votre stock est au bon niveau",
+                                    "Votre stock est suffisant.",
                                     style: TextStyle(
-                                        color: MyColors.myBrown, fontSize: 15),
-                                  )
+                                        color: Colors.green, fontSize: 15),
+                                  ),
                           ],
                         ),
                       )
