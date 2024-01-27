@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:icecream_service/presentation/screens/home/home_screen.dart';
 import 'package:icecream_service/presentation/screens/login/login_screen.dart';
 import 'package:icecream_service/presentation/screens/signup/inscription.dart';
 import 'package:icecream_service/presentation/screens/signup/signup-step1.dart';
@@ -19,6 +20,10 @@ List<GetPage<dynamic>> getPages() {
     GetPage(
         name: '/',
         page: () => const SplashScreen(),
+        transition: Transition.cupertino),
+         GetPage(
+        name: '/home',
+        page: () => const HomeScreen(),
         transition: Transition.cupertino),
     GetPage(
         name: '/routestack',

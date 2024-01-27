@@ -315,7 +315,7 @@ class _SignupVendeurStep2State extends State<SignupVendeurStep2> {
 
                                         Map? response = await SignUpRepository
                                             .signupAgentCream(data);
-                                        print(response);
+                                        // print(response);
 
                                         int status = response["status"];
                                         String? message = response["message"];

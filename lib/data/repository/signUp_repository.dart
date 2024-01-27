@@ -56,14 +56,14 @@ class SignUpRepository {
   }
 
 
-   static Future<Map<String, dynamic>> loginCream(String login, String pwd) async {
+   static Future<Map<String, dynamic>> loginCream(Map data) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'GET', Uri.parse("https://iglace.eyanofinance.org/api/v1/auth/login"));
+        'POST', Uri.parse("https://iglace.eyanofinance.org/api/v1/auth/login"));
 
-    request.body = json.encode({"login": login, "pwd": pwd});
+    request.body = json.encode(data);
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();

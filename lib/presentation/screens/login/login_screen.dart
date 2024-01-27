@@ -6,6 +6,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icecream_service/constants/my_colors.dart';
+import 'package:icecream_service/data/repository/signUp_repository.dart';
 import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogError.dart';
 import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogLoginPayment.dart';
 import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogSuccess.dart';
@@ -282,331 +283,140 @@ class _LoginScreenState extends State<LoginScreen> {
                           BlocBuilder<SignupCubit, SignupState>(
                               builder: (context, state) {
                             return GestureDetector(
-                              onTap: (() {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const HomeScreen()),
-                                );
-                              }),
+                              // onTap: (() {
+                              //   Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => const HomeScreen()),
+                              //   );
+                              // }),
 
-                              // onTap: () async {
-                              //   if (state.field!["phone"] == "") {
-                              //     ValidationDialog.show(context,
-                              //         "Veuillez saisir le numéro de téléphone",
-                              //         () {
-                              //       if (kDebugMode) {
-                              //         print("modal");
-                              //       }
-                              //     });
-                              //     return;
-                              //   }
+                              onTap: () async {
+                                SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+                                if (state.field!["phone"] == "") {
+                                  ValidationDialog.show(context,
+                                      "Veuillez saisir le numéro de téléphone",
+                                      () {
+                                    if (kDebugMode) {
+                                      print("modal");
+                                    }
+                                  });
+                                  return;
+                                }
 
-                              //   if (state.field!["phone"].substring(0, 1) ==
-                              //           "0" ||
-                              //       state.field!["phone"].substring(0, 1) ==
-                              //           "+") {
-                              //     ValidationDialog.show(context,
-                              //         "Veuillez saisir le numéro avec le format valide, par exemple: (826016607).",
-                              //         () {
-                              //       print("modal");
-                              //     });
-                              //     return;
-                              //   }
-                              //   if (state.field!["phone"].length < 8) {
-                              //     ValidationDialog.show(context,
-                              //         "Le numéro ne doit pas avoir moins de 9 caractères, par exemple: (826016607).",
-                              //         () {
-                              //       print("modal");
-                              //     });
-                              //     return;
-                              //   }
-                              //   if (state.field!["password"] == "") {
-                              //     ValidationDialog.show(context,
-                              //         "le mot de passe ne doit pas être vide",
-                              //         () {
-                              //       if (kDebugMode) {
-                              //         print("modal");
-                              //       }
-                              //     });
-                              //     return;
-                              //   }
+                                if (state.field!["phone"].substring(0, 1) ==
+                                        "0" ||
+                                    state.field!["phone"].substring(0, 1) ==
+                                        "+") {
+                                  ValidationDialog.show(context,
+                                      "Veuillez saisir le numéro avec le format valide, par exemple: (816644420).",
+                                      () {
+                                    print("modal");
+                                  });
+                                  return;
+                                }
 
-                              //   // check connexion
-                              //   try {
-                              //     final response = await InternetAddress.lookup(
-                              //         'www.google.com');
-                              //     if (response.isNotEmpty) {
-                              //       print("connected");
-                              //     }
-                              //   } on SocketException catch (err) {
-                              //     ValidationDialog.show(
-                              //         context, "Pas de connexion internet !",
-                              //         () {
-                              //       if (kDebugMode) {
-                              //         print("modal");
-                              //       }
-                              //     });
-                              //     return;
-                              //   }
+                                if (state.field!["phone"]
+                                            .substring(0, 1) ==
+                                        "1" ||
+                                    state.field!["phone"]
+                                            .substring(0, 1) ==
+                                        "2" ||
+                                    state.field!["phone"]
+                                            .substring(0, 1) ==
+                                        "3" ||
+                                    state.field!["phone"]
+                                            .substring(0, 1) ==
+                                        "4" ||
+                                    state.field!["phone"]
+                                            .substring(0, 1) ==
+                                        "5" ||
+                                    state.field!["phone"].substring(0, 1) ==
+                                        "6" ||
+                                    state.field!["phone"].substring(0, 1) ==
+                                        "7") {
+                                  ValidationDialog.show(context,
+                                      "Veuillez saisir le numéro avec le format valide, par exemple: (816644420).",
+                                      () {
+                                    print("modal");
+                                  });
+                                  return;
+                                }
 
-                              //   //send data in api
+                                if (state.field!["password"] == "") {
+                                  ValidationDialog.show(context,
+                                      "le mot de passe ne doit pas être vide",
+                                      () {
+                                    if (kDebugMode) {
+                                      print("modal");
+                                    }
+                                  });
+                                  return;
+                                }
 
-                              //   TransAcademiaLoadingDialog.show(context);
+                                TransAcademiaLoadingDialog.show(context);
+                                Map? data = {
+                                  "login": "0" + state.field!["phone"],
+                                  "pwd": state.field!["password"],
+                                  "IP_MAC": "357093539784400Zf",
+                                  "NAME_DEVICE": "Galaxy A4 de Teddy",
+                                  "IP_IMEI": "35709353978440Z0",
+                                  "MODEL_DEVICE": "Android",
+                                  "VERSION_OS": "13",
+                                  "app_agent_version": "v1.01.2"
+                                };
 
-                              //   int status;
-                              //   try {
-                              //     await http.post(Uri.parse(
-                                      
-                              //         "https://tag.trans-academia.cd/API_login_crypte.php"), body: {
-                              //       // 'App_name': "app",
-                              //       // 'token': "2022",
-                              //       'login': "0" + state.field!["phone"],
-                              //       'pass': state.field!["password"],
-                                    
-                              //     }).then((response) {
-                              //       var data = json.decode(response.body);
+                                Map? response =
+                                    await SignUpRepository.loginCream(data);
+                                print(response);
 
-                              //       status = data['status'];
-                              //       if (status == 201) {
-                              //         // if (status == 200) {
-                              //         if (data['données'][0]["statut"] ==
-                              //             "pending") {
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "phonePayment",
-                              //                   data: state.field!["phone"]);
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "id",
-                              //                   data: data['données'][0]["id"]);
-                              //           TransAcademiaDialogLoginPayment.show(
-                              //               context, "Finaliser le Prélèvement",
-                              //               () {
-                              //             if (kDebugMode) {
-                              //               print("modal");
-                              //             }
-                              //           });
-                              //         } else {
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "id",
-                              //                   data: data['données'][0]["id"]);
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "phone",
-                              //                   data: data['données'][0]
-                              //                           ["Login"]
-                              //                       .substring(1, 10));
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "password",
-                              //                   data: data['données'][0]
-                              //                       ["password"]);
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "nom",
-                              //                   data: data['données'][0]
-                              //                       ["Nom"]);
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "postnom",
-                              //                   data: data['données'][0]
-                              //                       ["Postnom"]);
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "prenom",
-                              //                   data: data['données'][0]
-                              //                       ["Prenom"]);
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "codeEtudiant",
-                              //                   data: data['données'][0]
-                              //                       ["Code Etudiant"]);
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "photo",
-                              //                   data: data['données'][0]
-                              //                           ["Photo"] ??
-                              //                       '');
+                                if (response["status"] == 200) {
+                                   TransAcademiaLoadingDialog.stop(context);
+                                  String? messageSucces =
+                                      "Authentification effectué avec succès";
+                                  TransAcademiaDialogSuccess.show(
+                                      context, messageSucces, "Auth");
 
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "refresh",
-                              //                   data: data['données'][0]
-                              //                           ["Refresh"] ??
-                              //                       '');
+                                  SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+                                  prefs.setString(
+                                      'id', response['data']["user_ID"]);
+                                  prefs.setString(
+                                      'fonction', response['data']["function"]);
+                                  prefs.setString(
+                                      'idAgent', response['data']["agent_ID"]);
 
-                              //           TransAcademiaLoadingDialog.stop(
-                              //               context);
-                              //           TransAcademiaDialogSuccess.show(
-                              //               context,
-                              //               "Authentification réussie",
-                              //               "login");
-                              //           Future.delayed(
-                              //               const Duration(milliseconds: 4000),
-                              //               () async {
-                              //             SharedPreferences prefs =
-                              //                 await SharedPreferences
-                              //                     .getInstance();
-                              //             prefs.setString(
-                              //                 'id', data['données'][0]["id"]);
-                              //             prefs.setString(
-                              //                 'phone',
-                              //                 data['données'][0]["Login"]
-                              //                     .substring(1, 10));
-                              //             prefs.setString(
-                              //                 'nom', data['données'][0]["Nom"]);
-                              //             prefs.setString('postnom',
-                              //                 data['données'][0]["Postnom"]);
-                              //             prefs.setString('prenom',
-                              //                 data['données'][0]["Prenom"]);
-                              //             prefs.setString(
-                              //                 'code',
-                              //                 data['données'][0]
-                              //                     ["Code Etudiant"]);
-                              //             prefs.setString(
-                              //                 'photo',
-                              //                 data['données'][0]["Photo"] ??
-                              //                     '');
-                              //             prefs.setString(
-                              //                 'refresh',
-                              //                 data['données'][0]["Refresh"] ??
-                              //                     '');
+                                  prefs.setString(
+                                      'prenom', response['data']["last_name"]);
+                                  prefs.setString(
+                                      'nom', response['data']["first_name"]);
 
-                              //             // ignore: use_build_context_synchronously
-                              //             Navigator.of(context)
-                              //                 .pushNamedAndRemoveUntil(
-                              //                     '/routestack',
-                              //                     (Route<dynamic> route) =>
-                              //                         false);
-                              //           });
-                              //         }
-                              //       } else if (status == 200) {
-                              //         if (data['données'][0]["statut"] ==
-                              //             "pending") {
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "phonePayment",
-                              //                   data: state.field!["phone"]);
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "id",
-                              //                   data: data['données'][0]["id"]);
-                              //           TransAcademiaDialogLoginPayment.show(
-                              //               context, "Finaliser le Prélèvement",
-                              //               () {
-                              //             if (kDebugMode) {
-                              //               print("modal");
-                              //             }
-                              //           });
-                              //         } else {
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "id",
-                              //                   data: data['données'][0]["id"]);
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "phone",
-                              //                   data: data['données'][0]
-                              //                           ["Login"]
-                              //                       .substring(1, 10));
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "password",
-                              //                   data: data['données'][0]
-                              //                       ["password"]);
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "nom",
-                              //                   data: data['données'][0]
-                              //                       ["Nom"]);
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "postnom",
-                              //                   data: data['données'][0]
-                              //                       ["Postnom"]);
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "prenom",
-                              //                   data: data['données'][0]
-                              //                       ["Prenom"]);
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "codeEtudiant",
-                              //                   data: data['données'][0]
-                              //                       ["Code Etudiant"]);
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "photo",
-                              //                   data: data['données'][0]
-                              //                           ["Photo"] ??
-                              //                       '');
-
-                              //           BlocProvider.of<SignupCubit>(context)
-                              //               .updateField(context,
-                              //                   field: "refresh",
-                              //                   data: data['données'][0]
-                              //                           ["Refresh"] ??
-                              //                       '');
-
-                              //           TransAcademiaLoadingDialog.stop(
-                              //               context);
-                              //           TransAcademiaDialogSuccess.show(
-                              //               context,
-                              //               "Authentification réussie",
-                              //               "login");
-                              //           Future.delayed(
-                              //               const Duration(milliseconds: 4000),
-                              //               () async {
-                              //             SharedPreferences prefs =
-                              //                 await SharedPreferences
-                              //                     .getInstance();
-                              //             prefs.setString(
-                              //                 'id', data['données'][0]["id"]);
-                              //             prefs.setString(
-                              //                 'phone',
-                              //                 data['données'][0]["Login"]
-                              //                     .substring(1, 10));
-                              //             prefs.setString(
-                              //                 'nom', data['données'][0]["Nom"]);
-                              //             prefs.setString('postnom',
-                              //                 data['données'][0]["Postnom"]);
-                              //             prefs.setString('prenom',
-                              //                 data['données'][0]["Prenom"]);
-                              //             prefs.setString(
-                              //                 'code',
-                              //                 data['données'][0]
-                              //                     ["Code Etudiant"]);
-                              //             prefs.setString(
-                              //                 'photo',
-                              //                 data['données'][0]["Photo"] ??
-                              //                     '');
-                              //             prefs.setString(
-                              //                 'refresh',
-                              //                 data['données'][0]["Refresh"] ??
-                              //                     '');
-
-                              //             // ignore: use_build_context_synchronously
-                              //             Navigator.of(context)
-                              //                 .pushNamedAndRemoveUntil(
-                              //                     '/routestack',
-                              //                     (Route<dynamic> route) =>
-                              //                         false);
-                              //           });
-                              //         }
-                              //       } else {
-                              //         TransAcademiaLoadingDialog.stop(context);
-                              //         TransAcademiaDialogError.show(
-                              //             context,
-                              //             "Numéro de télépone ou mot de passe incorrect",
-                              //             "login");
-                              //       }
-                              //     });
-                              //   } catch (e) {
-                              //     print(e);
-                              //   }
-                              // },
+                                  Future.delayed(
+                                      const Duration(milliseconds: 4000),
+                                      () async {
+                                    TransAcademiaDialogSuccess.stop(context);
+                                    Navigator.of(context)
+                                        .pushNamedAndRemoveUntil('/home',
+                                            (Route<dynamic> route) => false);
+                                  });
+                                } else if (response["status"] == 400) {
+                                  TransAcademiaLoadingDialog.stop(context);
+                                  TransAcademiaDialogError.show(
+                                    context,
+                                    response["message"],
+                                    "login",
+                                  );
+                                  Future.delayed(
+                                      const Duration(milliseconds: 4000), () {
+                                    TransAcademiaDialogError.stop(context);
+                                  });
+                                } else {
+                                  TransAcademiaLoadingDialog.stop(context);
+                                  TransAcademiaDialogError.show(
+                                      context, response["message"], "login");
+                                }
+                              },
 
                               child: const ButtonTransAcademia(
                                   title: "Se connecter"),
@@ -618,12 +428,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: getProportionateScreenHeight(50),
                     ),
-
-                    // SizedBox(
-                    //   height: MediaQuery.of(context).size.height * 0.20,
-                    // ),
-                    //
-                    // Text("A propos",style:GoogleFonts.montserrat(color: Colors.white, fontSize: 12)),
                   ],
                 ),
               ),
