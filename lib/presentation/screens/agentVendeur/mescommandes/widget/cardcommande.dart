@@ -4,9 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:icecream_service/constants/my_colors.dart';
 
 class CardCommandes extends StatefulWidget {
-  String? icon;
-  String? title;
-  CardCommandes({super.key, this.icon, this.title});
+  Map? data;
+  CardCommandes({super.key, required this.data});
 
   @override
   State<CardCommandes> createState() => _CardCommandesState();
@@ -38,53 +37,58 @@ class _CardCommandesState extends State<CardCommandes> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Text("icon"),
+              Text(
+                "${widget.data!["description"]}",
+                style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+              ),
+              const Divider(
+                thickness: 1,
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
               Row(
                 children: const [
                   Icon(
-                    Icons
-                        .person_rounded, 
+                    Icons.person_rounded,
                     size: 25.0,
-                      color: MyColors.myBrown,
+                    color: MyColors.myBrown,
                   ),
                   SizedBox(
                     width: 10.0,
                   ),
                   Text(
                     "Victoire Myinda",
-                    style: TextStyle(
-                       fontWeight: FontWeight.w500,fontSize: 15
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
                   )
                 ],
               ),
+              Text(
+                "${widget.data!["order_at"]}",
+                style:
+                    const TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10.0,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
               const Text(
-                "11/01/2022",
-                style: TextStyle( fontWeight: FontWeight.w500, fontSize: 15),
+                "Livrée ",
+                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11),
               ),
-            ],
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
-                "Quantité obtenue",
-                style: TextStyle(
-                   fontWeight: FontWeight.w400, fontSize: 11
-                ),
-              ),
-              SizedBox(
+              const SizedBox(
                 width: 10.0,
               ),
               Text(
-                "20 Litres",
-                style: TextStyle(
-                  // color: Colors.white,
-                  fontWeight: FontWeight.w400, fontSize: 11
-                ),
+                "${widget.data!["delivered_at"]}",
+                style: const TextStyle(
+                    // color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 11),
               )
             ],
           ),
@@ -93,51 +97,48 @@ class _CardCommandesState extends State<CardCommandes> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
-                "produit",
-                style: TextStyle(
-                   fontWeight: FontWeight.w400, fontSize: 11
-                ),
+            children: [
+              const Text(
+                "Statut",
+                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10.0,
               ),
               Text(
-                "Cream",
-                style: TextStyle(
-                  // color: Colors.white,
-                  fontWeight: FontWeight.w400, fontSize: 11
-                ),
+                "${widget.data!["status"]}",
+                style: const TextStyle(
+                    // color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 11),
               )
             ],
           ),
-          const Divider(thickness: 1, ),
-         const  SizedBox(
+          const Divider(
+            thickness: 1,
+          ),
+          const SizedBox(
             height: 10.0,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
+            children: [
+              const Text(
                 "Total en chiffre",
-                style: TextStyle(
-                  fontWeight: FontWeight.w400, fontSize: 11
-                ),
+                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10.0,
               ),
               Text(
-                "80.000 fc",
-                style: TextStyle(
-                  // color: Colors.white,
-                  fontWeight: FontWeight.w400, fontSize: 11
-                ),
+                "${widget.data!["estimated_price"]}",
+                style: const TextStyle(
+                    // color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 11),
               )
             ],
           ),
-          
         ],
       ),
     );
