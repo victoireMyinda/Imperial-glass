@@ -263,7 +263,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                                   color: MyColors.myBrown),
                             ),
                             Icon(
-                              Icons.local_shipping_outlined,
+                              Icons.production_quantity_limits_outlined,
                               color: MyColors.myBrown,
                             ),
                           ],
@@ -287,14 +287,14 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                           child: Column(
                             children: const [
                               Image(
-                                image: AssetImage("assets/images/nodata.png"),
+                                image: AssetImage("assets/images/icecream.png"),
                                 fit: BoxFit.cover,
                               ),
                               SizedBox(
                                 height: 15,
                               ),
                               Text(
-                                "Cliquez sur le boutton ci-haut pour ajouter un colis.",
+                                "Cliquez sur le boutton ci-haut pour ajouter un produit.",
                                 style: TextStyle(fontSize: 14),
                               )
                             ],
@@ -362,6 +362,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                           ],
                         ),
                       ),
+                      const SizedBox(height: 10,)
               ],
             ),
           ),
