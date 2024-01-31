@@ -60,7 +60,7 @@ class SignupCubit extends Cubit<SignupState> {
     emit(SignupState(field: {...state.field!, "ecoleData": ecoleData}));
   }
 
-   loadLeveltData() async {
+  loadLeveltData() async {
     var response = await SignUpRepository.getLevel();
     List? levelData = response["data"];
     emit(SignupState(field: {...state.field!, "levelData": levelData}));
@@ -85,21 +85,20 @@ class SignupCubit extends Cubit<SignupState> {
     emit(SignupState(field: {...state.field!, "communeData": communeData}));
   }
 
- loadProvincesKelasi() async {
-  var response = await SignUpRepository.getProvinceKelasi();
-  int statusCode = response["status"];
+  loadProvincesKelasi() async {
+    var response = await SignUpRepository.getProvinceKelasi();
+    int statusCode = response["status"];
 
-  if (statusCode == 200) {
-    List<Map<String, dynamic>> provincesDataKelasi = response["data"];
-    emit(SignupState(field: {
-      ...state.field!,
-      "provinceDataKelasi": provincesDataKelasi,
-    }));
-  } else {
-   print("erreur de l'obtention de data");
+    if (statusCode == 200) {
+      List<Map<String, dynamic>> provincesDataKelasi = response["data"];
+      emit(SignupState(field: {
+        ...state.field!,
+        "provinceDataKelasi": provincesDataKelasi,
+      }));
+    } else {
+      print("erreur de l'obtention de data");
+    }
   }
-}
-
 
   loadVillesKelasi() async {
     var response =
@@ -121,13 +120,40 @@ class SignupCubit extends Cubit<SignupState> {
     }));
   }
 
-   void updateField(context, {required String field, data}) {
+  loadProductCream() async {
+    var response = await SignUpRepository.gettAllProductCream();
+    int statusCode = response["status"];
+
+    if (statusCode == 200) {
+      List<Map<String, dynamic>> productData = response["data"];
+      emit(SignupState(field: {
+        ...state.field!,
+        "productData": productData,
+      }));
+    } else {
+      print("erreur de l'obtention de data");
+    }
+  }
+
+ loadVolumeCream() async {
+    var response = await SignUpRepository.gettAllVolumeCream();
+    int statusCode = response["status"];
+
+    if (statusCode == 200) {
+      List<Map<String, dynamic>> volumeData = response["data"];
+      emit(SignupState(field: {
+        ...state.field!,
+        "volumeData": volumeData,
+      }));
+    } else {
+      print("erreur de l'obtention de data");
+    }
+  }
+  void updateField(context, {required String field, data}) {
     emit(SignupState(field: {
       ...state.field!,
       field: data,
     }));
-
-    
 
     if (field == 'universite') {
       loadFaculteData();

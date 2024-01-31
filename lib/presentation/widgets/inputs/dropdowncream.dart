@@ -50,6 +50,10 @@ class _KelasiDropdownState extends State<KelasiDropdown> {
       labelForDropdown = "Type";
     } else if (widget.value == "province") {
       labelForDropdown = "labele";
+    } else if (widget.value == "product") {
+      labelForDropdown = "description";
+    } else if (widget.value == "volume") {
+      labelForDropdown = "name";
     } else if (widget.value == "ville") {
       labelForDropdown = "labele";
     } else if (widget.value == "commune") {
@@ -66,8 +70,8 @@ class _KelasiDropdownState extends State<KelasiDropdown> {
   @override
   Widget build(BuildContext context) {
     return Container(
-       padding: const EdgeInsets.symmetric(horizontal: 18.0),
-       height: 50,
+      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+      height: 50,
       //margin: const EdgeInsets.only(bottom: 15),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -125,7 +129,7 @@ class _KelasiDropdownState extends State<KelasiDropdown> {
                 //     ),
                 //   );
                 // }).toList(),
-                 items: state.field![widget.items]
+                items: state.field![widget.items]
                     .map<DropdownMenuItem<String>>((item) {
                   return DropdownMenuItem(
                     value: widget.value == "option"

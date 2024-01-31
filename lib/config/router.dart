@@ -13,10 +13,6 @@ import 'package:icecream_service/version.dart';
 
 List<GetPage<dynamic>> getPages() {
   return [
-    // GetPage(
-    //     name: '/inscription',
-    //     page: () => const Inscription(),
-    //     transition: Transition.cupertino),
     GetPage(
         name: '/',
         page: () => const SplashScreen(),
@@ -27,7 +23,7 @@ List<GetPage<dynamic>> getPages() {
         transition: Transition.cupertino),
     GetPage(
         name: '/routestack',
-        page: () => const RouteStack(),
+         page: () => const LoginScreen(),
         transition: Transition.cupertino),
     GetPage(
         name: '/login',

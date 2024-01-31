@@ -29,10 +29,14 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
   TextEditingController descriptionColisController = TextEditingController();
   TextEditingController poidsColisController = TextEditingController();
   TextEditingController provinceController = TextEditingController();
+    TextEditingController volumeController = TextEditingController();
+      TextEditingController productController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+      BlocProvider.of<SignupCubit>(context).loadProductCream();
+      BlocProvider.of<SignupCubit>(context).loadVolumeCream();
     addNewColis();
     // getPrice();
     // getProfilAgent();
@@ -287,7 +291,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                           child: Column(
                             children: const [
                               Image(
-                                image: AssetImage("assets/images/icecream.png"),
+                                image: AssetImage("assets/images/icecream.jpg"),
                                 fit: BoxFit.cover,
                               ),
                               SizedBox(
@@ -392,9 +396,9 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                       child: SizedBox(
                         height: 50.0,
                         child: KelasiDropdown(
-                          items: "provinceDataKelasi",
-                          value: "province",
-                          controller: provinceController,
+                          items: "productData",
+                          value: "product",
+                          controller: productController,
                           hintText: "Produit à commander",
                           color: Colors.white,
                           label: "Produit à commander",
@@ -410,9 +414,9 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                       child: SizedBox(
                         height: 50.0,
                         child: KelasiDropdown(
-                          items: "provinceDataKelasi",
-                          value: "province",
-                          controller: provinceController,
+                          items: "volumeData",
+                          value: "volume",
+                          controller: volumeController,
                           hintText: "Volume",
                           color: Colors.white,
                           label: "Volume",
