@@ -29,8 +29,8 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
   TextEditingController descriptionColisController = TextEditingController();
   TextEditingController poidsColisController = TextEditingController();
   TextEditingController provinceController = TextEditingController();
-    TextEditingController volumeController = TextEditingController();
-      TextEditingController productController = TextEditingController();
+    // TextEditingController volumeController = TextEditingController();
+    //   TextEditingController productController = TextEditingController();
 
   @override
   void initState() {
@@ -398,7 +398,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                         child: KelasiDropdown(
                           items: "productData",
                           value: "product",
-                          controller: productController,
+                          // controller: productController,
                           hintText: "Produit à commander",
                           color: Colors.white,
                           label: "Produit à commander",
@@ -416,7 +416,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                         child: KelasiDropdown(
                           items: "volumeData",
                           value: "volume",
-                          controller: volumeController,
+                          // controller: volumeController,
                           hintText: "Volume",
                           color: Colors.white,
                           label: "Volume",

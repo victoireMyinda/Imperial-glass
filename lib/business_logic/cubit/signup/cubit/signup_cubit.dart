@@ -125,7 +125,7 @@ class SignupCubit extends Cubit<SignupState> {
     int statusCode = response["status"];
 
     if (statusCode == 200) {
-      List<Map<String, dynamic>> productData = response["data"];
+      List productData = response["data"];
       emit(SignupState(field: {
         ...state.field!,
         "productData": productData,
@@ -140,7 +140,7 @@ class SignupCubit extends Cubit<SignupState> {
     int statusCode = response["status"];
 
     if (statusCode == 200) {
-      List<Map<String, dynamic>> volumeData = response["data"];
+      List volumeData = response["data"];
       emit(SignupState(field: {
         ...state.field!,
         "volumeData": volumeData,

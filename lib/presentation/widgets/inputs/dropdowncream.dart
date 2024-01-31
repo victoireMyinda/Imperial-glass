@@ -134,7 +134,7 @@ class _KelasiDropdownState extends State<KelasiDropdown> {
                   return DropdownMenuItem(
                     value: widget.value == "option"
                         ? item['Id_option'].toString()
-                        : item['id'].toString(),
+                        : item['ID'].toString(),
                     child: SizedBox(
                       width: 200.0,
                       child: Text(
