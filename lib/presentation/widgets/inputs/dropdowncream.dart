@@ -66,7 +66,8 @@ class _KelasiDropdownState extends State<KelasiDropdown> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+       padding: const EdgeInsets.symmetric(horizontal: 18.0),
+       height: 50,
       //margin: const EdgeInsets.only(bottom: 15),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -80,11 +81,11 @@ class _KelasiDropdownState extends State<KelasiDropdown> {
                   label: Text(widget.label.toString()),
                   enabledBorder: OutlineInputBorder(
                     borderSide: const BorderSide(color: Colors.grey, width: 1),
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   border: OutlineInputBorder(
                     // borderSide: const BorderSide(color: Colors.grey, width: 1),
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   filled: true,
                   fillColor: Colors.grey.withOpacity(0.1),

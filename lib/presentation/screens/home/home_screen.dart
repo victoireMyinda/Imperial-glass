@@ -202,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: drawerMenu(context),
       body: SafeArea(
         child: Container(
-          color: Colors.white70,
+          color: const Color.fromARGB(179, 246, 244, 244),
           width: MediaQuery.of(context).size.width,
           height: 700,
           child: Column(
@@ -211,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Container(
                 // color: MyColors.myBrown,
-                height: 50,
+                height: 30,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Row(

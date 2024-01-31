@@ -65,7 +65,7 @@ class _MesCommandesScreenState extends State<MesCommandesScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const CommandeDuJourScreen()),
+                  builder: (context) =>  const CommandeDuJourScreen()),
             );
           },
           child: Container(
@@ -91,7 +91,7 @@ class _MesCommandesScreenState extends State<MesCommandesScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      "ommandes enregistrées",
+                      "Commandes enregistrées",
                       style: TextStyle(fontWeight: FontWeight.w400),
                     ),
                     Text(

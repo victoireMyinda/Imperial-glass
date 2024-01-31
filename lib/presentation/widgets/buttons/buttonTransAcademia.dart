@@ -17,7 +17,7 @@ class _ButtonTransAcademiaState extends State<ButtonTransAcademia> {
       height: 50.0,
       width: widget.width ?? MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30.0),
+        borderRadius: BorderRadius.circular(10.0),
        color: Colors.brown,
       ),
       child: Align(
