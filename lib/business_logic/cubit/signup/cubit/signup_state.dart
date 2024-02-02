@@ -92,6 +92,8 @@ Map? initialState() {
     "userId":"",
     "parentId":"",
     "fromSingup":"false",
+    "nomsiteError"  : "",
+    "localisationsiteError" : "",
     "nomError":"",
     "descProduitError": "",
     'prixProduitError' : "",

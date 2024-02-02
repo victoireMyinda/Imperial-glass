@@ -1,13 +1,20 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icecream_service/business_logic/cubit/signup/cubit/signup_cubit.dart';
 import 'package:icecream_service/constants/my_colors.dart';
+import 'package:icecream_service/data/repository/signUp_repository.dart';
 import 'package:icecream_service/presentation/screens/agentAdmin/sites/sites.dart';
 import 'package:icecream_service/presentation/widgets/appbarkelasi.dart';
 import 'package:icecream_service/presentation/widgets/buttons/buttonTransAcademia.dart';
+import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogError.dart';
+import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogSuccess.dart';
+import 'package:icecream_service/presentation/widgets/dialog/ValidationDialog.dart';
+import 'package:icecream_service/presentation/widgets/dialog/loading.dialog.dart';
 import 'package:icecream_service/presentation/widgets/inputs/dropdownTransAcademia.dart';
 import 'package:icecream_service/presentation/widgets/inputs/nameField.dart';
+import 'package:icecream_service/presentation/widgets/inputs/simplePhoneNumberField.dart';
 import 'package:icecream_service/sizeconfig.dart';
 
 class SignupSite extends StatefulWidget {
@@ -18,6 +25,7 @@ class SignupSite extends StatefulWidget {
 }
 
 class _SignupSiteState extends State<SignupSite> {
+  final TextEditingController phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -124,7 +132,24 @@ class _SignupSiteState extends State<SignupSite> {
                                     ),
                                   ));
                             }),
-                           
+                            const SizedBox(height: 10),
+                            BlocBuilder<SignupCubit, SignupState>(
+                                builder: (context, state) {
+                              return Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20.0),
+                                  // margin: const EdgeInsets.only(bottom: 15, top: 20),
+                                  child: SizedBox(
+                                    height: 50.0,
+                                    child: TransAcademiaPhoneNumber(
+                                      number: 20,
+                                      controller: phoneController,
+                                      hintText: "Numéro de téléphone",
+                                      field: "phone",
+                                      fieldValue: state.field!["phone"],
+                                    ),
+                                  ));
+                            }),
                             const SizedBox(height: 10),
                             const TransAcademiaDropdown(
                               items: "provinceData",
@@ -156,13 +181,133 @@ class _SignupSiteState extends State<SignupSite> {
                                   BlocBuilder<SignupCubit, SignupState>(
                                       builder: (context, state) {
                                     return GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ListSitesScreen()),
-                                        );
+                                      onTap: () async {
+                                        if (state.field!["nomsite"] == "") {
+                                          BlocProvider.of<SignupCubit>(context)
+                                              .updateField(context,
+                                                  field: "nomsiteError",
+                                                  data: "error");
+                                          ValidationDialog.show(context,
+                                              "Veuillez renseigner le nom du site",
+                                              () {
+                                            if (kDebugMode) {
+                                              print("modal");
+                                            }
+                                          });
+                                          return;
+                                        }
+
+                                        if (state.field!["localisationsite"] ==
+                                            "") {
+                                          BlocProvider.of<SignupCubit>(context)
+                                              .updateField(context,
+                                                  field:
+                                                      "localisationsiteError",
+                                                  data: "error");
+                                          ValidationDialog.show(context,
+                                              "Veuillez indiquer le nom de la localisation",
+                                              () {
+                                            if (kDebugMode) {
+                                              print("modal");
+                                            }
+                                          });
+                                          return;
+                                        }
+                                       if (state.field!["phone"] == "") {
+                                  ValidationDialog.show(context,
+                                      "Veuillez saisir le numéro de téléphone",
+                                      () {
+                                    if (kDebugMode) {
+                                      print("modal");
+                                    }
+                                  });
+                                  return;
+                                }
+
+                                if (state.field!["phone"].substring(0, 1) ==
+                                        "0" ||
+                                    state.field!["phone"].substring(0, 1) ==
+                                        "+") {
+                                  ValidationDialog.show(context,
+                                      "Veuillez saisir le numéro avec le format valide, par exemple: (816644420).",
+                                      () {
+                                    print("modal");
+                                  });
+                                  return;
+                                }
+
+                                if (state.field!["phone"]
+                                            .substring(0, 1) ==
+                                        "1" ||
+                                    state.field!["phone"]
+                                            .substring(0, 1) ==
+                                        "2" ||
+                                    state.field!["phone"]
+                                            .substring(0, 1) ==
+                                        "3" ||
+                                    state.field!["phone"]
+                                            .substring(0, 1) ==
+                                        "4" ||
+                                    state.field!["phone"]
+                                            .substring(0, 1) ==
+                                        "5" ||
+                                    state.field!["phone"].substring(0, 1) ==
+                                        "6" ||
+                                    state.field!["phone"].substring(0, 1) ==
+                                        "7") {
+                                  ValidationDialog.show(context,
+                                      "Veuillez saisir le numéro avec le format valide, par exemple: (816644420).",
+                                      () {
+                                    print("modal");
+                                  });
+                                  return;
+                                }
+
+                                        Map data = {
+                                          "name": state.field!["nomsite"],
+                                          "location":
+                                              state.field!["localisationsite"],
+                                          "contacts": state.field!["phone"],
+                                          "ID_province": 1,
+                                          "ID_commune": 2,
+                                          "ID_ville": 1,
+                                          "ID_user_created_at":
+                                              state.field!["idUser"],
+                                        };
+
+                                        Map? response = await SignUpRepository
+                                            .createSiteCream(data);
+                                        // print(response);
+
+                                        int status = response["status"];
+                                        String? message = response["message"];
+
+                                        if (status == 201) {
+                                          TransAcademiaDialogSuccess.stop(
+                                                context);
+                                          String? messageSucces =
+                                              "Site crée avec succès";
+                                          TransAcademiaDialogSuccess.show(
+                                              context, messageSucces, "Signup");
+
+                                          Future.delayed(
+                                              const Duration(
+                                                  milliseconds: 4000),
+                                              () async {
+                                            TransAcademiaDialogSuccess.stop(
+                                                context);
+                                            Navigator.of(context)
+                                                .pushNamedAndRemoveUntil(
+                                                    '/home',
+                                                    (Route<dynamic> route) =>
+                                                        false);
+                                          });
+                                        } else {
+                                          TransAcademiaLoadingDialog.stop(
+                                              context);
+                                          TransAcademiaDialogError.show(
+                                              context, message, "site");
+                                        }
                                       },
                                       child: const ButtonTransAcademia(
                                           width: 300, title: "Enregistrer"),
