@@ -89,12 +89,42 @@ class _SignupSiteState extends State<SignupSite> {
                               ),
                             ),
                             const SizedBox(height: 20),
-                            const TransAcademiaDropdown(
-                              items: "provinceData",
-                              value: "province",
-                              label: "Affecter un agent",
-                              hintText: "Affecter un agent",
-                            ),
+                            const SizedBox(height: 10),
+                            BlocBuilder<SignupCubit, SignupState>(
+                                builder: (context, state) {
+                              return Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20.0),
+                                  margin: const EdgeInsets.only(bottom: 10),
+                                  child: SizedBox(
+                                    height: 45.0,
+                                    child: TransAcademiaNameInput(
+                                      hintText: "Nom du site",
+                                      field: "nomsite",
+                                      label: "Nom du site",
+                                      fieldValue: state.field!["nomsite"],
+                                    ),
+                                  ));
+                            }),
+                            const SizedBox(height: 10),
+                            BlocBuilder<SignupCubit, SignupState>(
+                                builder: (context, state) {
+                              return Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20.0),
+                                  margin: const EdgeInsets.only(bottom: 10),
+                                  child: SizedBox(
+                                    height: 45.0,
+                                    child: TransAcademiaNameInput(
+                                      hintText: "Localisation",
+                                      field: "localisationsite",
+                                      label: "Localisation",
+                                      fieldValue:
+                                          state.field!["localisationsite"],
+                                    ),
+                                  ));
+                            }),
+                           
                             const SizedBox(height: 10),
                             const TransAcademiaDropdown(
                               items: "provinceData",
@@ -117,43 +147,9 @@ class _SignupSiteState extends State<SignupSite> {
                               hintText: "Choisir la commune",
                             ),
                             const SizedBox(height: 10),
-                            BlocBuilder<SignupCubit, SignupState>(
-                                builder: (context, state) {
-                              return Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20.0),
-                                  margin: const EdgeInsets.only(bottom: 10),
-                                  child: SizedBox(
-                                    height: 45.0,
-                                    child: TransAcademiaNameInput(
-                                      hintText: "Quartier",
-                                      field: "quartier",
-                                      label: "Quartier",
-                                      fieldValue: state.field!["quartier"],
-                                    ),
-                                  ));
-                            }),
-                            const SizedBox(height: 10),
-                            BlocBuilder<SignupCubit, SignupState>(
-                                builder: (context, state) {
-                              return Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20.0),
-                                  margin: const EdgeInsets.only(bottom: 10),
-                                  child: SizedBox(
-                                    height: 45.0,
-                                    child: TransAcademiaNameInput(
-                                      hintText: "Avenue et numero",
-                                      field: "avenue",
-                                      label: "Avenue/Numero",
-                                      fieldValue: state.field!["avenue"],
-                                    ),
-                                  ));
-                            }),
-                            const SizedBox(height: 10),
                             Container(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 20.0),
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -169,7 +165,7 @@ class _SignupSiteState extends State<SignupSite> {
                                         );
                                       },
                                       child: const ButtonTransAcademia(
-                                          width: 290, title: "Enregistrer"),
+                                          width: 300, title: "Enregistrer"),
                                     );
                                   }),
                                 ],

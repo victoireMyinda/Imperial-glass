@@ -36,6 +36,8 @@ Map? initialState() {
     'ligneCommande' : [],
     'quantiteProduit' :"",
     'descriptionProduit' : "",
+    'nomsite' : "",
+    'localisationsite' : "",
     'promotion': "",
     'currency': "",
     'phone': "",

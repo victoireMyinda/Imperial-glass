@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:icecream_service/presentation/screens/agentAdmin/widgets/detailsite.dart';
+import 'package:icecream_service/presentation/screens/agentAdmin/sites/widgets/detailsite.dart';
 import 'package:icecream_service/presentation/widgets/imageview.dart';
 
 class CardSitePlaceholder extends StatefulWidget {

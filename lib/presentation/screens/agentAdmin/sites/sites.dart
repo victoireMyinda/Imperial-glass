@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:icecream_service/presentation/screens/agentAdmin/sites/signupsite.dart';
-import 'package:icecream_service/presentation/screens/agentAdmin/widgets/cardsite.dart';
+import 'package:icecream_service/presentation/screens/agentAdmin/sites/widgets/cardsite.dart';
 import 'package:icecream_service/presentation/widgets/appbarkelasi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:icecream_service/data/repository/signUp_repository.dart';

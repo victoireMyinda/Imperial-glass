@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:icecream_service/constants/my_colors.dart';
-import 'package:icecream_service/presentation/screens/agentAdmin/widgets/detailsite.dart';
+import 'package:icecream_service/presentation/screens/agentAdmin/sites/widgets/detailsite.dart';
 
 class CardSites extends StatefulWidget {
   final Map? data;
