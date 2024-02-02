@@ -15,13 +15,13 @@ class _CardSitePlaceholderState extends State<CardSitePlaceholder> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-                  Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) =>  DetailSitesScreen()),
-          );
+      // onTap: () {
+      //             Navigator.push(
+      //       context,
+      //       MaterialPageRoute(builder: (context) =>  DetailSitesScreen()),
+      //     );
         
-      },
+      // },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(

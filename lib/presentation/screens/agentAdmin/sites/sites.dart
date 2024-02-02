@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:icecream_service/presentation/screens/agentAdmin/produits/widget/cardlistPlaceholder.dart';
 import 'package:icecream_service/presentation/screens/agentAdmin/sites/signupsite.dart';
 import 'package:icecream_service/presentation/screens/agentAdmin/sites/widgets/cardsite.dart';
 import 'package:icecream_service/presentation/widgets/appbarkelasi.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:icecream_service/data/repository/signUp_repository.dart';
 
@@ -15,9 +17,9 @@ class ListSitesScreen extends StatefulWidget {
 }
 
 class _ListSitesScreenState extends State<ListSitesScreen> {
-  List? dataStudent = [];
+  List? dataSite = [];
   bool isLoading = true;
-  int dataStudentLength = 0;
+  int dataSiteLength = 0;
 
   @override
   void initState() {
@@ -27,18 +29,16 @@ class _ListSitesScreenState extends State<ListSitesScreen> {
   }
 
   loadData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? idParent = prefs.getString("parentId");
-    Map? response =
-        await SignUpRepository.getEnfantsDuParent(idParent.toString());
-    List? recorded = response["data"]["recorded"];
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // String? idParent = prefs.getString("parentId");
+    Map? response = await SignUpRepository.gettAllSIteCream();
+    List? siteList = response["data"];
 
-    print(response["data"]);
+    // print(response["data"]);
     setState(() {
-      dataStudent = recorded;
+      dataSite = siteList;
       isLoading = false;
-      dataStudentLength = recorded!.length;
-      dataStudent = recorded.reversed.toList(); // Inversion de l'ordre
+      dataSiteLength = siteList!.length;
     });
   }
 
@@ -59,8 +59,7 @@ class _ListSitesScreenState extends State<ListSitesScreen> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => const SignupSite()),
+              MaterialPageRoute(builder: (context) => const SignupSite()),
             );
           },
           child: Container(
@@ -78,64 +77,53 @@ class _ListSitesScreenState extends State<ListSitesScreen> {
         ),
         backgroundColor: const Color.fromARGB(255, 245, 244, 244),
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "Sites enregistrés",
-                        style: TextStyle(fontWeight: FontWeight.w400),
-                      ),
-                      Text(
-                        dataStudent!.length.toString(),
-                        style: const TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                    ],
-                  ),
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Sites enregistrés",
+                      style: TextStyle(fontWeight: FontWeight.w400),
+                    ),
+                    Text(
+                      dataSite!.length.toString(),
+                      style: const TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                  ],
                 ),
-                // isLoading == true
-                //     ? SizedBox(
-                //         height: 400,
-                //         child: ListView.builder(
-                //           scrollDirection: Axis.vertical,
-                //           itemCount: 3, // ou le nombre d'éléments que vous avez
-                //           itemBuilder: (BuildContext context, int index) {
-                //             return const CardProduitPlaceholder();
-                //           },
-                //         ),
-                //       )
-                //     : dataStudentLength == 0
-                //         ? Column(
-                //             children: [
-                //               Lottie.asset(
-                //                   "assets/images/last-transaction.json",
-                //                   height: 200),
-                //               const Text("Aucun produit enregistré.")
-                //             ],
-                //           )
-                //         : SizedBox(
-                //             height: 400,
-                //             child: ListView.builder(
-                //                 scrollDirection: Axis.vertical,
-                //                 itemCount: dataStudent!
-                //                     .length, // ou le nombre d'éléments que vous avez
-                //                 itemBuilder: (BuildContext context, int index) {
-                //                   return CardProduit(data: dataStudent![index]);
-                //                 }),
-                //           )
-
-                const CardSites(),
-                 const CardSites(),
-                  const CardSites(),
-                   const CardSites(),
-                    const CardSites(),
-              ],
-            ),
+              ),
+              isLoading == true
+                  ? Flexible(
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: 3, // ou le nombre d'éléments que vous avez
+                        itemBuilder: (BuildContext context, int index) {
+                          return const CardProduitPlaceholder();
+                        },
+                      ),
+                    )
+                  : dataSiteLength == 0
+                      ? Column(
+                          children: [
+                            Lottie.asset(
+                                "assets/images/last-transaction.json",
+                                height: 200),
+                            const Text("Aucun site enregistré.")
+                          ],
+                        )
+                      : Flexible(
+                          child: ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              itemCount: dataSite!.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return CardSites(data: dataSite![index]);
+                              }),
+                        )
+            ],
           ),
         ),
       ),

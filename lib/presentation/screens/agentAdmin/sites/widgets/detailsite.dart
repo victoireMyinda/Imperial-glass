@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:icecream_service/constants/my_colors.dart';
 import 'package:icecream_service/presentation/screens/agentAdmin/sites/signupsite.dart';
 import 'package:icecream_service/presentation/widgets/appbarkelasi.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:icecream_service/data/repository/signUp_repository.dart';
 
 class DetailSitesScreen extends StatefulWidget {
+  Map? data;
   DetailSitesScreen({
-    super.key,
+    super.key, required this.data
   });
 
   @override
@@ -15,31 +14,11 @@ class DetailSitesScreen extends StatefulWidget {
 }
 
 class _DetailSitesScreenState extends State<DetailSitesScreen> {
-  List? dataStudent = [];
-  bool isLoading = true;
-  int dataStudentLength = 0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    loadData();
-  }
-
-  loadData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? idParent = prefs.getString("parentId");
-    Map? response =
-        await SignUpRepository.getEnfantsDuParent(idParent.toString());
-    List? recorded = response["data"]["recorded"];
-
-    print(response["data"]);
-    setState(() {
-      dataStudent = recorded;
-      isLoading = false;
-      dataStudentLength = recorded!.length;
-      dataStudent = recorded.reversed.toList(); // Inversion de l'ordre
-    });
   }
 
   @override
@@ -84,9 +63,9 @@ class _DetailSitesScreenState extends State<DetailSitesScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            "Site de masina",
-                            style: TextStyle(
+                          Text(
+                            "${widget.data!["name"]}",
+                            style: const TextStyle(
                               fontSize: 20,
                               color: MyColors.myBrown,
                             ),
@@ -125,6 +104,23 @@ class _DetailSitesScreenState extends State<DetailSitesScreen> {
                       const SizedBox(
                         height: 10,
                       ),
+                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Localisation",
+                            style: TextStyle(fontWeight: FontWeight.w300),
+                          ),
+                          Text("${widget.data!["location"]}",
+                              style: const TextStyle(fontWeight: FontWeight.w300)),
+                        ],
+                      ),
+                      const Divider(
+                        thickness: 1,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
@@ -142,6 +138,7 @@ class _DetailSitesScreenState extends State<DetailSitesScreen> {
                       const SizedBox(
                         height: 10,
                       ),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
@@ -166,51 +163,7 @@ class _DetailSitesScreenState extends State<DetailSitesScreen> {
                               style: TextStyle(fontWeight: FontWeight.w300)),
                         ],
                       ),
-                      const Divider(
-                        thickness: 1,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text("Quartier",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("Sans-fils",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
-                        ],
-                      ),
-                      const Divider(
-                        thickness: 1,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text("Avenue",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("ACP",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
-                        ],
-                      ),
-                      const Divider(
-                        thickness: 1,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text("Numero",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("10",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
-                        ],
-                      ),
+                     
                         const Divider(
                         thickness: 1,
                       ),
@@ -234,11 +187,11 @@ class _DetailSitesScreenState extends State<DetailSitesScreen> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text("Date de mise à jour",
+                        children: [
+                          const Text("Date de mise à jour",
                               style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("15/05/1997",
-                              style: TextStyle(fontWeight: FontWeight.w300))
+                          Text("${widget.data!["updated_at"]}",
+                              style: const TextStyle(fontWeight: FontWeight.w300))
                         ],
                       ),
                     ],

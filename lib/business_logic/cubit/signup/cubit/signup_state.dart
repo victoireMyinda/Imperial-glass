@@ -88,6 +88,7 @@ Map? initialState() {
     "optionData": [],
     "option":"",
     "levelData" : [],
+    "siteData" : [],
     "level" : "",
     "userId":"",
     "parentId":"",
