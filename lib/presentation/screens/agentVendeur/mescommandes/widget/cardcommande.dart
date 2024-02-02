@@ -1,11 +1,12 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:icecream_service/constants/my_colors.dart';
+import 'package:icecream_service/presentation/screens/agentAdmin/sites/widgets/detailsite.dart';
 
 class CardCommandes extends StatefulWidget {
-  Map? data;
-  CardCommandes({super.key, required this.data});
+  final Map? data;
+  const CardCommandes({super.key, this.data});
 
   @override
   State<CardCommandes> createState() => _CardCommandesState();
@@ -14,133 +15,107 @@ class CardCommandes extends StatefulWidget {
 class _CardCommandesState extends State<CardCommandes> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      padding: const EdgeInsets.all(20.0),
-      height: 150,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade100,
-            spreadRadius: 3,
-            blurRadius: 7,
-            offset: const Offset(0, 3),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => DetailSitesScreen(data: widget.data)),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Container(
+          padding: EdgeInsets.all(20),
+          height: 180,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            // border: Border.all(color: MyColors.mylite),
+            borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            ),
           ),
-        ],
-        borderRadius: BorderRadius.circular(20.0),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
             children: [
-              Text(
-                "${widget.data!["description"]}",
-                style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
-              ),
-              const Divider(
-                thickness: 1,
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
               Row(
-                children: const [
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "${widget.data!["description"]}",
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: MyColors.myBrown,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
                   Icon(
-                    Icons.person_rounded,
-                    size: 25.0,
+                    Icons.shopping_cart_outlined,
                     color: MyColors.myBrown,
                   ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Text(
-                    "Victoire Myinda",
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
-                  )
                 ],
               ),
-              Text(
-                "${widget.data!["order_at"]}",
-                style:
-                    const TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+              Divider(
+                thickness: 1,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Commande",
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11),
+                  ),
+                  Text("${widget.data!["order_at"]}",
+                      style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Livrée",
+                    style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11),
+                  ),
+                  Text("${widget.data!["delivered_at"]}",
+                      style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
+                ],
+              ),
+               SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Statut",
+                    style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11),
+                  ),
+                  Text("${widget.data!["status"]}",
+                      style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
+                ],
+              ),
+              Divider(
+                thickness: 1,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Date de mise à jour",
+                      style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
+                  Text("${widget.data!["updated_at"]}",
+                      style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11))
+                ],
               ),
             ],
           ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                "Livrée ",
-                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11),
-              ),
-              const SizedBox(
-                width: 10.0,
-              ),
-              Text(
-                "${widget.data!["delivered_at"]}",
-                style: const TextStyle(
-                    // color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 11),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                "Statut",
-                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11),
-              ),
-              const SizedBox(
-                width: 10.0,
-              ),
-              Text(
-                "${widget.data!["status"]}",
-                style: const TextStyle(
-                    // color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 11),
-              )
-            ],
-          ),
-          const Divider(
-            thickness: 1,
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                "Total en chiffre",
-                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11),
-              ),
-              const SizedBox(
-                width: 10.0,
-              ),
-              Text(
-                "${widget.data!["estimated_price"]}",
-                style: const TextStyle(
-                    // color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 11),
-              )
-            ],
-          ),
-        ],
+        ),
       ),
     );
   }
 }
+
