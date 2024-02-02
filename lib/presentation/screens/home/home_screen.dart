@@ -210,8 +210,8 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                // color: MyColors.myBrown,
-                height: 30,
+               
+                height: 40,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Row(
@@ -257,19 +257,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+             
               Expanded(
                 child: Container(
                   // // color: Colors.red,
                   // height: MediaQuery.of(context).size.height,
                   // width: MediaQuery.of(context).size.width,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: GridView.count(
                       crossAxisCount: 2,
-                      childAspectRatio: 1,
+                       childAspectRatio: 1,
                       mainAxisSpacing: 20,
                       crossAxisSpacing: 20,
                       children: [

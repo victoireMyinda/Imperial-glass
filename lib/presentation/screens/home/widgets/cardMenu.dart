@@ -25,6 +25,7 @@ class _CardMenuState extends State<CardMenu> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(20.0),
         boxShadow: [
           BoxShadow(
@@ -35,33 +36,24 @@ class _CardMenuState extends State<CardMenu> {
           ),
         ],
       ),
-      child: Container(
-        height: 150,
-        width: 200,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(20),)
-          // border: Border.all(color: MyColors.myBrown, width: 1),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SvgPicture.asset(
-              widget.icon.toString(),
-              color: Color.fromARGB(255, 131, 105, 95),
-              height: 40,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              widget.title.toString(),
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
-            )
-          ],
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            widget.icon.toString(),
+            color: Color.fromARGB(255, 131, 105, 95),
+            height: 40,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Text(
+            widget.title.toString(),
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
+          )
+        ],
       ),
     );
   }
