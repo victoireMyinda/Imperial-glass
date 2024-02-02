@@ -16,13 +16,13 @@ class _CardCommandesState extends State<CardCommandes> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => DetailSitesScreen(data: widget.data)),
-        );
-      },
+      // onTap: () {
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (context) => DetailSitesScreen(data: widget.data)),
+      //   );
+      // },
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Container(
