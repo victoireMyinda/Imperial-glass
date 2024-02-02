@@ -1,12 +1,12 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:icecream_service/constants/my_colors.dart';
 
+
 class CardVentes extends StatefulWidget {
-  String? icon;
-  String? title;
-  CardVentes({super.key, this.icon, this.title});
+  final Map? data;
+  const CardVentes({super.key, this.data});
 
   @override
   State<CardVentes> createState() => _CardVentesState();
@@ -15,176 +15,107 @@ class CardVentes extends StatefulWidget {
 class _CardVentesState extends State<CardVentes> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      padding: const EdgeInsets.all(20.0),
-      height: 200,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade100,
-            spreadRadius: 3,
-            blurRadius: 7,
-            offset: const Offset(0, 3),
+    return InkWell(
+      // onTap: () {
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (context) => DetailSitesScreen(data: widget.data)),
+      //   );
+      // },
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Container(
+          padding: EdgeInsets.all(20),
+          height: 180,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            // border: Border.all(color: MyColors.mylite),
+            borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            ),
           ),
-        ],
-        borderRadius: BorderRadius.circular(20.0),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
             children: [
-              // Text("icon"),
               Row(
-                children: const [
-                  Icon(
-                    Icons
-                        .person_rounded, 
-                    size: 25.0,
-                      color: MyColors.myBrown,
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                   Text(
-                    "Victoire Myinda",
+                    "${widget.data!["operation_nature"]}",
                     style: TextStyle(
-                       fontWeight: FontWeight.w500,fontSize: 15
+                      fontSize: 15,
+                      color: MyColors.myBrown,
+                      fontWeight: FontWeight.bold
                     ),
-                  )
+                  ),
+                  Icon(
+                    Icons.money_sharp,
+                    color: MyColors.myBrown,
+                  ),
                 ],
               ),
-              const Text(
-                "11/01/2022",
-                style: TextStyle( fontWeight: FontWeight.w500, fontSize: 15),
+              Divider(
+                thickness: 1,
               ),
-            ],
-          ),
-           const SizedBox(
-            height: 10.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
-                "produit",
-                style: TextStyle(
-                   fontWeight: FontWeight.w400, fontSize: 11
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Quantité totale",
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11),
+                  ),
+                  Text("${widget.data!["total_quantity"]}",
+                      style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
+                ],
               ),
               SizedBox(
-                width: 10.0,
+                height: 10,
               ),
-              Text(
-                "Cream",
-                style: TextStyle(
-                  // color: Colors.white,
-                  fontWeight: FontWeight.w400, fontSize: 11
-                ),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
-                "Quantité obtenue",
-                style: TextStyle(
-                   fontWeight: FontWeight.w400, fontSize: 11
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Volume total",
+                    style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11),
+                  ),
+                  Text("${widget.data!["total_volume"]}   ${widget.data!["unit_name"]}",
+                      style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
+                ],
               ),
-             
-              Text(
-                "20 Litres",
-                style: TextStyle(
-                  // color: Colors.white,
-                  fontWeight: FontWeight.w400, fontSize: 11
-                ),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
-                "Quantité vendue",
-                style: TextStyle(
-                   fontWeight: FontWeight.w400, fontSize: 11
-                ),
+               SizedBox(
+                height: 10,
               ),
-             
-              Text(
-                "20 Litres",
-                style: TextStyle(
-                  // color: Colors.white,
-                  fontWeight: FontWeight.w400, fontSize: 11
-                ),
-              )
-            ],
-          ),
-           const SizedBox(
-            height: 10.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
-                "quantite restant",
-                style: TextStyle(
-                   fontWeight: FontWeight.w400, fontSize: 11
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Somme totale",
+                    style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11),
+                  ),
+                  Text("${widget.data!["total_sum"]}   ${widget.data!["currency_name"]}",
+                      style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
+                ],
+              ),
+              Divider(
+                thickness: 1,
               ),
               SizedBox(
-                width: 10.0,
+                height: 10,
               ),
-              Text(
-                "5 litres",
-                style: TextStyle(
-                  // color: Colors.white,
-                  fontWeight: FontWeight.w400, fontSize: 11
-                ),
-              )
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Date de mise à jour",
+                      style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
+                  Text("${widget.data!["updated_at"]}",
+                      style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11))
+                ],
+              ),
             ],
           ),
-         
-          const Divider(thickness: 1, ),
-         const  SizedBox(
-            height: 10.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
-                "Total en chiffre",
-                style: TextStyle(
-                  fontWeight: FontWeight.w400, fontSize: 11
-                ),
-              ),
-              SizedBox(
-                width: 10.0,
-              ),
-              Text(
-                "80.000 fc",
-                style: TextStyle(
-                  // color: Colors.white,
-                  fontWeight: FontWeight.w400, fontSize: 11
-                ),
-              )
-            ],
-          ),
-          
-        ],
+        ),
       ),
     );
   }
 }
+

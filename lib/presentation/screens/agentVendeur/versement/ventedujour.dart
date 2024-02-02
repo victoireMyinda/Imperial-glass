@@ -2,7 +2,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icecream_service/business_logic/cubit/signup/cubit/signup_cubit.dart';
-import 'package:icecream_service/presentation/screens/agentVendeur/mesventes/mesventes.dart';
+import 'package:icecream_service/presentation/screens/agentVendeur/mescommandes/mescommandes.dart';
 import 'package:icecream_service/presentation/widgets/appbarkelasi.dart';
 import 'package:icecream_service/presentation/widgets/buttons/buttonTransAcademia.dart';
 import 'package:icecream_service/presentation/widgets/inputs/dateField.dart';
@@ -296,7 +296,7 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  const MesVentesScreen()),
+                                                  const MesCommandesScreen()),
                                         );
                                       },
                                       child: const ButtonTransAcademia(
