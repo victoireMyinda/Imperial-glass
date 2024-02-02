@@ -22,92 +22,24 @@ class CommandeDuJourScreen extends StatefulWidget {
 }
 
 class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
-  List<Widget> formSectionColis = [];
+  List<Widget> formSectionProduct = [];
 
   TextEditingController natureColisController = TextEditingController();
   TextEditingController nomColisController = TextEditingController();
-  TextEditingController descriptionColisController = TextEditingController();
+  TextEditingController descriptionProduitController = TextEditingController();
   TextEditingController poidsColisController = TextEditingController();
   TextEditingController provinceController = TextEditingController();
-    // TextEditingController volumeController = TextEditingController();
-    //   TextEditingController productController = TextEditingController();
+  TextEditingController volumeController = TextEditingController();
+  TextEditingController productController = TextEditingController();
+  TextEditingController quantiteProduitController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-      BlocProvider.of<SignupCubit>(context).loadProductCream();
-      BlocProvider.of<SignupCubit>(context).loadVolumeCream();
-    addNewColis();
-    // getPrice();
-    // getProfilAgent();
-    // BlocProvider.of<SignupCubit>(context)
-    //     .updateField(context, field: "sumPoids", data: 0.0);
+    BlocProvider.of<SignupCubit>(context).loadProductCream();
+    BlocProvider.of<SignupCubit>(context).loadVolumeCream();
+    addNewProduct();
   }
-
-  // calculateSumOfWeights(List dataList, double prixVoyage, double prixFret,
-  //     double sumPoids, double fretOffert, double prixCourrier) {
-  //   double sumPoids = dataList
-  //       .map((item) => (item['poids'] ?? 0.0) as double)
-  //       .fold(0, (prev, poids) => prev + poids);
-
-  //   BlocProvider.of<SignupCubit>(context)
-  //       .updateField(context, field: "sumPoids", data: sumPoids);
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(
-  //         builder: (context) => AbonnementScreen(
-  //               prixVoyage: prixVoyage,
-  //               prixFret: prixFret,
-  //               sumPoids: sumPoids,
-  //               fretOffert: fretOffert,
-  //               prixCourrier: prixCourrier,
-  //               typeReservation: "voyage",
-  //             )),
-  //   );
-  // }
-
-  // void getPrice() {
-  //   final Map<String, dynamic>? foundItem =
-  //       findItemById(widget.dataPrice, widget.idCourse);
-
-  //   // Print the found item
-  //   if (foundItem != null) {
-  //     double prixVoyage = double.parse(foundItem['prix_voyage']);
-  //     double prixFret = double.parse(foundItem['prix_fret']);
-  //     double prixCourrier = double.parse(foundItem['prix_courrier']);
-  //     double fretOffert = double.parse(foundItem['fret_offert']);
-
-  //     print(foundItem['libele_ligne']);
-  //     BlocProvider.of<SignupCubit>(context)
-  //         .updateField(context, field: "prixVoyage", data: prixVoyage);
-  //     BlocProvider.of<SignupCubit>(context)
-  //         .updateField(context, field: "prixFret", data: prixFret);
-  //     BlocProvider.of<SignupCubit>(context)
-  //         .updateField(context, field: "prixCourrier", data: prixCourrier);
-  //     BlocProvider.of<SignupCubit>(context)
-  //         .updateField(context, field: "fretOffert", data: fretOffert);
-  //   } else {
-  //     print('Item with ID ${widget.idCourse} not found');
-  //   }
-  // }
-
-  Map<String, dynamic>? findItemById(List dataList, String targetId) {
-    return dataList.firstWhere((item) => item['id'] == targetId,
-        orElse: () => null);
-  }
-
-  // getProfilAgent() async {
-  //   BlocProvider.of<SignupCubit>(context)
-  //       .updateField(context, field: "poidsList", data: []);
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-
-  //   BlocProvider.of<SignupCubit>(context)
-  //       .updateField(context, field: "currency", data: "");
-  //   BlocProvider.of<SignupCubit>(context).updateField(context,
-  //       field: "idAgent", data: prefs.getString('idAgent'));
-  //   BlocProvider.of<SignupCubit>(context)
-  //       .updateField(context, field: "idUser", data: prefs.getString('id'));
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -139,11 +71,11 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                             child: SizedBox(
                               height: 50.0,
                               child: TransAcademiaNameInput(
-                                field: "descriptionColis",
-                                controller: descriptionColisController,
+                                field: "descriptionProduit",
+                                controller: descriptionProduitController,
                                 hintText: "Description commande",
                                 label: "Description commande",
-                                fieldValue: state.field!["descriptionColis"],
+                                fieldValue: state.field!["descriptionProduit"],
                               ),
                             ));
                       },
@@ -166,8 +98,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                             ));
                       },
                     ),
-                    
-                    for (int i = 0; i < formSectionColis.length; i++)
+                    for (int i = 0; i < formSectionProduct.length; i++)
                       Container(
                         decoration: BoxDecoration(
                           border: Border.all(
@@ -179,75 +110,51 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                         margin: const EdgeInsets.all(15.0),
                         child: Column(
                           children: [
-                            formSectionColis[i],
+                            formSectionProduct[i],
                           ],
                         ),
                       ),
                   ],
                 ),
-               
                 SizedBox(
                   width: 330,
                   child: BlocBuilder<SignupCubit, SignupState>(
                     builder: (context, state) {
                       return ElevatedButton(
                         onPressed: () {
-                          // if (state.field!["natureColis"] == "") {
-                          //   ValidationDialog.show(
-                          //       context, "Veuillez choisir la nature du colis",
-                          //       () {
-                          //     if (kDebugMode) {
-                          //       print("modal");
-                          //     }
-                          //   });
-                          //   return;
-                          // }
+                          if (state.field!["product"] == "") {
+                            ValidationDialog.show(
+                                context, "Veuillez choisir le produit",
+                                () {
+                              if (kDebugMode) {
+                                print("modal");
+                              }
+                            });
+                            return;
+                          }
+                           if (state.field!["volume"] == "") {
+                            ValidationDialog.show(
+                                context, "Veuillez choisir le volume",
+                                () {
+                              if (kDebugMode) {
+                                print("modal");
+                              }
+                            });
+                            return;
+                          }
 
-                          // if (state.field!["poids"] == "0") {
-                          //   ValidationDialog.show(
-                          //       context, "le poids doit être superiuer à 0",
-                          //       () {
-                          //     if (kDebugMode) {
-                          //       print("modal");
-                          //     }
-                          //   });
-                          //   return;
-                          // }
-
-                          // double parsedValue;
-                          // try {
-                          //   parsedValue = double.parse(state.field!["poids"]);
-                          // } catch (e) {
-                          //   parsedValue = 0.0;
-                          // }
-                          // Map colisObject = {
-                          //   "poids": parsedValue,
-                          //   "Id_recever": state.field!["idClient"],
-                          //   "Id_type_colis": state.field!["natureColis"],
-                          //   "Id_user_created_at": state.field!["idUser"]
-                          // };
-
-                          // List? poidsList = state.field!["poidsList"];
-
-                          // poidsList!.add(colisObject);
-
-                          // print("object: " + poidsList.toString());
-
-                          // BlocProvider.of<SignupCubit>(context).updateField(
-                          //     context,
-                          //     field: "poidsList",
-                          //     data: poidsList);
-
-                          // BlocProvider.of<SignupCubit>(context).updateField(
-                          //     context,
-                          //     field: "natureColis",
-                          //     data: "");
-                          // BlocProvider.of<SignupCubit>(context)
-                          //     .updateField(context, field: "poids", data: "10");
-
-                          // calculateSumOfWeights(poidsList);
-
-                          addNewColis();
+                          if (state.field!["quantiteProduit"] == "" ||
+                              state.field!["quantiteProduit"] == "0") {
+                            ValidationDialog.show(context,
+                                "Quantité ne doit pas etre vide",
+                                () {
+                              if (kDebugMode) {
+                                print("modal");
+                              }
+                            });
+                            return;
+                          }
+                          addNewProduct();
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
@@ -279,7 +186,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                 const SizedBox(
                   height: 30.0,
                 ),
-                formSectionColis.isEmpty
+                formSectionProduct.isEmpty
                     ? Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Container(
@@ -313,51 +220,6 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                             BlocBuilder<SignupCubit, SignupState>(
                               builder: (context, state) {
                                 return GestureDetector(
-                                  // onTap: () {
-                                  //   if (state.field!["natureColis"] == "" ||
-                                  //       state.field!["natureColis"] == null) {
-                                  //     ValidationDialog.show(context,
-                                  //         "Veuillez choisir la nature du colis",
-                                  //         () {
-                                  //       if (kDebugMode) {
-                                  //         print("modal");
-                                  //       }
-                                  //     });
-                                  //     return;
-                                  //   }
-                                  //   double parsedValue;
-                                  //   try {
-                                  //     parsedValue =
-                                  //         double.parse(state.field!["poids"]);
-                                  //   } catch (e) {
-                                  //     parsedValue = 0.0;
-                                  //   }
-                                  //   Map colisObject = {
-                                  //     "poids": parsedValue,
-                                  //     "Id_recever": state.field!["idClient"],
-                                  //     "Id_type_colis":
-                                  //         state.field!["natureColis"],
-                                  //     "Id_user_created_at":
-                                  //         state.field!["idUser"]
-                                  //   };
-
-                                  //   List? poidsList = state.field!["poidsList"];
-
-                                  //   poidsList!.add(colisObject);
-
-                                  //   BlocProvider.of<SignupCubit>(context)
-                                  //       .updateField(context,
-                                  //           field: "poidsList",
-                                  //           data: poidsList);
-
-                                  //   calculateSumOfWeights(
-                                  //       poidsList,
-                                  //       state.field!["prixVoyage"],
-                                  //       state.field!["prixFret"],
-                                  //       state.field!["sumPoids"],
-                                  //       state.field!["fretOffert"],
-                                  //       state.field!["prixCourrier"]);
-                                  // },
                                   child: const ButtonTransAcademia(
                                       width: 320, title: "Commander"),
                                 );
@@ -366,7 +228,9 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 10,)
+                const SizedBox(
+                  height: 10,
+                )
               ],
             ),
           ),
@@ -375,72 +239,72 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
     );
   }
 
-  void addNewColis() {
+  void addNewProduct() {
+    TextEditingController newQuantiteProduitController =
+        TextEditingController();
+    TextEditingController newProductController = TextEditingController();
+    TextEditingController newVolumeController = TextEditingController();
+
     setState(() {
       Key key = UniqueKey();
-      formSectionColis.add(
+      formSectionProduct.add(
         Container(
           key: key,
-          // padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          // margin: const EdgeInsets.only(bottom: 30),
           child: Column(
             children: [
-              const SizedBox(
-                height: 30,
-              ),
+             const  SizedBox(height: 30),
               BlocBuilder<SignupCubit, SignupState>(
                 builder: (context, state) {
                   return Container(
-                      // padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      margin: const EdgeInsets.only(bottom: 20),
-                      child: SizedBox(
-                        height: 50.0,
-                        child: KelasiDropdown(
-                          items: "productData",
-                          value: "product",
-                          // controller: productController,
-                          hintText: "Produit à commander",
-                          color: Colors.white,
-                          label: "Produit à commander",
-                        ),
-                      ));
-                },
-              ),
-              BlocBuilder<SignupCubit, SignupState>(
-                builder: (context, state) {
-                  return Container(
-                      // padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      margin: const EdgeInsets.only(bottom: 20),
-                      child: SizedBox(
-                        height: 50.0,
-                        child: KelasiDropdown(
-                          items: "volumeData",
-                          value: "volume",
-                          // controller: volumeController,
-                          hintText: "Volume",
-                          color: Colors.white,
-                          label: "Volume",
-                        ),
-                      ));
-                },
-              ),
-              BlocBuilder<SignupCubit, SignupState>(
-                builder: (context, state) {
-                  return Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      margin: const EdgeInsets.only(
-                        bottom: 30,
+                    margin: const EdgeInsets.only(bottom: 20),
+                    child: SizedBox(
+                      height: 50.0,
+                      child: KelasiDropdown(
+                        items: "productData",
+                        value: "product",
+                        controller: newProductController,
+                        hintText: "Produit à commander",
+                        color: Colors.white,
+                        label: "Produit à commander",
                       ),
-                      child: SizedBox(
-                        height: 50.0,
-                        child: TransAcademiaNameInput(
-                          field: "descriptionColis",
-                          controller: descriptionColisController,
-                          hintText: "Quantité ",
-                          label: "Quantité ",
-                          fieldValue: state.field!["descriptionColis"],
-                        ),
-                      ));
+                    ),
+                  );
+                },
+              ),
+              BlocBuilder<SignupCubit, SignupState>(
+                builder: (context, state) {
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 20),
+                    child: SizedBox(
+                      height: 50.0,
+                      child: KelasiDropdown(
+                        items: "volumeData",
+                        value: "volume",
+                        controller: newVolumeController,
+                        hintText: "Volume",
+                        color: Colors.white,
+                        label: "Volume",
+                      ),
+                    ),
+                  );
+                },
+              ),
+              BlocBuilder<SignupCubit, SignupState>(
+                builder: (context, state) {
+                  return Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    margin: const EdgeInsets.only(bottom: 30),
+                    child: SizedBox(
+                      height: 50.0,
+                      child: TransAcademiaNameInput(
+                        field: "quantiteProduit",
+                        controller: newQuantiteProduitController,
+                        hintText: "Quantité ",
+                        label: "Quantité ",
+                        // fieldValue: state.field!["quantiteProduit"],
+                      ),
+                    ),
+                  );
                 },
               ),
               Padding(
@@ -468,7 +332,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
 
   void removeSectionColis(Key key) {
     setState(() {
-      formSectionColis.removeWhere((section) => section.key == key);
+      formSectionProduct.removeWhere((section) => section.key == key);
     });
   }
 }

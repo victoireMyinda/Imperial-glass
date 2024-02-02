@@ -149,6 +149,10 @@ class SignupCubit extends Cubit<SignupState> {
       print("erreur de l'obtention de data");
     }
   }
+
+
+
+  
   void updateField(context, {required String field, data}) {
     emit(SignupState(field: {
       ...state.field!,
