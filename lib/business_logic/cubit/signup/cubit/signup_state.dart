@@ -7,7 +7,8 @@ class SignupState {
 
 Map? initialState() {
   return {
-    'id': "",
+    'idAgent': "",
+    'idUser' : "",
     'nom': "",
     'postnom': "",
     'prenom': "",
@@ -32,6 +33,7 @@ Map? initialState() {
     'ecoleData': [],
     'productData': [],
     'volumeData' : [],
+    'ligneCommande' : [],
     'quantiteProduit' :"",
     'descriptionProduit' : "",
     'promotion': "",

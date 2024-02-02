@@ -102,20 +102,18 @@ class _KelasiDropdownState extends State<KelasiDropdown> {
                 value: state.field![widget.value] == ""
                     ? null
                     : state.field![widget.value],
-                onChanged: (newValue) {
-                  // selectedValue = newValue!.toString();
-                  BlocProvider.of<SignupCubit>(context).updateField(context,
-                      field: widget.value.toString(),
-                      data: newValue.toString());
+              
+                  onChanged: (newValue) {
+                    setState(() {
+                     state.field![widget.value] = newValue!.toString();
+                    });
 
-                  if (widget.value == "section") {
-                    BlocProvider.of<SignupCubit>(context)
-                        .updateField(context, field: "option", data: "");
-                  }
-                  BlocProvider.of<SignupCubit>(context).updateField(context,
-                      field: widget.value.toString(),
-                      data: newValue.toString());
-                },
+                    // if (widget.value == "natureColis") {
+                    //     BlocProvider.of<SignupCubit>(context).updateField(context,
+                    //     field: "natureColis", data: newValue.toString());
+                    // } 
+
+                  },
                 // items: dropdownItems
                 // items: state.field![widget.items]
                 //     .map<DropdownMenuItem<String>>((item) {

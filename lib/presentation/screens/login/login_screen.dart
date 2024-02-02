@@ -372,8 +372,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                   SharedPreferences prefs =
                                       await SharedPreferences.getInstance();
+                                  prefs.setString('id',
+                                      response['data']["agent_ID"].toString());
                                   prefs.setString(
-                                      'id', response['data']["user_ID"].toString());
+                                      'idUser',
+                                      response['data']["user_ID"]
+                                          .toString());
+
                                   prefs.setString(
                                       'fonction', response['data']["function"]);
 
