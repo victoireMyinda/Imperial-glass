@@ -168,13 +168,16 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                           commandeObject = {
                             "quantity":
                                 int.parse(state.field!["quantiteProduit"]),
-                            "ID_quantity_unit": state.field!["volume"],
-                            "ID_product": state.field!["product"],
+                            "ID_quantity_unit":
+                                int.parse(state.field!["volume"]),
+                            "ID_product": int.parse(state.field!["product"]),
                           };
 
                           // ligneCommande = state.field!["ligneCommande"];
 
                           ligneCommande!.add(commandeObject);
+
+                          print(ligneCommande);
 
                           //  print("object: " + ligneCommande.toString());
 
@@ -262,24 +265,25 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                                       return;
                                     }
 
-                                    commandeObject = {
-                                      "quantity": int.parse(
-                                          state.field!["quantiteProduit"]),
-                                      "ID_quantity_unit":
-                                          state.field!["volume"],
-                                      "ID_product": state.field!["product"],
-                                    };
+                                    // commandeObject = {
+                                    //   "quantity": int.parse(
+                                    //       state.field!["quantiteProduit"]),
+                                    //   "ID_quantity_unit":
+                                    //       state.field!["volume"],
+                                    //   "ID_product": state.field!["product"],
+                                    // };
 
-                                    ligneCommande!.add(commandeObject);
+                                    // ligneCommande!.add(commandeObject);
 
                                     Map data = {
                                       "description":
                                           state.field!["descriptionProduit"],
                                       "ID_ordering_agent":
-                                          state.field!["idAgent"],
+                                          int.parse(state.field!["idAgent"]),
                                       "Id_user_created_at":
-                                          state.field!["idUser"],
-                                      "ID_sale_site": state.field!["site"],
+                                          int.parse(state.field!["idUser"]),
+                                      "ID_sale_site":
+                                          int.parse(state.field!["site"]),
                                       "line": ligneCommande,
                                     };
 
