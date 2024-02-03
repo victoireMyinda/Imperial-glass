@@ -62,6 +62,8 @@ class _KelasiDropdownState extends State<KelasiDropdown> {
       labelForDropdown = "label";
     } else if (widget.value == "users") {
       labelForDropdown = "prenom";
+    } else if (widget.value == "site") {
+      labelForDropdown = "name";
     } else {
       labelForDropdown = "libele";
     }
@@ -102,18 +104,17 @@ class _KelasiDropdownState extends State<KelasiDropdown> {
                 value: state.field![widget.value] == ""
                     ? null
                     : state.field![widget.value],
-              
-                  onChanged: (newValue) {
-                    setState(() {
-                     state.field![widget.value] = newValue!.toString();
-                    });
 
-                    // if (widget.value == "natureColis") {
-                    //     BlocProvider.of<SignupCubit>(context).updateField(context,
-                    //     field: "natureColis", data: newValue.toString());
-                    // } 
+                onChanged: (newValue) {
+                  setState(() {
+                    state.field![widget.value] = newValue!.toString();
+                  });
 
-                  },
+                  // if (widget.value == "natureColis") {
+                  //     BlocProvider.of<SignupCubit>(context).updateField(context,
+                  //     field: "natureColis", data: newValue.toString());
+                  // }
+                },
                 // items: dropdownItems
                 // items: state.field![widget.items]
                 //     .map<DropdownMenuItem<String>>((item) {
@@ -154,15 +155,15 @@ class _KelasiDropdownState extends State<KelasiDropdown> {
   }
 }
 
-List<DropdownMenuItem<String>> get dropdownItems {
-  List<DropdownMenuItem<String>> menuItems = [
-    DropdownMenuItem(child: Text("UNIKIN"), value: "Unikin"),
-    DropdownMenuItem(child: Text("ISTA"), value: "ISTA"),
-    DropdownMenuItem(child: Text("ISC"), value: "ISC"),
-    DropdownMenuItem(child: Text("ABA"), value: "ABA"),
-  ];
-  return menuItems;
-}
+// List<DropdownMenuItem<String>> get dropdownItems {
+//   List<DropdownMenuItem<String>> menuItems = [
+//     DropdownMenuItem(child: Text("UNIKIN"), value: "Unikin"),
+//     DropdownMenuItem(child: Text("ISTA"), value: "ISTA"),
+//     DropdownMenuItem(child: Text("ISC"), value: "ISC"),
+//     DropdownMenuItem(child: Text("ABA"), value: "ABA"),
+//   ];
+//   return menuItems;
+// }
 
 OutlineInputBorder myinputborder() {
   //return type is OutlineInputBorder

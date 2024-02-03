@@ -14,8 +14,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class CommandeDuJourScreen extends StatefulWidget {
   const CommandeDuJourScreen({super.key});
-  // final List dataPrice;
-  // final String idCourse;
 
   @override
   State<CommandeDuJourScreen> createState() => _CommandeDuJourScreenState();
@@ -24,7 +22,7 @@ class CommandeDuJourScreen extends StatefulWidget {
 class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
   List<Widget> formSectionProduct = [];
 
-  TextEditingController provinceController = TextEditingController();
+  TextEditingController siteController = TextEditingController();
   TextEditingController descriptionProduitController = TextEditingController();
   TextEditingController volumeController = TextEditingController();
   TextEditingController productController = TextEditingController();
@@ -35,6 +33,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
     super.initState();
     BlocProvider.of<SignupCubit>(context).loadProductCream();
     BlocProvider.of<SignupCubit>(context).loadVolumeCream();
+    BlocProvider.of<SignupCubit>(context).loadSiteCream();
 
     addNewProduct();
     getProfilAgent();
@@ -99,9 +98,9 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                             child: SizedBox(
                               height: 50.0,
                               child: KelasiDropdown(
-                                items: "provinceDataKelasi",
-                                value: "province",
-                                controller: provinceController,
+                                items: "siteData",
+                                value: "site",
+                                controller: siteController,
                                 hintText: "Choisir le site",
                                 color: Colors.white,
                                 label: "Choisir le site",
@@ -167,7 +166,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                             "description": state.field!["descriptionProduit"],
                             "ID_ordering_agent": state.field!["idAgent"],
                             "Id_user_created_at": state.field!["idUser"],
-                            "ID_sale_site": 1,
+                            "ID_sale_site": state.field!["site"],
                             "line": [
                               {
                                 "quantity":
@@ -275,94 +274,90 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
   }
 
   void addNewProduct() {
-  setState(() {
-    Key key = UniqueKey();
-    TextEditingController productController = TextEditingController();
-    TextEditingController volumeController = TextEditingController();
-    TextEditingController quantiteProduitController = TextEditingController();
+    setState(() {
+      Key key = UniqueKey();
 
-    formSectionProduct.add(
-      Container(
-        key: key,
-        child: Column(
-          children: [
-            const SizedBox(height: 30),
-            BlocBuilder<SignupCubit, SignupState>(
-              builder: (context, state) {
-                return Container(
-                  margin: const EdgeInsets.only(bottom: 20),
-                  child: SizedBox(
-                    height: 50.0,
-                    child: KelasiDropdown(
-                      items: "productData",
-                      value: "product",
-                      controller: productController,
-                      hintText: "Produit à commander",
-                      color: Colors.white,
-                      label: "Produit à commander",
+      formSectionProduct.add(
+        Container(
+          key: key,
+          child: Column(
+            children: [
+              const SizedBox(height: 30),
+              BlocBuilder<SignupCubit, SignupState>(
+                builder: (context, state) {
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 20),
+                    child: SizedBox(
+                      height: 50.0,
+                      child: KelasiDropdown(
+                        items: "productData",
+                        value: "product",
+                        controller: productController,
+                        hintText: "Produit à commander",
+                        color: Colors.white,
+                        label: "Produit à commander",
+                      ),
                     ),
-                  ),
-                );
-              },
-            ),
-            BlocBuilder<SignupCubit, SignupState>(
-              builder: (context, state) {
-                return Container(
-                  margin: const EdgeInsets.only(bottom: 20),
-                  child: SizedBox(
-                    height: 50.0,
-                    child: KelasiDropdown(
-                      items: "volumeData",
-                      value: "volume",
-                      controller: volumeController,
-                      hintText: "Volume",
-                      color: Colors.white,
-                      label: "Volume",
-                    ),
-                  ),
-                );
-              },
-            ),
-            BlocBuilder<SignupCubit, SignupState>(
-              builder: (context, state) {
-                return Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  margin: const EdgeInsets.only(bottom: 30),
-                  child: SizedBox(
-                    height: 50.0,
-                    child: TransAcademiaNameInput(
-                      field: "quantiteProduit",
-                      controller: quantiteProduitController,
-                      hintText: "Quantité ",
-                      label: "Quantité ",
-                    ),
-                  ),
-                );
-              },
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: GestureDetector(
-                onTap: () {
-                  removeSectionColis(key);
+                  );
                 },
-                child: Container(
-                  alignment: Alignment.topRight,
-                  child: Icon(
-                    Icons.cancel,
-                    color: Colors.grey.shade400,
-                    size: 30.0,
+              ),
+              BlocBuilder<SignupCubit, SignupState>(
+                builder: (context, state) {
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 20),
+                    child: SizedBox(
+                      height: 50.0,
+                      child: KelasiDropdown(
+                        items: "volumeData",
+                        value: "volume",
+                        controller: volumeController,
+                        hintText: "Volume",
+                        color: Colors.white,
+                        label: "Volume",
+                      ),
+                    ),
+                  );
+                },
+              ),
+              BlocBuilder<SignupCubit, SignupState>(
+                builder: (context, state) {
+                  return Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    margin: const EdgeInsets.only(bottom: 30),
+                    child: SizedBox(
+                      height: 50.0,
+                      child: TransAcademiaNameInput(
+                        field: "quantiteProduit",
+                        controller: quantiteProduitController,
+                        hintText: "Quantité ",
+                        label: "Quantité ",
+                      ),
+                    ),
+                  );
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: GestureDetector(
+                  onTap: () {
+                    removeSectionColis(key);
+                  },
+                  child: Container(
+                    alignment: Alignment.topRight,
+                    child: Icon(
+                      Icons.cancel,
+                      color: Colors.grey.shade400,
+                      size: 30.0,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
-  });
-}
-
+      );
+    });
+  }
 
   void removeSectionColis(Key key) {
     setState(() {
