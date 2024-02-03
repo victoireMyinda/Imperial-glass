@@ -24,9 +24,6 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
 
   TextEditingController siteController = TextEditingController();
   TextEditingController descriptionProduitController = TextEditingController();
-  TextEditingController volumeController = TextEditingController();
-  TextEditingController productController = TextEditingController();
-  TextEditingController quantiteProduitController = TextEditingController();
 
   @override
   void initState() {
@@ -35,14 +32,14 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
     BlocProvider.of<SignupCubit>(context).loadVolumeCream();
     BlocProvider.of<SignupCubit>(context).loadSiteCream();
 
+    BlocProvider.of<SignupCubit>(context)
+        .updateField(context, field: "ligneCommande", data: []);
+
     addNewProduct();
     getProfilAgent();
   }
 
   getProfilAgent() async {
-    BlocProvider.of<SignupCubit>(context)
-        .updateField(context, field: "ligneCommande", data: []);
-
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     BlocProvider.of<SignupCubit>(context)
@@ -141,6 +138,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                             });
                             return;
                           }
+
                           if (state.field!["volume"] == "") {
                             ValidationDialog.show(
                                 context, "Veuillez choisir le volume", () {
@@ -151,22 +149,21 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                             return;
                           }
 
-                          // if (state.field!["quantiteProduit"] == "" ||
-                          //     state.field!["quantiteProduit"] == "0") {
-                          //   ValidationDialog.show(
-                          //       context, "Quantité ne doit pas etre vide", () {
-                          //     if (kDebugMode) {
-                          //       print("modal");
-                          //     }
-                          //   });
-                          //   return;
-                          // }
+                          if (state.field!["quantiteProduit"] == "") {
+                            ValidationDialog.show(
+                                context, "Quantité ne doit pas etre vide", () {
+                              if (kDebugMode) {
+                                print("modal");
+                              }
+                            });
+                            return;
+                          }
 
                           Map commandeObject = {
-                            "description": state.field!["descriptionProduit"],
-                            "ID_ordering_agent": state.field!["idAgent"],
-                            "Id_user_created_at": state.field!["idUser"],
-                            "ID_sale_site": state.field!["site"],
+                            // "description": state.field!["descriptionProduit"],
+                            // "ID_ordering_agent": state.field!["idAgent"],
+                            // "Id_user_created_at": state.field!["idUser"],
+                            // "ID_sale_site": state.field!["site"],
                             "line": [
                               {
                                 "quantity":
@@ -254,6 +251,59 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                             BlocBuilder<SignupCubit, SignupState>(
                               builder: (context, state) {
                                 return GestureDetector(
+                                  // onTap: () {
+                                  //   if (state.field!["descriptionProduit"] ==
+                                  //       "") {
+                                  //     ValidationDialog.show(context,
+                                  //         "Veuillez decrire le titre de votre commande",
+                                  //         () {
+                                  //       if (kDebugMode) {
+                                  //         print("modal");
+                                  //       }
+                                  //     });
+                                  //     return;
+                                  //   }
+
+                                  //   if (state.field!["site"] == "") {
+                                  //     ValidationDialog.show(context,
+                                  //         "Veuillez choisir votre site", () {
+                                  //       if (kDebugMode) {
+                                  //         print("modal");
+                                  //       }
+                                  //     });
+                                  //     return;
+                                  //   }
+                                  //   Map commandeObject = {
+                                  //     "description":
+                                  //         state.field!["descriptionProduit"],
+                                  //     "ID_ordering_agent":
+                                  //         state.field!["idAgent"],
+                                  //     "Id_user_created_at":
+                                  //         state.field!["idUser"],
+                                  //     "ID_sale_site": state.field!["site"],
+                                  //     "line": [
+                                  //       {
+                                  //         "quantity": int.parse(
+                                  //             state.field!["quantiteProduit"]),
+                                  //         "ID_quantity_unit":
+                                  //             state.field!["volume"],
+                                  //         "ID_product": state.field!["product"],
+                                  //       },
+                                  //     ]
+                                  //   };
+
+                                  //   List? ligneCommande =
+                                  //       state.field!["ligneCommande"];
+
+                                  //   ligneCommande!.add(commandeObject);
+
+                                  //   // print("object: " + ligneCommande.toString());
+
+                                  //   BlocProvider.of<SignupCubit>(context)
+                                  //       .updateField(context,
+                                  //           field: "ligneCommande",
+                                  //           data: ligneCommande);
+                                  // },
                                   child: const ButtonTransAcademia(
                                       width: 320, title: "Commander"),
                                 );
@@ -274,6 +324,10 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
   }
 
   void addNewProduct() {
+    TextEditingController volumeController = TextEditingController();
+    TextEditingController productController = TextEditingController();
+    TextEditingController quantiteProduitController = TextEditingController();
+
     setState(() {
       Key key = UniqueKey();
 

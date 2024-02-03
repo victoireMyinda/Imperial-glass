@@ -46,15 +46,17 @@ class _TransAcademiaNameInputState extends State<TransAcademiaNameInput> {
   Widget build(BuildContext context) {
     return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {
-        
         return TextField(
-         
-          key: widget.key,
+            key: widget.key,
+            keyboardType: widget.field == "quantiteProduit"
+                ? TextInputType.number
+                : TextInputType.text,
             onChanged: (String value) {
-              BlocProvider.of<SignupCubit>(context)
-                  .updateField(context, data: value.toString(), field: widget.field.toString()+"Error");
-              BlocProvider.of<SignupCubit>(context)
-                  .updateField(context, data: value.toString(), field: widget.field.toString());
+              BlocProvider.of<SignupCubit>(context).updateField(context,
+                  data: value.toString(),
+                  field: widget.field.toString() + "Error");
+              BlocProvider.of<SignupCubit>(context).updateField(context,
+                  data: value.toString(), field: widget.field.toString());
             },
             controller: _controller,
             decoration: InputDecoration(
@@ -67,7 +69,8 @@ class _TransAcademiaNameInputState extends State<TransAcademiaNameInput> {
               hintText: widget.hintText,
               // hintStyle: const TextStyle(color: Colors.black54),
               border: myinputborder(), //normal border
-              enabledBorder: myfocusborder(context, widget.isError), //enabled border
+              enabledBorder:
+                  myfocusborder(context, widget.isError), //enabled border
               focusedBorder: myfocusborder(context, widget.isError),
               //focused border
               // set more border style like disabledBorder
@@ -93,7 +96,9 @@ OutlineInputBorder myfocusborder(BuildContext context, String? isError) {
       borderRadius: const BorderRadius.all(Radius.circular(10)),
       borderSide: BorderSide(
         // color: Colors.black26,
-        color: isError == "error"? Color.fromARGB(255, 196, 16, 3): Theme.of(context).backgroundColor,
-        width: isError == "error"? 2: 1,
+        color: isError == "error"
+            ? Color.fromARGB(255, 196, 16, 3)
+            : Theme.of(context).backgroundColor,
+        width: isError == "error" ? 2 : 1,
       ));
 }

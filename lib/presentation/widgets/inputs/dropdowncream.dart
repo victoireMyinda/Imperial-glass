@@ -34,6 +34,8 @@ class KelasiDropdown extends StatefulWidget {
 }
 
 class _KelasiDropdownState extends State<KelasiDropdown> {
+  String? selectedValue = null;
+  final _dropdownFormKey = GlobalKey<FormState>();
   String? labelForDropdown;
 
   @override
@@ -71,85 +73,91 @@ class _KelasiDropdownState extends State<KelasiDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 18.0),
-      height: 50,
-      //margin: const EdgeInsets.only(bottom: 15),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          BlocBuilder<SignupCubit, SignupState>(
-            builder: (context, state) {
-              return DropdownButtonFormField(
-                decoration: InputDecoration(
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 4, horizontal: 20.0),
-                  label: Text(widget.label.toString()),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.grey, width: 1),
-                    borderRadius: BorderRadius.circular(10),
+    return Form(
+      key: _dropdownFormKey,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 18.0),
+        height: 50,
+        //margin: const EdgeInsets.only(bottom: 15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            BlocBuilder<SignupCubit, SignupState>(
+              builder: (context, state) {
+                return DropdownButtonFormField(
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 4, horizontal: 20.0),
+                    label: Text(widget.label.toString()),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: Colors.grey, width: 1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    border: OutlineInputBorder(
+                      // borderSide: const BorderSide(color: Colors.grey, width: 1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey.withOpacity(0.1),
                   ),
-                  border: OutlineInputBorder(
-                    // borderSide: const BorderSide(color: Colors.grey, width: 1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  filled: true,
-                  fillColor: Colors.grey.withOpacity(0.1),
-                ),
-                validator: (value) =>
-                    value == null ? "Selectionner l'université" : null,
-                dropdownColor: AdaptiveTheme.of(context).mode.name == "dark"
-                    ? Colors.black
-                    : Colors.white,
-                value: state.field![widget.value] == ""
-                    ? null
-                    : state.field![widget.value],
+                  validator: (value) =>
+                      value == null ? "Selectionner l'université" : null,
+                  dropdownColor: AdaptiveTheme.of(context).mode.name == "dark"
+                      ? Colors.black
+                      : Colors.white,
+                  value: selectedValue,
+                  onChanged: (newValue) {
+                    setState(() {
+                      selectedValue = newValue!.toString();
+                    });
 
-                onChanged: (newValue) {
-                  setState(() {
-                    state.field![widget.value] = newValue!.toString();
-                  });
+                    if (widget.value == "product") {
+                      BlocProvider.of<SignupCubit>(context).updateField(context,
+                          field: "product", data: newValue.toString());
+                    }
 
-                  // if (widget.value == "natureColis") {
-                  //     BlocProvider.of<SignupCubit>(context).updateField(context,
-                  //     field: "natureColis", data: newValue.toString());
-                  // }
-                },
-                // items: dropdownItems
-                // items: state.field![widget.items]
-                //     .map<DropdownMenuItem<String>>((item) {
-                //   return DropdownMenuItem(
-                //     value: item['id'].toString(),
-                //     child: Text(
-                //       item![labelForDropdown].toString(),
-                //       style: const TextStyle(
-                //         fontSize: 14,
-                //       ),
-                //     ),
-                //   );
-                // }).toList(),
-                items: state.field![widget.items]
-                    .map<DropdownMenuItem<String>>((item) {
-                  return DropdownMenuItem(
-                    value: widget.value == "option"
-                        ? item['Id_option'].toString()
-                        : item['ID'].toString(),
-                    child: SizedBox(
-                      width: 200.0,
-                      child: Text(
-                        item![labelForDropdown].toString(),
-                        style: const TextStyle(
-                          overflow: TextOverflow.ellipsis,
-                          fontSize: 12,
+                    if (widget.value == "volume") {
+                      BlocProvider.of<SignupCubit>(context).updateField(context,
+                          field: "volume", data: newValue.toString());
+                    }
+                  },
+                  // items: dropdownItems
+                  // items: state.field![widget.items]
+                  //     .map<DropdownMenuItem<String>>((item) {
+                  //   return DropdownMenuItem(
+                  //     value: item['id'].toString(),
+                  //     child: Text(
+                  //       item![labelForDropdown].toString(),
+                  //       style: const TextStyle(
+                  //         fontSize: 14,
+                  //       ),
+                  //     ),
+                  //   );
+                  // }).toList(),
+                  items: state.field![widget.items]
+                      .map<DropdownMenuItem<String>>((item) {
+                    return DropdownMenuItem(
+                      value: widget.value == "option"
+                          ? item['Id_option'].toString()
+                          : item['ID'].toString(),
+                      child: SizedBox(
+                        width: 200.0,
+                        child: Text(
+                          item![labelForDropdown].toString(),
+                          style: const TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            fontSize: 12,
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                }).toList(),
-              );
-            },
-          ),
-        ],
+                    );
+                  }).toList(),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
