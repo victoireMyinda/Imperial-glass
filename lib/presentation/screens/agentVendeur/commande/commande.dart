@@ -5,9 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icecream_service/business_logic/cubit/signup/cubit/signup_cubit.dart';
 import 'package:icecream_service/constants/my_colors.dart';
+import 'package:icecream_service/data/repository/signUp_repository.dart';
 import 'package:icecream_service/presentation/widgets/appbarkelasi.dart';
 import 'package:icecream_service/presentation/widgets/buttons/buttonTransAcademia.dart';
+import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogError.dart';
+import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogSuccess.dart';
 import 'package:icecream_service/presentation/widgets/dialog/ValidationDialog.dart';
+import 'package:icecream_service/presentation/widgets/dialog/loading.dialog.dart';
 import 'package:icecream_service/presentation/widgets/inputs/dropdowncream.dart';
 import 'package:icecream_service/presentation/widgets/inputs/nameField.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,6 +24,8 @@ class CommandeDuJourScreen extends StatefulWidget {
 }
 
 class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
+  Map? commandeObject;
+  List? ligneCommande = [];
   List<Widget> formSectionProduct = [];
 
   TextEditingController siteController = TextEditingController();
@@ -159,31 +165,23 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                             return;
                           }
 
-                          Map commandeObject = {
-                            // "description": state.field!["descriptionProduit"],
-                            // "ID_ordering_agent": state.field!["idAgent"],
-                            // "Id_user_created_at": state.field!["idUser"],
-                            // "ID_sale_site": state.field!["site"],
-                            "line": [
-                              {
-                                "quantity":
-                                    int.parse(state.field!["quantiteProduit"]),
-                                "ID_quantity_unit": state.field!["volume"],
-                                "ID_product": state.field!["product"],
-                              },
-                            ]
+                          commandeObject = {
+                            "quantity":
+                                int.parse(state.field!["quantiteProduit"]),
+                            "ID_quantity_unit": state.field!["volume"],
+                            "ID_product": state.field!["product"],
                           };
 
-                          List? ligneCommande = state.field!["ligneCommande"];
+                          // ligneCommande = state.field!["ligneCommande"];
 
                           ligneCommande!.add(commandeObject);
 
-                          // print("object: " + ligneCommande.toString());
+                          //  print("object: " + ligneCommande.toString());
 
-                          BlocProvider.of<SignupCubit>(context).updateField(
-                              context,
-                              field: "ligneCommande",
-                              data: ligneCommande);
+                          // BlocProvider.of<SignupCubit>(context).updateField(
+                          //     context,
+                          //     field: "ligneCommande",
+                          //     data: ligneCommande);
 
                           addNewProduct();
                         },
@@ -251,59 +249,75 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                             BlocBuilder<SignupCubit, SignupState>(
                               builder: (context, state) {
                                 return GestureDetector(
-                                  // onTap: () {
-                                  //   if (state.field!["descriptionProduit"] ==
-                                  //       "") {
-                                  //     ValidationDialog.show(context,
-                                  //         "Veuillez decrire le titre de votre commande",
-                                  //         () {
-                                  //       if (kDebugMode) {
-                                  //         print("modal");
-                                  //       }
-                                  //     });
-                                  //     return;
-                                  //   }
+                                  onTap: () async {
+                                    if (state.field!["descriptionProduit"] ==
+                                        "") {
+                                      ValidationDialog.show(context,
+                                          "Veuillez decrire le titre de votre commande",
+                                          () {
+                                        if (kDebugMode) {
+                                          print("modal");
+                                        }
+                                      });
+                                      return;
+                                    }
 
-                                  //   if (state.field!["site"] == "") {
-                                  //     ValidationDialog.show(context,
-                                  //         "Veuillez choisir votre site", () {
-                                  //       if (kDebugMode) {
-                                  //         print("modal");
-                                  //       }
-                                  //     });
-                                  //     return;
-                                  //   }
-                                  //   Map commandeObject = {
-                                  //     "description":
-                                  //         state.field!["descriptionProduit"],
-                                  //     "ID_ordering_agent":
-                                  //         state.field!["idAgent"],
-                                  //     "Id_user_created_at":
-                                  //         state.field!["idUser"],
-                                  //     "ID_sale_site": state.field!["site"],
-                                  //     "line": [
-                                  //       {
-                                  //         "quantity": int.parse(
-                                  //             state.field!["quantiteProduit"]),
-                                  //         "ID_quantity_unit":
-                                  //             state.field!["volume"],
-                                  //         "ID_product": state.field!["product"],
-                                  //       },
-                                  //     ]
-                                  //   };
+                                    Map data = {
+                                      "description":
+                                          state.field!["descriptionProduit"],
+                                      "ID_ordering_agent":
+                                          state.field!["idAgent"],
+                                      "Id_user_created_at":
+                                          state.field!["idUser"],
+                                      "ID_sale_site": state.field!["site"],
+                                      "line": ligneCommande,
+                                    };
 
-                                  //   List? ligneCommande =
-                                  //       state.field!["ligneCommande"];
+                                    Map? response = await SignUpRepository
+                                        .createCommandeCream(data);
+                                    // print(response);
 
-                                  //   ligneCommande!.add(commandeObject);
+                                    if (response["status"] == 201) {
+                                      TransAcademiaLoadingDialog.stop(context);
+                                      String? messageSucces =
+                                          response["message"];
+                                      TransAcademiaDialogSuccess.show(
+                                          context, messageSucces, "Auth");
 
-                                  //   // print("object: " + ligneCommande.toString());
-
-                                  //   BlocProvider.of<SignupCubit>(context)
-                                  //       .updateField(context,
-                                  //           field: "ligneCommande",
-                                  //           data: ligneCommande);
-                                  // },
+                                      try {
+                                        Future.delayed(
+                                            const Duration(milliseconds: 4000),
+                                            () async {
+                                          TransAcademiaDialogSuccess.stop(
+                                              context);
+                                          Navigator.of(context)
+                                              .pushNamedAndRemoveUntil(
+                                                  '/home',
+                                                  (Route<dynamic> route) =>
+                                                      false);
+                                        });
+                                      } catch (e) {
+                                        print(
+                                            "Exception during navigation: $e");
+                                      }
+                                    } else if (response["status"] == 400) {
+                                      TransAcademiaLoadingDialog.stop(context);
+                                      TransAcademiaDialogError.show(
+                                        context,
+                                        response["message"],
+                                        "login",
+                                      );
+                                      Future.delayed(
+                                          const Duration(milliseconds: 4000),
+                                          () {
+                                        TransAcademiaDialogError.stop(context);
+                                      });
+                                    } else {
+                                      TransAcademiaLoadingDialog.stop(context);
+                                      TransAcademiaDialogError.show(context,
+                                          response["message"], "login");
+                                    }
+                                  },
                                   child: const ButtonTransAcademia(
                                       width: 320, title: "Commander"),
                                 );
