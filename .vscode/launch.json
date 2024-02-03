@@ -6,18 +6,18 @@
     "configurations": [
         
         {
-            "name": "transacademia",
+            "name": "imperialcream",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "transacademia (profile mode)",
+            "name": "imperialcream (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "transacademia (release mode)",
+            "name": "imperialcream (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
