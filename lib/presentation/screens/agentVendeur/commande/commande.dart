@@ -262,6 +262,16 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                                       return;
                                     }
 
+                                    commandeObject = {
+                                      "quantity": int.parse(
+                                          state.field!["quantiteProduit"]),
+                                      "ID_quantity_unit":
+                                          state.field!["volume"],
+                                      "ID_product": state.field!["product"],
+                                    };
+
+                                    ligneCommande!.add(commandeObject);
+
                                     Map data = {
                                       "description":
                                           state.field!["descriptionProduit"],
