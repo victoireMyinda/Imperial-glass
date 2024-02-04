@@ -177,7 +177,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
 
                           ligneCommande!.add(commandeObject);
 
-                          print(ligneCommande);
+                          // print(ligneCommande);
 
                           //  print("object: " + ligneCommande.toString());
 

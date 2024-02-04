@@ -121,6 +121,11 @@ class _KelasiDropdownState extends State<KelasiDropdown> {
                       BlocProvider.of<SignupCubit>(context).updateField(context,
                           field: "volume", data: newValue.toString());
                     }
+
+                    if (widget.value == "site") {
+                      BlocProvider.of<SignupCubit>(context).updateField(context,
+                          field: "site", data: newValue.toString());
+                    }
                   },
                   // items: dropdownItems
                   // items: state.field![widget.items]
