@@ -150,8 +150,8 @@ class _KelasiDropdownState extends State<KelasiDropdown> {
                   items: state.field![widget.items]
                       .map<DropdownMenuItem<String>>((item) {
                     return DropdownMenuItem(
-                      value: widget.value == "option"
-                          ? item['Id_option'].toString()
+                      value: widget.value == "productBySite"
+                          ? item['ID_product'].toString()
                           : item['ID'].toString(),
                       child: SizedBox(
                         width: 200.0,
