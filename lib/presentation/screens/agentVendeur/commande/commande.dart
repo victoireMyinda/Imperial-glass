@@ -37,7 +37,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
     super.initState();
 
     BlocProvider.of<SignupCubit>(context).loadProductCream();
-     BlocProvider.of<SignupCubit>(context).loadProductBySite();
+    BlocProvider.of<SignupCubit>(context).loadProductBySite();
     BlocProvider.of<SignupCubit>(context).loadVolumeCream();
     BlocProvider.of<SignupCubit>(context).loadSiteCream();
 
@@ -135,8 +135,6 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                     builder: (context, state) {
                       return ElevatedButton(
                         onPressed: () {
-                         
-
                           if (state.field!["volume"] == "") {
                             ValidationDialog.show(
                                 context, "Veuillez choisir le volume", () {
@@ -162,21 +160,11 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                                 int.parse(state.field!["quantiteProduit"]),
                             "ID_quantity_unit":
                                 int.parse(state.field!["volume"]),
-                            "ID_product": int.parse(state.field!["productBySite"]),
+                            "ID_product":
+                                int.parse(state.field!["productBySite"]),
                           };
 
-                          // ligneCommande = state.field!["ligneCommande"];
-
                           ligneCommande.add(commandeObject);
-
-                          //  print(ligneCommande);
-
-                          //  print("object: " + ligneCommande.toString());
-
-                          // BlocProvider.of<SignupCubit>(context).updateField(
-                          //     context,
-                          //     field: "ligneCommande",
-                          //     data: ligneCommande);
 
                           addNewProduct();
                         },
@@ -256,25 +244,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                                       });
                                       return;
                                     }
-
-                                    // Map data = {
-                                    //   "description": "Beg eke ezongi",
-                                    //   "ID_ordering_agent": 29,
-                                    //   "ID_user_created_at": 80,
-                                    //   "ID_sale_site": 1,
-                                    //   "line": [
-                                    //     {
-                                    //       "quantity": 24,
-                                    //       "ID_quantity_unit": 1,
-                                    //       "ID_product": 1
-                                    //     },
-                                    //     {
-                                    //       "quantity": 24,
-                                    //       "ID_quantity_unit": 1,
-                                    //       "ID_product": 2
-                                    //     }
-                                    //   ]
-                                    // };
+                                    ligneCommande.add(commandeObject);
 
                                     Map? data = {
                                       "description":
@@ -287,11 +257,8 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                                       "line": ligneCommande
                                     };
 
-                                     print(data);
-
                                     Map? response = await SignUpRepository
                                         .createCommandeCream(data);
-                                    // print(response);
 
                                     if (response["status"] == 201) {
                                       TransAcademiaLoadingDialog.stop(context);
