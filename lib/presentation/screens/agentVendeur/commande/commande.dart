@@ -53,6 +53,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
     BlocProvider.of<SignupCubit>(context)
         .updateField(context, field: "idUser", data: prefs.getString('idUser'));
   }
+  
 
   @override
   Widget build(BuildContext context) {
