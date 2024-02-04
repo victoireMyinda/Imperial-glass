@@ -24,8 +24,9 @@ class CommandeDuJourScreen extends StatefulWidget {
 }
 
 class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
-  Map? commandeObject;
-  List? ligneCommande = [];
+  Map<String, dynamic>? commandeObject;
+  List ligneCommande = [];
+
   List<Widget> formSectionProduct = [];
 
   TextEditingController siteController = TextEditingController();
@@ -34,12 +35,11 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
   @override
   void initState() {
     super.initState();
+
     BlocProvider.of<SignupCubit>(context).loadProductCream();
+     BlocProvider.of<SignupCubit>(context).loadProductBySite();
     BlocProvider.of<SignupCubit>(context).loadVolumeCream();
     BlocProvider.of<SignupCubit>(context).loadSiteCream();
-
-    BlocProvider.of<SignupCubit>(context)
-        .updateField(context, field: "ligneCommande", data: []);
 
     addNewProduct();
     getProfilAgent();
@@ -135,15 +135,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                     builder: (context, state) {
                       return ElevatedButton(
                         onPressed: () {
-                          if (state.field!["product"] == "") {
-                            ValidationDialog.show(
-                                context, "Veuillez choisir le produit", () {
-                              if (kDebugMode) {
-                                print("modal");
-                              }
-                            });
-                            return;
-                          }
+                         
 
                           if (state.field!["volume"] == "") {
                             ValidationDialog.show(
@@ -170,14 +162,14 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                                 int.parse(state.field!["quantiteProduit"]),
                             "ID_quantity_unit":
                                 int.parse(state.field!["volume"]),
-                            "ID_product": int.parse(state.field!["product"]),
+                            "ID_product": int.parse(state.field!["productBySite"]),
                           };
 
                           // ligneCommande = state.field!["ligneCommande"];
 
-                          ligneCommande!.add(commandeObject);
+                          ligneCommande.add(commandeObject);
 
-                          // print(ligneCommande);
+                          //  print(ligneCommande);
 
                           //  print("object: " + ligneCommande.toString());
 
@@ -265,27 +257,37 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                                       return;
                                     }
 
-                                    // commandeObject = {
-                                    //   "quantity": int.parse(
-                                    //       state.field!["quantiteProduit"]),
-                                    //   "ID_quantity_unit":
-                                    //       state.field!["volume"],
-                                    //   "ID_product": state.field!["product"],
+                                    // Map data = {
+                                    //   "description": "Beg eke ezongi",
+                                    //   "ID_ordering_agent": 29,
+                                    //   "ID_user_created_at": 80,
+                                    //   "ID_sale_site": 1,
+                                    //   "line": [
+                                    //     {
+                                    //       "quantity": 24,
+                                    //       "ID_quantity_unit": 1,
+                                    //       "ID_product": 1
+                                    //     },
+                                    //     {
+                                    //       "quantity": 24,
+                                    //       "ID_quantity_unit": 1,
+                                    //       "ID_product": 2
+                                    //     }
+                                    //   ]
                                     // };
 
-                                    // ligneCommande!.add(commandeObject);
-
-                                    Map data = {
+                                    Map? data = {
                                       "description":
                                           state.field!["descriptionProduit"],
                                       "ID_ordering_agent":
                                           int.parse(state.field!["idAgent"]),
-                                      "Id_user_created_at":
+                                      "ID_user_created_at":
                                           int.parse(state.field!["idUser"]),
-                                      "ID_sale_site":
-                                          int.parse(state.field!["site"]),
-                                      "line": ligneCommande,
+                                      "ID_sale_site": 1,
+                                      "line": ligneCommande
                                     };
+
+                                     print(data);
 
                                     Map? response = await SignUpRepository
                                         .createCommandeCream(data);
@@ -372,8 +374,8 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                     child: SizedBox(
                       height: 50.0,
                       child: KelasiDropdown(
-                        items: "productData",
-                        value: "product",
+                        items: "productDataBySite",
+                        value: "productBySite",
                         controller: productController,
                         hintText: "Produit à commander",
                         color: Colors.white,

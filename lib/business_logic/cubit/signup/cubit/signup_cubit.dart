@@ -135,6 +135,21 @@ class SignupCubit extends Cubit<SignupState> {
     }
   }
 
+   loadProductBySite() async {
+    var response = await SignUpRepository.gettAllProductBySite(1);
+    int statusCode = response["status"];
+
+    if (statusCode == 200) {
+      List productDataBySite = response["data"];
+      emit(SignupState(field: {
+        ...state.field!,
+        "productDataBySite": productDataBySite,
+      }));
+    } else {
+      print("erreur de l'obtention de data");
+    }
+  }
+
   loadSiteCream() async {
     var response = await SignUpRepository.gettAllSIteCream();
     int statusCode = response["status"];

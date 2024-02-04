@@ -54,6 +54,8 @@ class _KelasiDropdownState extends State<KelasiDropdown> {
       labelForDropdown = "labele";
     } else if (widget.value == "product") {
       labelForDropdown = "description";
+    } else if (widget.value == "productBySite") {
+      labelForDropdown = "product";
     } else if (widget.value == "volume") {
       labelForDropdown = "name";
     } else if (widget.value == "ville") {
@@ -101,8 +103,8 @@ class _KelasiDropdownState extends State<KelasiDropdown> {
                     filled: true,
                     fillColor: Colors.grey.withOpacity(0.1),
                   ),
-                  validator: (value) =>
-                      value == null ? "Selectionner l'université" : null,
+                  // validator: (value) =>
+                  //     value == null ? "Selectionner l'université" : null,
                   dropdownColor: AdaptiveTheme.of(context).mode.name == "dark"
                       ? Colors.black
                       : Colors.white,
@@ -115,6 +117,11 @@ class _KelasiDropdownState extends State<KelasiDropdown> {
                     if (widget.value == "product") {
                       BlocProvider.of<SignupCubit>(context).updateField(context,
                           field: "product", data: newValue.toString());
+                    }
+
+                    if (widget.value == "productBySite") {
+                      BlocProvider.of<SignupCubit>(context).updateField(context,
+                          field: "productBySite", data: newValue.toString());
                     }
 
                     if (widget.value == "volume") {
