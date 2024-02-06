@@ -24,8 +24,8 @@ class VenteDuJourScreen extends StatefulWidget {
 }
 
 class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
-  Map<String, dynamic>? commandeObject;
-  List ligneCommande = [];
+  Map<String, dynamic>? operationObjet;
+  List ligneOperation = [];
 
   List<Widget> formSectionProduct = [];
 
@@ -185,16 +185,30 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                             return;
                           }
 
-                          commandeObject = {
-                            "quantity":
-                                int.parse(state.field!["quantiteProduit"]),
-                            "ID_quantity_unit":
-                                int.parse(state.field!["volume"]),
+                          if (state.field!["PrixProductVendu"] == "") {
+                            ValidationDialog.show(
+                                context, "Le prix ne doit pas etre null", () {
+                              if (kDebugMode) {
+                                print("modal");
+                              }
+                            });
+                            return;
+                          }
+
+                          operationObjet = {
                             "ID_product":
                                 int.parse(state.field!["productBySite"]),
+                            "quantity":
+                                int.parse(state.field!["quantiteProduit"]),
+                            "ID_volume_unit": int.parse(state.field!["volume"]),
+                            "price":
+                                int.parse(state.field!["PrixProductVendu"]),
+                            "ID_currency": 1,
+                            "created_by_user_ID":
+                                int.parse(state.field!["idUser"]),
                           };
 
-                          ligneCommande.add(commandeObject);
+                          ligneOperation.add(operationObjet);
 
                           addNewProduct();
                         },
@@ -263,10 +277,20 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                               builder: (context, state) {
                                 return GestureDetector(
                                   onTap: () async {
-                                    if (state.field!["descriptionProduit"] ==
-                                        "") {
+                                    if (state.field!["operationnature"] == "") {
                                       ValidationDialog.show(context,
-                                          "Veuillez decrire le titre de votre commande",
+                                          "Veuillez choisir la nature de l'operation",
+                                          () {
+                                        if (kDebugMode) {
+                                          print("modal");
+                                        }
+                                      });
+                                      return;
+                                    }
+
+                                    if (state.field!["operationreason"] == "") {
+                                      ValidationDialog.show(context,
+                                          "Veuillez choisir la raison de l'operation",
                                           () {
                                         if (kDebugMode) {
                                           print("modal");
@@ -294,6 +318,7 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                                       });
                                       return;
                                     }
+
                                     if (state.field!["quantiteProduit"] == "") {
                                       ValidationDialog.show(context,
                                           "Quantité ne doit pas etre vide", () {
@@ -303,33 +328,55 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                                       });
                                     }
 
-                                    commandeObject = {
-                                      "quantity": int.parse(
-                                          state.field!["quantiteProduit"]),
-                                      "ID_quantity_unit":
-                                          int.parse(state.field!["volume"]),
+                                    if (state.field!["PrixProductVendu"] ==
+                                        "") {
+                                      ValidationDialog.show(context,
+                                          "Le prix ne doit pas etre null", () {
+                                        if (kDebugMode) {
+                                          print("modal");
+                                        }
+                                      });
+                                      return;
+                                    }
+
+                                    operationObjet = {
                                       "ID_product": int.parse(
                                           state.field!["productBySite"]),
+                                      "quantity": int.parse(
+                                          state.field!["quantiteProduit"]),
+                                      "ID_volume_unit":
+                                          int.parse(state.field!["volume"]),
+                                      "price": int.parse(
+                                          state.field!["PrixProductVendu"]),
+                                      "ID_currency": 1,
+                                      "created_by_user_ID":
+                                          int.parse(state.field!["idUser"]),
                                     };
-                                    ligneCommande.add(commandeObject);
+                                    ligneOperation.add(operationObjet);
 
-                                    // print(ligneCommande);
+                                    // print(ligneOperation);
 
                                     Map? data = {
-                                      "description":
-                                          state.field!["descriptionProduit"],
-                                      "ID_ordering_agent":
+                                      "ID_agent":
                                           int.parse(state.field!["idAgent"]),
-                                      "ID_user_created_at":
-                                          int.parse(state.field!["idUser"]),
+                                      "ID_currency": 1,
                                       "ID_sale_site": 1,
-                                      "line": ligneCommande
+                                      "created_by_user_ID":
+                                          int.parse(state.field!["idUser"]),
+                                      "ID_operation_nature": int.parse(
+                                          state.field!["operationnature"]),
+                                      "ID_operation_reason": int.parse(
+                                          state.field!["operationreason"]),
+                                      "ID_unit_volume":
+                                          int.parse(state.field!["volume"]),
+                                      "annex": [],
+                                      "stock": ligneOperation
                                     };
 
-                                    //  print(data);
+                                     print(data);
 
                                     Map? response = await SignUpRepository
-                                        .createCommandeCream(data);
+                                        .createOperationCream(data);
 
                                     if (response["status"] == 201) {
                                       TransAcademiaLoadingDialog.stop(context);
@@ -373,7 +420,7 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                                     }
                                   },
                                   child: const ButtonTransAcademia(
-                                      width: 320, title: "Commander"),
+                                      width: 320, title: "Envoyer le rapport"),
                                 );
                               },
                             ),
@@ -395,7 +442,7 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
     TextEditingController volumeController = TextEditingController();
     TextEditingController productController = TextEditingController();
     TextEditingController quantiteProduitController = TextEditingController();
-     TextEditingController prixProduitController = TextEditingController();
+    TextEditingController prixProduitController = TextEditingController();
 
     setState(() {
       Key key = UniqueKey();
@@ -459,8 +506,7 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                   );
                 },
               ),
-
-               BlocBuilder<SignupCubit, SignupState>(
+              BlocBuilder<SignupCubit, SignupState>(
                 builder: (context, state) {
                   return Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),

@@ -10,8 +10,7 @@ import 'package:dio/dio.dart';
 import 'package:icecream_service/utils/string.util.dart';
 
 class SignUpRepository {
-
- static Future<Map<String, dynamic>> signupAgentCream(Map data) async {
+  static Future<Map<String, dynamic>> signupAgentCream(Map data) async {
     // Vérifier la connexion Internet
     try {
       final response = await InternetAddress.lookup('www.google.com');
@@ -26,8 +25,8 @@ class SignUpRepository {
 
     var headers = {'Content-Type': 'application/json'};
 
-    var request = http.Request(
-        'POST', Uri.parse("https://iglace.eyanofinance.org/api/v1/auth/signup"));
+    var request = http.Request('POST',
+        Uri.parse("https://iglace.eyanofinance.org/api/v1/auth/signup"));
 
     request.body = json.encode(data);
 
@@ -55,8 +54,7 @@ class SignUpRepository {
     }
   }
 
-
-   static Future<Map<String, dynamic>> loginCream(Map data) async {
+  static Future<Map<String, dynamic>> loginCream(Map data) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var headers = {'Content-Type': 'application/json'};
@@ -92,7 +90,7 @@ class SignUpRepository {
     }
   }
 
-    static Future<Map<String, dynamic>> gettAllAgentCream() async {
+  static Future<Map<String, dynamic>> gettAllAgentCream() async {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // String? token = prefs.getString("token");
 
@@ -120,7 +118,7 @@ class SignUpRepository {
     }
   }
 
-    static Future<Map<String, dynamic>> gettAllProductCream() async {
+  static Future<Map<String, dynamic>> gettAllProductCream() async {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // String? token = prefs.getString("token");
 
@@ -148,13 +146,15 @@ class SignUpRepository {
     }
   }
 
-   static Future<Map<String, dynamic>> gettAllProductBySite(int idSite) async {
+  static Future<Map<String, dynamic>> gettAllProductBySite(int idSite) async {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // String? token = prefs.getString("token");
 
     // var headers = {'Authorization': 'Bearer $token'};
     var request = http.Request(
-        'GET', Uri.parse('https://iglace.eyanofinance.org/api/v1/dashboard/sale_site_price?ID_sales_site=${idSite}'));
+        'GET',
+        Uri.parse(
+            'https://iglace.eyanofinance.org/api/v1/dashboard/sale_site_price?ID_sales_site=${idSite}'));
 
     // request.headers.addAll(headers);
 
@@ -176,13 +176,15 @@ class SignUpRepository {
     }
   }
 
-   static Future<Map<String, dynamic>> gettAllSIteCream() async {
+  static Future<Map<String, dynamic>> gettAllSIteCream() async {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // String? token = prefs.getString("token");
 
     // var headers = {'Authorization': 'Bearer $token'};
     var request = http.Request(
-        'GET', Uri.parse('https://iglace.eyanofinance.org/api/v1/dashboard/sale_site'));
+        'GET',
+        Uri.parse(
+            'https://iglace.eyanofinance.org/api/v1/dashboard/sale_site'));
 
     // request.headers.addAll(headers);
 
@@ -204,13 +206,15 @@ class SignUpRepository {
     }
   }
 
-    static Future<Map<String, dynamic>> gettAllVolumeCream() async {
+  static Future<Map<String, dynamic>> gettAllVolumeCream() async {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // String? token = prefs.getString("token");
 
     // var headers = {'Authorization': 'Bearer $token'};
     var request = http.Request(
-        'GET', Uri.parse('https://iglace.eyanofinance.org/api/v1/dashboard/capacity_unit'));
+        'GET',
+        Uri.parse(
+            'https://iglace.eyanofinance.org/api/v1/dashboard/capacity_unit'));
 
     // request.headers.addAll(headers);
 
@@ -232,13 +236,13 @@ class SignUpRepository {
     }
   }
 
-   static Future<Map<String, dynamic>> gettAllOperationCream() async {
+  static Future<Map<String, dynamic>> gettAllOperationCream() async {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // String? token = prefs.getString("token");
 
     // var headers = {'Authorization': 'Bearer $token'};
-    var request = http.Request(
-        'GET', Uri.parse('https://iglace.eyanofinance.org/api/v1/operation/nature'));
+    var request = http.Request('GET',
+        Uri.parse('https://iglace.eyanofinance.org/api/v1/operation/nature'));
 
     // request.headers.addAll(headers);
 
@@ -260,13 +264,13 @@ class SignUpRepository {
     }
   }
 
-   static Future<Map<String, dynamic>> gettAllOperationReasonCream() async {
+  static Future<Map<String, dynamic>> gettAllOperationReasonCream() async {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // String? token = prefs.getString("token");
 
     // var headers = {'Authorization': 'Bearer $token'};
-    var request = http.Request(
-        'GET', Uri.parse('https://iglace.eyanofinance.org/api/v1/operation/reason'));
+    var request = http.Request('GET',
+        Uri.parse('https://iglace.eyanofinance.org/api/v1/operation/reason'));
 
     // request.headers.addAll(headers);
 
@@ -348,7 +352,9 @@ class SignUpRepository {
     var headers = {'Content-Type': 'application/json'};
 
     var request = http.Request(
-        'POST', Uri.parse("https://iglace.eyanofinance.org/api/v1/dashboard/sale_site"));
+        'POST',
+        Uri.parse(
+            "https://iglace.eyanofinance.org/api/v1/dashboard/sale_site"));
 
     request.body = json.encode(data);
 
@@ -376,7 +382,7 @@ class SignUpRepository {
     }
   }
 
-   static Future<Map<String, dynamic>> createCommandeCream(Map data) async {
+  static Future<Map<String, dynamic>> createCommandeCream(Map data) async {
     // Vérifier la connexion Internet
     try {
       final response = await InternetAddress.lookup('www.google.com');
@@ -420,13 +426,59 @@ class SignUpRepository {
     }
   }
 
-    static Future<Map<String, dynamic>> getCommandesByIdAgent(String? id) async {
+  static Future<Map<String, dynamic>> createOperationCream(Map data) async {
+    // Vérifier la connexion Internet
+    try {
+      final response = await InternetAddress.lookup('www.google.com');
+      if (response.isNotEmpty) {
+        if (kDebugMode) {
+          print("connected");
+        }
+      }
+    } on SocketException catch (err) {
+      return {"status": 0, "message": "Pas de connexion internet"};
+    }
+
+    var headers = {'Content-Type': 'application/json'};
+
+    var request = http.Request(
+        'POST', Uri.parse("https://iglace.eyanofinance.org/api/v1/operation"));
+
+    request.body = json.encode(data);
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    String responseBody = await response.stream.bytesToString();
+
+    Map<String, dynamic> responseJson = json.decode(responseBody);
+
+    int statusCode = responseJson['code'];
+
+    if (statusCode == 201) {
+      Map? responseData = responseJson['data'];
+      String? message = responseJson['message'];
+      //prefs.setString("token", token.toString());
+      return {"status": statusCode, "data": responseData, "message": message};
+    } else if (statusCode == 400) {
+      String? message = responseJson['message'];
+      return {"status": statusCode, "message": message};
+    } else {
+      String? message = responseJson['message'];
+      return {"status": statusCode, "message": message};
+    }
+  }
+
+  static Future<Map<String, dynamic>> getCommandesByIdAgent(String? id) async {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // String? token = prefs.getString("token");
 
     // var headers = {'Authorization': 'Bearer $token'};
     var request = http.Request(
-        'GET', Uri.parse('https://iglace.eyanofinance.org/api/v1/order?ID_ordering_agent=${id}'));
+        'GET',
+        Uri.parse(
+            'https://iglace.eyanofinance.org/api/v1/order?ID_ordering_agent=${id}'));
 
     // request.headers.addAll(headers);
 
@@ -448,14 +500,15 @@ class SignUpRepository {
     }
   }
 
-
-   static Future<Map<String, dynamic>> getOperationsByIdAgent(String? id) async {
+  static Future<Map<String, dynamic>> getOperationsByIdAgent(String? id) async {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // String? token = prefs.getString("token");
 
     // var headers = {'Authorization': 'Bearer $token'};
     var request = http.Request(
-        'GET', Uri.parse('https://iglace.eyanofinance.org/api/v1/operation?ID_agent=${id}'));
+        'GET',
+        Uri.parse(
+            'https://iglace.eyanofinance.org/api/v1/operation?ID_agent=${id}'));
 
     // request.headers.addAll(headers);
 
@@ -476,17 +529,6 @@ class SignUpRepository {
       return {"status": statusCode, "message": message};
     }
   }
-
-
-
-
-
-
-
-
-
-
-
 
   // static Future<Map<String, dynamic>> login(String login, String pwd) async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -700,34 +742,35 @@ class SignUpRepository {
     }
   }
 
+  static Future<Map<String, dynamic>> getProvinceKelasi() async {
+    var request = http.Request('GET',
+        Uri.parse("${StringFormat.baseUrlCream}api/v1/address/province"));
 
- static Future<Map<String, dynamic>> getProvinceKelasi() async {
-  var request = http.Request(
-      'GET', Uri.parse("${StringFormat.baseUrlCream}api/v1/address/province"));
+    request.body = json.encode({"idParent": ""});
 
-  request.body = json.encode({"idParent": ""});
+    http.StreamedResponse response = await request.send();
+    String responseBody = await response.stream.bytesToString();
 
-  http.StreamedResponse response = await request.send();
-  String responseBody = await response.stream.bytesToString();
+    Map<String, dynamic> responseJson = json.decode(responseBody);
 
-  Map<String, dynamic> responseJson = json.decode(responseBody);
-
-  if (response.statusCode == 200) {
-    List<Map<String, dynamic>> data = List<Map<String, dynamic>>.from(responseJson["data"]);
-    return {"status": response.statusCode, "data": data};
-  } else {
-    return {"status": response.statusCode};
+    if (response.statusCode == 200) {
+      List<Map<String, dynamic>> data =
+          List<Map<String, dynamic>>.from(responseJson["data"]);
+      return {"status": response.statusCode, "data": data};
+    } else {
+      return {"status": response.statusCode};
+    }
   }
-}
 
-
- static Future<Map<String, dynamic>> getVilleKelasi(String idProvince) async {
+  static Future<Map<String, dynamic>> getVilleKelasi(String idProvince) async {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // String? token = prefs.getString("token");
 
     // var headers = {'Authorization': 'Bearer $token'};
-    var request =
-        http.Request('GET', Uri.parse("${StringFormat.baseUrlCream}api/v1/address/province/${idProvince}"));
+    var request = http.Request(
+        'GET',
+        Uri.parse(
+            "${StringFormat.baseUrlCream}api/v1/address/province/${idProvince}"));
 
     // request.headers.addAll(headers);
     request.body = json.encode({"province_id": idProvince});
@@ -751,8 +794,10 @@ class SignUpRepository {
     // String? token = prefs.getString("token");
 
     // var headers = {'Authorization': 'Bearer $token'};
-    var request =
-         http.Request('GET', Uri.parse("${StringFormat.baseUrlCream}api/v1/address/ville/${idVille}"));
+    var request = http.Request(
+        'GET',
+        Uri.parse(
+            "${StringFormat.baseUrlCream}api/v1/address/ville/${idVille}"));
 
     // request.headers.addAll(headers);
     request.body = json.encode({"ville_id": idVille});
