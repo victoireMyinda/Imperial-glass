@@ -48,7 +48,7 @@ class _TransAcademiaNameInputState extends State<TransAcademiaNameInput> {
       builder: (context, state) {
         return TextField(
             key: widget.key,
-            keyboardType: widget.field == "quantiteProduit"
+            keyboardType: widget.field == "quantiteProduit" || widget.field == "PrixProductVendu"
                 ? TextInputType.number
                 : TextInputType.text,
             onChanged: (String value) {

@@ -31,6 +31,8 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
 
   TextEditingController siteController = TextEditingController();
   TextEditingController descriptionProduitController = TextEditingController();
+  TextEditingController operationnatureController = TextEditingController();
+  TextEditingController operationreasonController = TextEditingController();
 
   @override
   void initState() {
@@ -75,24 +77,24 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                 const SizedBox(height: 20),
                 Column(
                   children: [
-                    BlocBuilder<SignupCubit, SignupState>(
-                      builder: (context, state) {
-                        return Container(
-                            // padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                            margin: const EdgeInsets.only(bottom: 10),
-                            child: SizedBox(
-                              height: 50.0,
-                              child: KelasiDropdown(
-                                items: "siteData",
-                                value: "site",
-                                controller: siteController,
-                                hintText: "Choisir le site",
-                                color: Colors.white,
-                                label: "Choisir le site",
-                              ),
-                            ));
-                      },
-                    ),
+                    // BlocBuilder<SignupCubit, SignupState>(
+                    //   builder: (context, state) {
+                    //     return Container(
+                    //         // padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    //         margin: const EdgeInsets.only(bottom: 10),
+                    //         child: SizedBox(
+                    //           height: 50.0,
+                    //           child: KelasiDropdown(
+                    //             items: "siteData",
+                    //             value: "site",
+                    //             controller: siteController,
+                    //             hintText: "Choisir le site",
+                    //             color: Colors.white,
+                    //             label: "Choisir le site",
+                    //           ),
+                    //         ));
+                    //   },
+                    // ),
                     BlocBuilder<SignupCubit, SignupState>(
                       builder: (context, state) {
                         return Container(
@@ -103,7 +105,7 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                               child: KelasiDropdown(
                                 items: "operationData",
                                 value: "operationnature",
-                                controller: siteController,
+                                controller: operationnatureController,
                                 hintText: "Choisir l'operation à effectuer",
                                 color: Colors.white,
                                 label: "Choisir l'operation à effectuer",
@@ -121,7 +123,7 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                               child: KelasiDropdown(
                                 items: "operationreasonData",
                                 value: "operationreason",
-                                controller: siteController,
+                                controller: operationreasonController,
                                 hintText: "La raison de votre operation",
                                 color: Colors.white,
                                 label: "La raison de votre operation",
@@ -393,6 +395,7 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
     TextEditingController volumeController = TextEditingController();
     TextEditingController productController = TextEditingController();
     TextEditingController quantiteProduitController = TextEditingController();
+     TextEditingController prixProduitController = TextEditingController();
 
     setState(() {
       Key key = UniqueKey();
@@ -451,6 +454,24 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                         controller: quantiteProduitController,
                         hintText: "Quantité ",
                         label: "Quantité ",
+                      ),
+                    ),
+                  );
+                },
+              ),
+
+               BlocBuilder<SignupCubit, SignupState>(
+                builder: (context, state) {
+                  return Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    margin: const EdgeInsets.only(bottom: 30),
+                    child: SizedBox(
+                      height: 50.0,
+                      child: TransAcademiaNameInput(
+                        field: "PrixProductVendu",
+                        controller: prixProduitController,
+                        hintText: "Montant vendu",
+                        label: "Montant vendu",
                       ),
                     ),
                   );

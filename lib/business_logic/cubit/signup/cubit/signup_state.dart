@@ -42,6 +42,7 @@ Map? initialState() {
     'operationreason' : "",
     'product': "",
     'productBySite' : "",
+    'PrixProductVendu' : "",
     'volume': "",
     'site': "",
     'quantiteProduit': "",
