@@ -53,7 +53,6 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
     BlocProvider.of<SignupCubit>(context)
         .updateField(context, field: "idUser", data: prefs.getString('idUser'));
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +90,8 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                                 label: "Description commande",
                                 fieldValue: state.field!["descriptionProduit"],
                               ),
+
+                              
                             ));
                       },
                     ),
@@ -136,6 +137,16 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                     builder: (context, state) {
                       return ElevatedButton(
                         onPressed: () {
+                          if (state.field!["productBySite"] == "") {
+                            ValidationDialog.show(
+                                context, "Champs produit obligatoire", () {
+                              if (kDebugMode) {
+                                print("modal");
+                              }
+                            });
+                            return;
+                          }
+
                           if (state.field!["volume"] == "") {
                             ValidationDialog.show(
                                 context, "Veuillez choisir le volume", () {
@@ -245,7 +256,48 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                                       });
                                       return;
                                     }
-                                    ligneCommande.add(commandeObject);
+                                   
+                                      if (state.field!["productBySite"] == "") {
+                                        ValidationDialog.show(context,
+                                            "Vueillez choisir le produit", () {
+                                          if (kDebugMode) {
+                                            print("modal");
+                                          }
+                                        });
+                                        return;
+                                      }
+                                      if (state.field!["volume"] == "") {
+                                        ValidationDialog.show(context,
+                                            "Veuillez choisir le volume", () {
+                                          if (kDebugMode) {
+                                            print("modal");
+                                          }
+                                        });
+                                        return;
+                                      }
+                                      if (state.field!["quantiteProduit"] ==
+                                          "") {
+                                        ValidationDialog.show(context,
+                                            "Quantité ne doit pas etre vide",
+                                            () {
+                                          if (kDebugMode) {
+                                            print("modal");
+                                          }
+                                        });
+                                      }
+
+                                      commandeObject = {
+                                        "quantity": int.parse(
+                                            state.field!["quantiteProduit"]),
+                                        "ID_quantity_unit":
+                                            int.parse(state.field!["volume"]),
+                                        "ID_product": int.parse(
+                                            state.field!["productBySite"]),
+                                      };
+                                      ligneCommande.add(commandeObject);
+                                    
+
+                                    // print(ligneCommande);
 
                                     Map? data = {
                                       "description":
@@ -257,6 +309,8 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                                       "ID_sale_site": 1,
                                       "line": ligneCommande
                                     };
+
+                                    //  print(data);
 
                                     Map? response = await SignUpRepository
                                         .createCommandeCream(data);

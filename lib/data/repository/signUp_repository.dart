@@ -232,6 +232,62 @@ class SignUpRepository {
     }
   }
 
+   static Future<Map<String, dynamic>> gettAllOperationCream() async {
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // String? token = prefs.getString("token");
+
+    // var headers = {'Authorization': 'Bearer $token'};
+    var request = http.Request(
+        'GET', Uri.parse('https://iglace.eyanofinance.org/api/v1/operation'));
+
+    // request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    String responseBody = await response.stream.bytesToString();
+
+    Map<String, dynamic> responseJson = json.decode(responseBody);
+
+    int statusCode = responseJson['code'];
+
+    if (statusCode == 200) {
+      String? message = responseJson['message'];
+      List? data = responseJson['data'];
+      return {"status": statusCode, "message": message, "data": data};
+    } else {
+      String message = responseJson['message'];
+      return {"status": statusCode, "message": message};
+    }
+  }
+
+   static Future<Map<String, dynamic>> gettAllOperationReasonCream() async {
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // String? token = prefs.getString("token");
+
+    // var headers = {'Authorization': 'Bearer $token'};
+    var request = http.Request(
+        'GET', Uri.parse('https://iglace.eyanofinance.org/api/v1/operation/reason'));
+
+    // request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    String responseBody = await response.stream.bytesToString();
+
+    Map<String, dynamic> responseJson = json.decode(responseBody);
+
+    int statusCode = responseJson['code'];
+
+    if (statusCode == 200) {
+      String? message = responseJson['message'];
+      List? data = responseJson['data'];
+      return {"status": statusCode, "message": message, "data": data};
+    } else {
+      String message = responseJson['message'];
+      return {"status": statusCode, "message": message};
+    }
+  }
+
   static Future<Map<String, dynamic>> createProductCream(Map data) async {
     // Vérifier la connexion Internet
     try {
