@@ -38,7 +38,7 @@ Map? initialState() {
     'operationreasonData' : [],
     'siteData': [],
     'ligneCommande': [],
-    'operation' : "",
+    'operationnature' : "",
     'operationreason' : "",
     'product': "",
     'productBySite' : "",

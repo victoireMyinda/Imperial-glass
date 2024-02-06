@@ -140,10 +140,10 @@ class SignupCubit extends Cubit<SignupState> {
     int statusCode = response["status"];
 
     if (statusCode == 200) {
-      List productData = response["data"];
+      List operationData = response["data"];
       emit(SignupState(field: {
         ...state.field!,
-        "productData": productData,
+        "operationData": operationData,
       }));
     } else {
       print("erreur de l'obtention de data");
@@ -155,10 +155,10 @@ class SignupCubit extends Cubit<SignupState> {
     int statusCode = response["status"];
 
     if (statusCode == 200) {
-      List productData = response["data"];
+      List operationreasonData = response["data"];
       emit(SignupState(field: {
         ...state.field!,
-        "productData": productData,
+        "operationreasonData": operationreasonData,
       }));
     } else {
       print("erreur de l'obtention de data");

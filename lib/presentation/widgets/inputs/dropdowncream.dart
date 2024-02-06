@@ -58,6 +58,10 @@ class _KelasiDropdownState extends State<KelasiDropdown> {
       labelForDropdown = "product";
     } else if (widget.value == "volume") {
       labelForDropdown = "name";
+    } else if (widget.value == "operationnature") {
+      labelForDropdown = "label";
+    } else if (widget.value == "operationreason") {
+      labelForDropdown = "label";
     } else if (widget.value == "ville") {
       labelForDropdown = "labele";
     } else if (widget.value == "commune") {
@@ -132,6 +136,15 @@ class _KelasiDropdownState extends State<KelasiDropdown> {
                     if (widget.value == "site") {
                       BlocProvider.of<SignupCubit>(context).updateField(context,
                           field: "site", data: newValue.toString());
+                    }
+
+                    if (widget.value == "operationnature") {
+                      BlocProvider.of<SignupCubit>(context).updateField(context,
+                          field: "operationnature", data: newValue.toString());
+                    }
+                    if (widget.value == "operationreason") {
+                      BlocProvider.of<SignupCubit>(context).updateField(context,
+                          field: "operationreason", data: newValue.toString());
                     }
                   },
                   // items: dropdownItems

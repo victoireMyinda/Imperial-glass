@@ -40,6 +40,8 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
     BlocProvider.of<SignupCubit>(context).loadProductBySite();
     BlocProvider.of<SignupCubit>(context).loadVolumeCream();
     BlocProvider.of<SignupCubit>(context).loadSiteCream();
+    BlocProvider.of<SignupCubit>(context).loadOperationCream();
+    BlocProvider.of<SignupCubit>(context).loadOperationReasonCream();
 
     addNewProduct();
     getProfilAgent();
@@ -73,7 +75,6 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                 const SizedBox(height: 20),
                 Column(
                   children: [
-                   
                     BlocBuilder<SignupCubit, SignupState>(
                       builder: (context, state) {
                         return Container(
@@ -92,8 +93,7 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                             ));
                       },
                     ),
-
-                      BlocBuilder<SignupCubit, SignupState>(
+                    BlocBuilder<SignupCubit, SignupState>(
                       builder: (context, state) {
                         return Container(
                             // padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -101,8 +101,8 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                             child: SizedBox(
                               height: 50.0,
                               child: KelasiDropdown(
-                                items: "siteData",
-                                value: "site",
+                                items: "operationData",
+                                value: "operationnature",
                                 controller: siteController,
                                 hintText: "Choisir l'operation à effectuer",
                                 color: Colors.white,
@@ -111,8 +111,7 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                             ));
                       },
                     ),
-
-                      BlocBuilder<SignupCubit, SignupState>(
+                    BlocBuilder<SignupCubit, SignupState>(
                       builder: (context, state) {
                         return Container(
                             // padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -120,8 +119,8 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                             child: SizedBox(
                               height: 50.0,
                               child: KelasiDropdown(
-                                items: "siteData",
-                                value: "site",
+                                items: "operationreasonData",
+                                value: "operationreason",
                                 controller: siteController,
                                 hintText: "La raison de votre operation",
                                 color: Colors.white,
@@ -273,46 +272,44 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                                       });
                                       return;
                                     }
-                                   
-                                      if (state.field!["productBySite"] == "") {
-                                        ValidationDialog.show(context,
-                                            "Vueillez choisir le produit", () {
-                                          if (kDebugMode) {
-                                            print("modal");
-                                          }
-                                        });
-                                        return;
-                                      }
-                                      if (state.field!["volume"] == "") {
-                                        ValidationDialog.show(context,
-                                            "Veuillez choisir le volume", () {
-                                          if (kDebugMode) {
-                                            print("modal");
-                                          }
-                                        });
-                                        return;
-                                      }
-                                      if (state.field!["quantiteProduit"] ==
-                                          "") {
-                                        ValidationDialog.show(context,
-                                            "Quantité ne doit pas etre vide",
-                                            () {
-                                          if (kDebugMode) {
-                                            print("modal");
-                                          }
-                                        });
-                                      }
 
-                                      commandeObject = {
-                                        "quantity": int.parse(
-                                            state.field!["quantiteProduit"]),
-                                        "ID_quantity_unit":
-                                            int.parse(state.field!["volume"]),
-                                        "ID_product": int.parse(
-                                            state.field!["productBySite"]),
-                                      };
-                                      ligneCommande.add(commandeObject);
-                                    
+                                    if (state.field!["productBySite"] == "") {
+                                      ValidationDialog.show(context,
+                                          "Vueillez choisir le produit", () {
+                                        if (kDebugMode) {
+                                          print("modal");
+                                        }
+                                      });
+                                      return;
+                                    }
+                                    if (state.field!["volume"] == "") {
+                                      ValidationDialog.show(
+                                          context, "Veuillez choisir le volume",
+                                          () {
+                                        if (kDebugMode) {
+                                          print("modal");
+                                        }
+                                      });
+                                      return;
+                                    }
+                                    if (state.field!["quantiteProduit"] == "") {
+                                      ValidationDialog.show(context,
+                                          "Quantité ne doit pas etre vide", () {
+                                        if (kDebugMode) {
+                                          print("modal");
+                                        }
+                                      });
+                                    }
+
+                                    commandeObject = {
+                                      "quantity": int.parse(
+                                          state.field!["quantiteProduit"]),
+                                      "ID_quantity_unit":
+                                          int.parse(state.field!["volume"]),
+                                      "ID_product": int.parse(
+                                          state.field!["productBySite"]),
+                                    };
+                                    ligneCommande.add(commandeObject);
 
                                     // print(ligneCommande);
 
