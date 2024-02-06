@@ -373,12 +373,12 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                                       "stock": ligneOperation
                                     };
 
-                                     print(data);
+                                    // print(data);
 
                                     Map? response = await SignUpRepository
                                         .createOperationCream(data);
 
-                                    if (response["status"] == 201) {
+                                    if (response["status"] == 200) {
                                       TransAcademiaLoadingDialog.stop(context);
                                       String? messageSucces =
                                           response["message"];

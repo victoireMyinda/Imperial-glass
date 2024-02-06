@@ -456,7 +456,7 @@ class SignUpRepository {
 
     int statusCode = responseJson['code'];
 
-    if (statusCode == 201) {
+    if (statusCode == 200) {
       Map? responseData = responseJson['data'];
       String? message = responseJson['message'];
       //prefs.setString("token", token.toString());

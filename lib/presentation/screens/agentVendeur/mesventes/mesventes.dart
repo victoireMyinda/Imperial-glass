@@ -19,9 +19,9 @@ class MesVentes extends StatefulWidget {
 
 class _MesVentesState extends State<MesVentes> {
 
- List? dataStudent = [];
+ List? dataOperation = [];
   bool isLoading = true;
-  int dataStudentLength = 0;
+  int dataOperationLength = 0;
 
   @override
   void initState() {
@@ -35,13 +35,13 @@ class _MesVentesState extends State<MesVentes> {
     String? idAgent = prefs.getString("id");
     Map? response =
         await SignUpRepository.getOperationsByIdAgent(idAgent);
-    List? products = response["data"];
+    List? operations = response["data"];
 
-    print(response["data"]);
+    // print(response["data"]);
     setState(() {
-      dataStudent = products;
+      dataOperation = operations;
       isLoading = false;
-      dataStudentLength = products!.length;
+      dataOperationLength = operations!.length;
     });
   }
 
@@ -94,7 +94,7 @@ class _MesVentesState extends State<MesVentes> {
                       style: TextStyle(fontWeight: FontWeight.w400),
                     ),
                     Text(
-                      dataStudent!.length.toString(),
+                      dataOperation!.length.toString(),
                       style: const TextStyle(fontWeight: FontWeight.w500),
                     ),
                   ],
@@ -111,7 +111,7 @@ class _MesVentesState extends State<MesVentes> {
                         },
                       ),
                     )
-                  : dataStudentLength == 0
+                  : dataOperationLength == 0
                       ? Column(
                           children: [
                             Lottie.asset(
@@ -124,10 +124,10 @@ class _MesVentesState extends State<MesVentes> {
                          
                           child: ListView.builder(
                               scrollDirection: Axis.vertical,
-                              itemCount: dataStudent!
+                              itemCount: dataOperation!
                                   .length, 
                               itemBuilder: (BuildContext context, int index) {
-                                return CardVentes(data: dataStudent![index]);
+                                return CardVentes(data: dataOperation![index]);
                               }),
                         ) 
             ],
