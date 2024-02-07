@@ -371,9 +371,22 @@ class _LoginScreenState extends State<LoginScreen> {
                                       await SharedPreferences.getInstance();
                                   prefs.setString('id',
                                       response['data']["agent_ID"].toString());
+                                  prefs.setString('idUser',
+                                      response['data']["user_ID"].toString());
                                   prefs.setString(
-                                      'idUser',
-                                      response['data']["user_ID"]
+                                      'idsite',
+                                      response['data']["assignement"]
+                                              ["ID_sale_site"]
+                                          .toString());
+                                  prefs.setString(
+                                      'nomsite',
+                                      response['data']["assignement"]
+                                              ["sale_site"]
+                                          .toString());
+                                  prefs.setString(
+                                      'dateaffectation',
+                                      response['data']["affected_at"]
+                                              ["sale_site"]
                                           .toString());
 
                                   prefs.setString(
@@ -416,7 +429,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 }
                               },
                               child: const ButtonTransAcademia(
-                               
                                   title: "Se connecter"),
                             );
                           }),

@@ -166,7 +166,7 @@ class SignupCubit extends Cubit<SignupState> {
   }
 
    loadProductBySite() async {
-    var response = await SignUpRepository.gettAllProductBySite(1);
+    var response = await SignUpRepository.gettAllProductBySite(state.field!["idsite"]);
     int statusCode = response["status"];
 
     if (statusCode == 200) {

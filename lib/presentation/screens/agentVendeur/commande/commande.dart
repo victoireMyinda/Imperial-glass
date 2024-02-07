@@ -52,6 +52,12 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
         .updateField(context, field: "idAgent", data: prefs.getString('id'));
     BlocProvider.of<SignupCubit>(context)
         .updateField(context, field: "idUser", data: prefs.getString('idUser'));
+    BlocProvider.of<SignupCubit>(context)
+        .updateField(context, field: "idsite", data: prefs.getString('idsite'));
+    BlocProvider.of<SignupCubit>(context).updateField(context,
+        field: "nomsite", data: prefs.getString('nomsite'));
+    BlocProvider.of<SignupCubit>(context).updateField(context,
+        field: "dateaffectation", data: prefs.getString('affected_at'));
   }
 
   @override
@@ -90,8 +96,6 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                                 label: "Description commande",
                                 fieldValue: state.field!["descriptionProduit"],
                               ),
-
-                              
                             ));
                       },
                     ),
@@ -256,46 +260,44 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                                       });
                                       return;
                                     }
-                                   
-                                      if (state.field!["productBySite"] == "") {
-                                        ValidationDialog.show(context,
-                                            "Vueillez choisir le produit", () {
-                                          if (kDebugMode) {
-                                            print("modal");
-                                          }
-                                        });
-                                        return;
-                                      }
-                                      if (state.field!["volume"] == "") {
-                                        ValidationDialog.show(context,
-                                            "Veuillez choisir le volume", () {
-                                          if (kDebugMode) {
-                                            print("modal");
-                                          }
-                                        });
-                                        return;
-                                      }
-                                      if (state.field!["quantiteProduit"] ==
-                                          "") {
-                                        ValidationDialog.show(context,
-                                            "Quantité ne doit pas etre vide",
-                                            () {
-                                          if (kDebugMode) {
-                                            print("modal");
-                                          }
-                                        });
-                                      }
 
-                                      commandeObject = {
-                                        "quantity": int.parse(
-                                            state.field!["quantiteProduit"]),
-                                        "ID_quantity_unit":
-                                            int.parse(state.field!["volume"]),
-                                        "ID_product": int.parse(
-                                            state.field!["productBySite"]),
-                                      };
-                                      ligneCommande.add(commandeObject);
-                                    
+                                    if (state.field!["productBySite"] == "") {
+                                      ValidationDialog.show(context,
+                                          "Vueillez choisir le produit", () {
+                                        if (kDebugMode) {
+                                          print("modal");
+                                        }
+                                      });
+                                      return;
+                                    }
+                                    if (state.field!["volume"] == "") {
+                                      ValidationDialog.show(
+                                          context, "Veuillez choisir le volume",
+                                          () {
+                                        if (kDebugMode) {
+                                          print("modal");
+                                        }
+                                      });
+                                      return;
+                                    }
+                                    if (state.field!["quantiteProduit"] == "") {
+                                      ValidationDialog.show(context,
+                                          "Quantité ne doit pas etre vide", () {
+                                        if (kDebugMode) {
+                                          print("modal");
+                                        }
+                                      });
+                                    }
+
+                                    commandeObject = {
+                                      "quantity": int.parse(
+                                          state.field!["quantiteProduit"]),
+                                      "ID_quantity_unit":
+                                          int.parse(state.field!["volume"]),
+                                      "ID_product": int.parse(
+                                          state.field!["productBySite"]),
+                                    };
+                                    ligneCommande.add(commandeObject);
 
                                     // print(ligneCommande);
 
