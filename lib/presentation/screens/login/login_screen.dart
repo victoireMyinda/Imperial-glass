@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icecream_service/constants/my_colors.dart';
 import 'package:icecream_service/data/repository/signUp_repository.dart';
 import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogError.dart';
-import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogLoginPayment.dart';
 import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogSuccess.dart';
 import 'package:icecream_service/presentation/widgets/dialog/ValidationDialog.dart';
 import 'package:icecream_service/presentation/widgets/dialog/loading.dialog.dart';
@@ -16,7 +15,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:icecream_service/business_logic/cubit/abonnement/cubit/abonnement_cubit.dart';
 import 'package:icecream_service/business_logic/cubit/signup/cubit/signup_cubit.dart';
-import 'package:icecream_service/presentation/screens/home/home_screen.dart';
 import 'package:icecream_service/presentation/widgets/buttons/buttonTransAcademia.dart';
 import 'package:icecream_service/sizeconfig.dart';
 import 'package:icecream_service/presentation/widgets/inputs/passwordTextField.dart';
@@ -385,8 +383,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                           .toString());
                                   prefs.setString(
                                       'dateaffectation',
-                                      response['data']["affected_at"]
-                                              ["sale_site"]
+                                      response['data']["assignement"]
+                                              ["affected_at"]
                                           .toString());
 
                                   prefs.setString(

@@ -26,7 +26,7 @@ class SignUpRepository {
     var headers = {'Content-Type': 'application/json'};
 
     var request = http.Request('POST',
-        Uri.parse("https://iglace.eyanofinance.org/api/v1/auth/signup"));
+        Uri.parse("https://iglace.sysmanager.pro/api/v1/auth/signup"));
 
     request.body = json.encode(data);
 
@@ -59,7 +59,7 @@ class SignUpRepository {
 
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'POST', Uri.parse("https://iglace.eyanofinance.org/api/v1/auth/login"));
+        'POST', Uri.parse("https://iglace.sysmanager.pro/api/v1/auth/login"));
 
     request.body = json.encode(data);
     request.headers.addAll(headers);
@@ -96,7 +96,7 @@ class SignUpRepository {
 
     // var headers = {'Authorization': 'Bearer $token'};
     var request = http.Request(
-        'GET', Uri.parse('https://iglace.eyanofinance.org/api/v1/user'));
+        'GET', Uri.parse('https://iglace.sysmanager.pro/api/v1/user'));
 
     // request.headers.addAll(headers);
 
@@ -124,7 +124,7 @@ class SignUpRepository {
 
     // var headers = {'Authorization': 'Bearer $token'};
     var request = http.Request(
-        'GET', Uri.parse('https://iglace.eyanofinance.org/api/v1/product'));
+        'GET', Uri.parse('https://iglace.sysmanager.pro/api/v1/product'));
 
     // request.headers.addAll(headers);
 
@@ -154,7 +154,7 @@ class SignUpRepository {
     var request = http.Request(
         'GET',
         Uri.parse(
-            'https://iglace.eyanofinance.org/api/v1/dashboard/sale_site_price?ID_sales_site=${idSite}'));
+            'https://iglace.sysmanager.pro/api/v1/dashboard/sale_site_price?ID_sales_site=${idSite}'));
 
     // request.headers.addAll(headers);
 
@@ -184,7 +184,7 @@ class SignUpRepository {
     var request = http.Request(
         'GET',
         Uri.parse(
-            'https://iglace.eyanofinance.org/api/v1/dashboard/sale_site'));
+            'https://iglace.sysmanager.pro/api/v1/dashboard/sale_site'));
 
     // request.headers.addAll(headers);
 
@@ -214,7 +214,7 @@ class SignUpRepository {
     var request = http.Request(
         'GET',
         Uri.parse(
-            'https://iglace.eyanofinance.org/api/v1/dashboard/capacity_unit'));
+            'https://iglace.sysmanager.pro/api/v1/dashboard/capacity_unit'));
 
     // request.headers.addAll(headers);
 
@@ -242,7 +242,7 @@ class SignUpRepository {
 
     // var headers = {'Authorization': 'Bearer $token'};
     var request = http.Request('GET',
-        Uri.parse('https://iglace.eyanofinance.org/api/v1/operation/nature'));
+        Uri.parse('https://iglace.sysmanager.pro/api/v1/operation/nature'));
 
     // request.headers.addAll(headers);
 
@@ -270,7 +270,7 @@ class SignUpRepository {
 
     // var headers = {'Authorization': 'Bearer $token'};
     var request = http.Request('GET',
-        Uri.parse('https://iglace.eyanofinance.org/api/v1/operation/reason'));
+        Uri.parse('https://iglace.sysmanager.pro/api/v1/operation/reason'));
 
     // request.headers.addAll(headers);
 
@@ -308,7 +308,7 @@ class SignUpRepository {
     var headers = {'Content-Type': 'application/json'};
 
     var request = http.Request(
-        'POST', Uri.parse("https://iglace.eyanofinance.org/api/v1/product"));
+        'POST', Uri.parse("https://iglace.sysmanager.pro/api/v1/product"));
 
     request.body = json.encode(data);
 
@@ -354,7 +354,7 @@ class SignUpRepository {
     var request = http.Request(
         'POST',
         Uri.parse(
-            "https://iglace.eyanofinance.org/api/v1/dashboard/sale_site"));
+            "https://iglace.sysmanager.pro/api/v1/dashboard/sale_site"));
 
     request.body = json.encode(data);
 
@@ -398,7 +398,7 @@ class SignUpRepository {
     var headers = {'Content-Type': 'application/json'};
 
     var request = http.Request(
-        'POST', Uri.parse("https://iglace.eyanofinance.org/api/v1/order"));
+        'POST', Uri.parse("https://iglace.sysmanager.pro/api/v1/order"));
 
     request.body = json.encode(data);
 
@@ -442,7 +442,7 @@ class SignUpRepository {
     var headers = {'Content-Type': 'application/json'};
 
     var request = http.Request(
-        'POST', Uri.parse("https://iglace.eyanofinance.org/api/v1/operation"));
+        'POST', Uri.parse("https://iglace.sysmanager.pro/api/v1/operation"));
 
     request.body = json.encode(data);
 
@@ -478,7 +478,7 @@ class SignUpRepository {
     var request = http.Request(
         'GET',
         Uri.parse(
-            'https://iglace.eyanofinance.org/api/v1/order?ID_ordering_agent=${id}'));
+            'https://iglace.sysmanager.pro/api/v1/order?ID_ordering_agent=${id}'));
 
     // request.headers.addAll(headers);
 
@@ -508,7 +508,7 @@ class SignUpRepository {
     var request = http.Request(
         'GET',
         Uri.parse(
-            'https://iglace.eyanofinance.org/api/v1/operation?ID_agent=${id}'));
+            'https://iglace.sysmanager.pro/api/v1/operation?ID_agent=${id}'));
 
     // request.headers.addAll(headers);
 
