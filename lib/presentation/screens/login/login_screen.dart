@@ -371,6 +371,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                       response['data']["agent_ID"].toString());
                                   prefs.setString('idUser',
                                       response['data']["user_ID"].toString());
+                                  BlocProvider.of<SignupCubit>(context)
+                                      .updateField(
+                                          context,
+                                          field: "idUser",
+                                          data: response['data']["user_ID"]
+                                              .toString());
                                   prefs.setString(
                                       'idsite',
                                       response['data']["assignement"]

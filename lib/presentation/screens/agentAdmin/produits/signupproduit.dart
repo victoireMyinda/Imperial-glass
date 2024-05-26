@@ -235,8 +235,12 @@ class _SignupProduitState extends State<SignupProduit> {
                                         "is_available": 1,
                                       };
 
+                                     
+
+
+
                                       Map? response = await SignUpRepository.createProductCream(data);
-                                      // print(response);
+                                       print(response);
 
                                       int status = response["status"];
                                       String? message = response["message"];

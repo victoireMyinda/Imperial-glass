@@ -11,7 +11,7 @@ Map? initialState() {
     'idUser': "",
     'nom': "",
     'postnom': "",
-    'prenom': "",
+    'prenom': "", 
     'descProduit': "",
     'volumeProduit': "",
     'prixProduit': "",

@@ -213,55 +213,61 @@ class _SignupSiteState extends State<SignupSite> {
                                           });
                                           return;
                                         }
-                                       if (state.field!["phone"] == "") {
-                                  ValidationDialog.show(context,
-                                      "Veuillez saisir le numéro de téléphone",
-                                      () {
-                                    if (kDebugMode) {
-                                      print("modal");
-                                    }
-                                  });
-                                  return;
-                                }
+                                        if (state.field!["phone"] == "") {
+                                          ValidationDialog.show(context,
+                                              "Veuillez saisir le numéro de téléphone",
+                                              () {
+                                            if (kDebugMode) {
+                                              print("modal");
+                                            }
+                                          });
+                                          return;
+                                        }
 
-                                if (state.field!["phone"].substring(0, 1) ==
-                                        "0" ||
-                                    state.field!["phone"].substring(0, 1) ==
-                                        "+") {
-                                  ValidationDialog.show(context,
-                                      "Veuillez saisir le numéro avec le format valide, par exemple: (816644420).",
-                                      () {
-                                    print("modal");
-                                  });
-                                  return;
-                                }
+                                        if (state.field!["phone"]
+                                                    .substring(0, 1) ==
+                                                "0" ||
+                                            state.field!["phone"]
+                                                    .substring(0, 1) ==
+                                                "+") {
+                                          ValidationDialog.show(context,
+                                              "Veuillez saisir le numéro avec le format valide, par exemple: (816644420).",
+                                              () {
+                                            print("modal");
+                                          });
+                                          return;
+                                        }
 
-                                if (state.field!["phone"]
-                                            .substring(0, 1) ==
-                                        "1" ||
-                                    state.field!["phone"]
-                                            .substring(0, 1) ==
-                                        "2" ||
-                                    state.field!["phone"]
-                                            .substring(0, 1) ==
-                                        "3" ||
-                                    state.field!["phone"]
-                                            .substring(0, 1) ==
-                                        "4" ||
-                                    state.field!["phone"]
-                                            .substring(0, 1) ==
-                                        "5" ||
-                                    state.field!["phone"].substring(0, 1) ==
-                                        "6" ||
-                                    state.field!["phone"].substring(0, 1) ==
-                                        "7") {
-                                  ValidationDialog.show(context,
-                                      "Veuillez saisir le numéro avec le format valide, par exemple: (816644420).",
-                                      () {
-                                    print("modal");
-                                  });
-                                  return;
-                                }
+                                        if (state.field!["phone"]
+                                                    .substring(0, 1) ==
+                                                "1" ||
+                                            state.field!["phone"]
+                                                    .substring(0, 1) ==
+                                                "2" ||
+                                            state.field!["phone"]
+                                                    .substring(0, 1) ==
+                                                "3" ||
+                                            state.field!["phone"]
+                                                    .substring(0, 1) ==
+                                                "4" ||
+                                            state.field!["phone"]
+                                                    .substring(0, 1) ==
+                                                "5" ||
+                                            state.field!["phone"]
+                                                    .substring(0, 1) ==
+                                                "6" ||
+                                            state.field!["phone"]
+                                                    .substring(0, 1) ==
+                                                "7") {
+                                          ValidationDialog.show(context,
+                                              "Veuillez saisir le numéro avec le format valide, par exemple: (816644420).",
+                                              () {
+                                            print("modal");
+                                          });
+                                          return;
+                                        }
+                                        TransAcademiaLoadingDialog.show(
+                                            context);
 
                                         Map data = {
                                           "name": state.field!["nomsite"],
@@ -271,37 +277,42 @@ class _SignupSiteState extends State<SignupSite> {
                                           "ID_province": 1,
                                           "ID_commune": 2,
                                           "ID_ville": 1,
-                                          "ID_user_created_at":
-                                              state.field!["idUser"],
+                                          "ID_user_created_at": int.tryParse(
+                                              state.field!["idUser"])
                                         };
 
                                         Map? response = await SignUpRepository
                                             .createSiteCream(data);
-                                        // print(response);
 
                                         int status = response["status"];
                                         String? message = response["message"];
 
                                         if (status == 201) {
-                                          TransAcademiaDialogSuccess.stop(
-                                                context);
-                                          String? messageSucces =
-                                              "Site crée avec succès";
+                                          TransAcademiaLoadingDialog.stop(
+                                              context);
+                                          String? messageSucces = message;
                                           TransAcademiaDialogSuccess.show(
-                                              context, messageSucces, "Signup");
+                                              context,
+                                              messageSucces,
+                                              "creation site");
 
-                                          Future.delayed(
-                                              const Duration(
-                                                  milliseconds: 4000),
-                                              () async {
-                                            TransAcademiaDialogSuccess.stop(
-                                                context);
-                                            Navigator.of(context)
-                                                .pushNamedAndRemoveUntil(
-                                                    '/home',
-                                                    (Route<dynamic> route) =>
-                                                        false);
-                                          });
+                                          try {
+                                            Future.delayed(
+                                                const Duration(
+                                                    milliseconds: 4000),
+                                                () async {
+                                              TransAcademiaDialogSuccess.stop(
+                                                  context);
+                                              Navigator.of(context)
+                                                  .pushNamedAndRemoveUntil(
+                                                      '/home',
+                                                      (Route<dynamic> route) =>
+                                                          false);
+                                            });
+                                          } catch (e) {
+                                            print(
+                                                "Exception during navigation: $e");
+                                          }
                                         } else {
                                           TransAcademiaLoadingDialog.stop(
                                               context);
