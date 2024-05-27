@@ -221,26 +221,26 @@ class _SignupProduitState extends State<SignupProduit> {
                                         });
                                         return;
                                       }
+                                      TransAcademiaLoadingDialog.show(context);
                                       Map data = {
                                         "description":
                                             state.field!["descProduit"],
-                                        "unit_price":
-                                            state.field!["prixProduit"],
-                                        "unit_quatity":
-                                            state.field!["qteProduit"],
-                                        "ID_user_created_at":
-                                            state.field!["id"],
+                                        "unit_price": int.tryParse(
+                                            state.field!["prixProduit"]),
+                                        "unit_quatity": int.tryParse(
+                                            state.field!["qteProduit"]),
+                                        "ID_user_created_at": int.tryParse(
+                                            state.field!["idUser"]),
                                         "volume": 1,
                                         "ID_currency": 1,
                                         "is_available": 1,
                                       };
 
-                                     
+                                      // print(data);
 
-
-
-                                      Map? response = await SignUpRepository.createProductCream(data);
-                                       print(response);
+                                      Map? response = await SignUpRepository
+                                          .createProductCream(data);
+                                      //  print(response);
 
                                       int status = response["status"];
                                       String? message = response["message"];

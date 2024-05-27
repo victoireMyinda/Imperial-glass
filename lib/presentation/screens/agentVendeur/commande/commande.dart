@@ -99,24 +99,24 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                             ));
                       },
                     ),
-                    BlocBuilder<SignupCubit, SignupState>(
-                      builder: (context, state) {
-                        return Container(
-                            // padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                            margin: const EdgeInsets.only(bottom: 10),
-                            child: SizedBox(
-                              height: 50.0,
-                              child: KelasiDropdown(
-                                items: "siteData",
-                                value: "site",
-                                controller: siteController,
-                                hintText: "Choisir le site",
-                                color: Colors.white,
-                                label: "Choisir le site",
-                              ),
-                            ));
-                      },
-                    ),
+                    // BlocBuilder<SignupCubit, SignupState>(
+                    //   builder: (context, state) {
+                    //     return Container(
+                    //         // padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    //         margin: const EdgeInsets.only(bottom: 10),
+                    //         child: SizedBox(
+                    //           height: 50.0,
+                    //           child: KelasiDropdown(
+                    //             items: "siteData",
+                    //             value: "site",
+                    //             controller: siteController,
+                    //             hintText: "Choisir le site",
+                    //             color: Colors.white,
+                    //             label: "Choisir le site",
+                    //           ),
+                    //         ));
+                    //   },
+                    // ),
                     for (int i = 0; i < formSectionProduct.length; i++)
                       Container(
                         decoration: BoxDecoration(
@@ -300,6 +300,8 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                                     ligneCommande.add(commandeObject);
 
                                     // print(ligneCommande);
+                                      TransAcademiaLoadingDialog.show(
+                                            context);
 
                                     Map? data = {
                                       "description":
@@ -312,7 +314,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                                       "line": ligneCommande
                                     };
 
-                                    //  print(data);
+                                      // print(data);
 
                                     Map? response = await SignUpRepository
                                         .createCommandeCream(data);

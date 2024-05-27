@@ -356,7 +356,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                 Map? response =
                                     await SignUpRepository.loginCream(data);
-                                // print(response);
+                                print(response);
 
                                 if (response["status"] == 200) {
                                   TransAcademiaLoadingDialog.stop(context);
@@ -377,6 +377,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                           field: "idUser",
                                           data: response['data']["user_ID"]
                                               .toString());
+                                  BlocProvider.of<SignupCubit>(context)
+                                      .updateField(
+                                          context,
+                                          field: "idsite",
+                                          data: response['data']["assignement"]
+                                                  ["ID_sale_site"]
+                                              .toString());
                                   prefs.setString(
                                       'idsite',
                                       response['data']["assignement"]
@@ -385,8 +392,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   prefs.setString(
                                       'nomsite',
                                       response['data']["assignement"]
-                                              ["sale_site"]
-                                          .toString());
+                                          ["sale_site"]);
                                   prefs.setString(
                                       'dateaffectation',
                                       response['data']["assignement"]
