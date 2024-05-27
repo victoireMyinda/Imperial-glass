@@ -43,10 +43,9 @@ class _CardCommandesState extends State<CardCommandes> {
                   Text(
                     "${widget.data!["description"]}",
                     style: TextStyle(
-                      fontSize: 15,
-                      color: MyColors.myBrown,
-                      fontWeight: FontWeight.bold
-                    ),
+                        fontSize: 15,
+                        color: MyColors.myBrown,
+                        fontWeight: FontWeight.bold),
                   ),
                   Icon(
                     Icons.shopping_cart_outlined,
@@ -65,7 +64,8 @@ class _CardCommandesState extends State<CardCommandes> {
                     style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11),
                   ),
                   Text("${widget.data!["order_at"]}",
-                      style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w400, fontSize: 11)),
                 ],
               ),
               SizedBox(
@@ -76,13 +76,14 @@ class _CardCommandesState extends State<CardCommandes> {
                 children: [
                   Text(
                     "Livrée",
-                    style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11),
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11),
                   ),
                   Text("${widget.data!["delivered_at"]}",
-                      style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w400, fontSize: 11)),
                 ],
               ),
-               SizedBox(
+              SizedBox(
                 height: 10,
               ),
               Row(
@@ -90,10 +91,15 @@ class _CardCommandesState extends State<CardCommandes> {
                 children: [
                   Text(
                     "Statut",
-                    style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11),
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11),
                   ),
                   Text("${widget.data!["status"]}",
-                      style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 11,
+                          color: widget.data!["status"] == "pending"
+                              ? Colors.orange
+                              : Colors.green)),
                 ],
               ),
               Divider(
@@ -106,9 +112,11 @@ class _CardCommandesState extends State<CardCommandes> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Date de mise à jour",
-                      style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w400, fontSize: 11)),
                   Text("${widget.data!["updated_at"]}",
-                      style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11))
+                      style:
+                          TextStyle(fontWeight: FontWeight.w400, fontSize: 11))
                 ],
               ),
             ],
@@ -118,4 +126,3 @@ class _CardCommandesState extends State<CardCommandes> {
     );
   }
 }
-
