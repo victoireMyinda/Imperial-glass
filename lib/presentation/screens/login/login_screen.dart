@@ -49,102 +49,15 @@ class _LoginScreenState extends State<LoginScreen> {
     BlocProvider.of<SignupCubit>(context)
         .updateField(context, field: "password", data: "");
     // checkVersion();
-    getDataListAbonnement();
   }
 
-  void getDataListAbonnement() async {
-    await http.post(Uri.parse("${stateInfoUrl}Trans_Liste_Abonement.php"),
-        body: {'App_name': "app", 'token': "2022"}).then((response) {
-      var data = json.decode(response.body);
-
-//      print(data);
-
-      dataAbonnement =
-          data['donnees'].where((e) => e['Type'] == 'Prelevement').toList();
-      prixUSD = dataAbonnement[0]['prix_USD'];
-
-      BlocProvider.of<SignupCubit>(context).updateField(context,
-          field: "prixCDF", data: dataAbonnement[0]['prix_CDF']);
-      BlocProvider.of<SignupCubit>(context).updateField(context,
-          field: "prixUSD", data: dataAbonnement[0]['prix_USD']);
-      BlocProvider.of<SignupCubit>(context).updateField(context,
-          field: "abonnement", data: dataAbonnement[0]['id']);
-    });
-  }
-
-  // checkVersion() async {
-  //   WidgetsFlutterBinding.ensureInitialized();
-
-  //   PackageInfo packageInfo = await PackageInfo.fromPlatform();
-
-  //   String appName = packageInfo.appName;
-  //   String packageName = packageInfo.packageName;
-  //   String buildNumber = packageInfo.buildNumber;
-
-  //   print('build' + buildNumber);
-
-  //   final response = await http
-  //       .get(Uri.parse('https://api-bantou-store.vercel.app/api/v1/versions'));
-
-  //   if (response.statusCode == 200) {
-  //     var data = json.decode(response.body);
-
-  //     print(data["android"]);
-  //     androidState = data["android"];
-  //     iosState = data["ios"];
-  //     List<String> descriptionList = data["description"].split(",");
-
-  //     if (Platform.isIOS == true) {
-  //       if (int.parse(buildNumber) < int.parse(iosState)) {
-  //         BlocProvider.of<SignupCubit>(context).updateField(context,
-  //             field: "iconVersion", data: "assets/images/appstore.json");
-  //         BlocProvider.of<SignupCubit>(context).updateField(context,
-  //             field: "titreVersion",
-  //             data: "Mettez à jour l'application sur Appstore");
-  //         Navigator.of(context).pushNamedAndRemoveUntil(
-  //             '/version', (Route<dynamic> route) => false, arguments: descriptionList);
-  //       } else {
-  //         return;
-  //       }
-  //     }
-
-  //     if (Platform.isIOS == false) {
-  //       if (int.parse(buildNumber) < int.parse(androidState)) {
-  //         BlocProvider.of<SignupCubit>(context).updateField(context,
-  //             field: "iconVersion", data: "assets/images/playstore.json");
-  //         BlocProvider.of<SignupCubit>(context).updateField(context,
-  //             field: "titreVersion",
-  //             data: "Mettez à jour l'application sur playstore");
-
-  //         Navigator.of(context).pushNamedAndRemoveUntil(
-  //             '/version', (Route<dynamic> route) => false,arguments: descriptionList);
-  //         // return;
-  //       } else {
-  //         print('ok');
-  //       }
-  //     }
-  //   } else {
-  //     print('error');
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     ToastContext().init(context);
     return Scaffold(
-      // bottomSheet: SizedBox(
-      //   height: 30.0,
-      //   width: MediaQuery.of(context).size.width,
-      //   child: Column(
-      //       crossAxisAlignment: CrossAxisAlignment.center,
-      //       mainAxisAlignment: MainAxisAlignment.center,
-      //       children: const [
-      //         Text("G.O.D | by Teams Developper"),
-      //       ]),
-      // ),
-      // backgroundColor: Colors.grey.withOpacity(0.1),
-      body: SingleChildScrollView(
+      body: Center(
         child: Container(
           height: MediaQuery.of(context).size.height,
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -226,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     }),
 
                     const SizedBox(
-                      height: 5.0,
+                      height: 20.0,
                     ),
 
                     BlocBuilder<SignupCubit, SignupState>(
@@ -356,7 +269,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                 Map? response =
                                     await SignUpRepository.loginCream(data);
-                                print(response);
+                                // print(response);
 
                                 if (response["status"] == 200) {
                                   TransAcademiaLoadingDialog.stop(context);
@@ -415,7 +328,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         () async {
                                       TransAcademiaDialogSuccess.stop(context);
                                       Navigator.of(context)
-                                          .pushNamedAndRemoveUntil('/home',
+                                          .pushNamedAndRemoveUntil('/routestack',
                                               (Route<dynamic> route) => false);
                                     });
                                   } catch (e) {

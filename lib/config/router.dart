@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:icecream_service/presentation/screens/home/home_screen.dart';
 import 'package:icecream_service/presentation/screens/login/login_screen.dart';
-import 'package:icecream_service/presentation/screens/signup/inscription.dart';
 import 'package:icecream_service/presentation/screens/signup/signup-step1.dart';
 import 'package:icecream_service/presentation/screens/signup/signup-step2.dart';
 import 'package:icecream_service/presentation/screens/signup/signup-step3.dart';
@@ -23,7 +22,7 @@ List<GetPage<dynamic>> getPages() {
         transition: Transition.cupertino),
     GetPage(
         name: '/routestack',
-         page: () => const LoginScreen(),
+         page: () => const  RouteStack(),
         transition: Transition.cupertino),
     GetPage(
         name: '/login',

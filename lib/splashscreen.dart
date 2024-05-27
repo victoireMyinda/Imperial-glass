@@ -6,16 +6,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:icecream_service/business_logic/cubit/signup/cubit/signup_cubit.dart';
-import 'package:icecream_service/presentation/screens/login/login_screen.dart';
-import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogSuccess.dart';
-import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogVersion.dart';
-import 'package:icecream_service/theme.dart';
-import 'package:animator/animator.dart';
-import 'package:http/http.dart' as http;
-import 'package:icecream_service/version.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -60,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
         BlocProvider.of<SignupCubit>(context)
             .updateField(context, field: "prenom", data: prenom);
         Navigator.of(context).pushNamedAndRemoveUntil(
-            '/routestack', (Route<dynamic> route) => false);
+            '/login', (Route<dynamic> route) => false);
       }
     });
   }

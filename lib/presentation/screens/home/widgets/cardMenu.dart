@@ -24,6 +24,7 @@ class _CardMenuState extends State<CardMenu> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 100,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20.0),
@@ -43,7 +44,7 @@ class _CardMenuState extends State<CardMenu> {
           SvgPicture.asset(
             widget.icon.toString(),
             color: Color.fromARGB(255, 131, 105, 95),
-            height: 40,
+            height: 30,
           ),
           const SizedBox(
             height: 20,

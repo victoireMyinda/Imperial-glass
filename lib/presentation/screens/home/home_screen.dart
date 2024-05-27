@@ -18,7 +18,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:icecream_service/business_logic/cubit/signup/cubit/signup_cubit.dart';
 import 'package:icecream_service/presentation/screens/agentAdmin/agents/listeagent.dart';
 import 'package:icecream_service/sizeconfig.dart';
-import 'package:icecream_service/theme.dart';
 import 'widgets/cardMenu.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:toast/toast.dart';
@@ -209,11 +208,10 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-               
+              SizedBox(
                 height: 40,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -257,161 +255,155 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-             
-              Expanded(
-                child: Container(
-                  // // color: Colors.red,
-                  // height: MediaQuery.of(context).size.height,
-                  // width: MediaQuery.of(context).size.width,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: GridView.count(
-                      crossAxisCount: 2,
-                       childAspectRatio: 1,
-                      mainAxisSpacing: 20,
-                      crossAxisSpacing: 20,
-                      children: [
-                        //  InkWell(
-                        //   // onTap: () {
-                        //   //   Navigator.push(
-                        //   //     context,
-                        //   //     MaterialPageRoute(
-                        //   //       builder: (context) =>
-                        //   //           HistoriqueTransanction(isHome: true),
-                        //   //     ),
-                        //   //   );
-                        //   // },
-                        //   child: CardMenu(
-                        //     icon: "assets/icons/dashboard.svg",
-                        //     title: "DashBoard",
-                        //     active: true,
-                        //   ),
-                        // ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ListProduitsScreen(),
-                              ),
-                            );
-                          },
-                          child: CardMenu(
-                            icon: "assets/icons/product.svg",
-                            title: "Produits",
-                            active: true,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ListSitesScreen(),
-                              ),
-                            );
-                          },
-                          child: CardMenu(
-                            icon: "assets/icons/site.svg",
-                            title: "Sites",
-                            active: true,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ListeAgentsScreen(),
-                              ),
-                            );
-                          },
-                          child: CardMenu(
-                            icon: "assets/icons/user-adds.svg",
-                            title: "Agents",
-                            active: true,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const CommandeDuJourScreen(),
-                              ),
-                            );
-                          },
-                          child: CardMenu(
-                            icon: "assets/icons/bus-fret.svg",
-                            title: "Commande",
-                            active: true,
-                          ),
-                        ),
 
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const VenteDuJourScreen(),
-                              ),
-                            );
-                          },
-                          child: CardMenu(
-                            icon: "assets/icons/inv.svg",
-                            title: "Versement",
-                            active: true,
-                          ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    childAspectRatio: 1,
+                    mainAxisSpacing: 20,
+                    crossAxisSpacing: 20,
+                    children: [
+                      //  InkWell(
+                      //   // onTap: () {
+                      //   //   Navigator.push(
+                      //   //     context,
+                      //   //     MaterialPageRoute(
+                      //   //       builder: (context) =>
+                      //   //           HistoriqueTransanction(isHome: true),
+                      //   //     ),
+                      //   //   );
+                      //   // },
+                      //   child: CardMenu(
+                      //     icon: "assets/icons/dashboard.svg",
+                      //     title: "DashBoard",
+                      //     active: true,
+                      //   ),
+                      // ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ListProduitsScreen(),
+                            ),
+                          );
+                        },
+                        child: CardMenu(
+                          icon: "assets/icons/product.svg",
+                          title: "Produits",
+                          active: true,
                         ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const MesVentes(),
-                              ),
-                            );
-                          },
-                          child: CardMenu(
-                            icon: "assets/icons/v.svg",
-                            title: "Mes ventes",
-                            active: true,
-                          ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ListSitesScreen(),
+                            ),
+                          );
+                        },
+                        child: CardMenu(
+                          icon: "assets/icons/site.svg",
+                          title: "Sites",
+                          active: true,
                         ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const MesCommandesScreen(),
-                              ),
-                            );
-                          },
-                          child: CardMenu(
-                            icon: "assets/icons/cart.svg",
-                            title: "Mes commandes",
-                            active: true,
-                          ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ListeAgentsScreen(),
+                            ),
+                          );
+                        },
+                        child: CardMenu(
+                          icon: "assets/icons/user-adds.svg",
+                          title: "Agents",
+                          active: true,
                         ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const MesBonusScreen(),
-                              ),
-                            );
-                          },
-                          child: CardMenu(
-                            icon: "assets/icons/bonus.svg",
-                            title: "Mes bonus",
-                            active: true,
-                          ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const CommandeDuJourScreen(),
+                            ),
+                          );
+                        },
+                        child: CardMenu(
+                          icon: "assets/icons/bus-fret.svg",
+                          title: "Commande",
+                          active: true,
                         ),
-                      ],
-                    ),
+                      ),
+
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const VenteDuJourScreen(),
+                            ),
+                          );
+                        },
+                        child: CardMenu(
+                          icon: "assets/icons/inv.svg",
+                          title: "Versement",
+                          active: true,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MesVentes(),
+                            ),
+                          );
+                        },
+                        child: CardMenu(
+                          icon: "assets/icons/v.svg",
+                          title: "Mes ventes",
+                          active: true,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MesCommandesScreen(),
+                            ),
+                          );
+                        },
+                        child: CardMenu(
+                          icon: "assets/icons/cart.svg",
+                          title: "Mes commandes",
+                          active: true,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MesBonusScreen(),
+                            ),
+                          );
+                        },
+                        child: CardMenu(
+                          icon: "assets/icons/bonus.svg",
+                          title: "Mes bonus",
+                          active: true,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -682,12 +674,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
+                              children: const [
                                 Icon(
                                   Icons.logout,
                                   color: MyColors.myBrown,
                                 ),
-                                const SizedBox(
+                                SizedBox(
                                   width: 100.0,
                                   child: Text(
                                     "Déconnexion",
