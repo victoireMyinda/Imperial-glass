@@ -332,7 +332,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  const CommandeDuJourScreen(),
+                                  CommandeDuJourScreen(backNavigation: false),
                             ),
                           );
                         },
@@ -348,7 +348,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const VenteDuJourScreen(),
+                              builder: (context) =>
+                                  VenteDuJourScreen(backNavigation: false),
                             ),
                           );
                         },

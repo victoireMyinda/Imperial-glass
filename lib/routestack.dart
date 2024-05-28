@@ -35,9 +35,9 @@ class _RouteStackState extends State<RouteStack>
   // ignore: prefer_final_fields
   List<Widget> _screens = [
     const HomeScreen(),
-    const CommandeDuJourScreen(),
-    const VenteDuJourScreen(),
-    SettingScreen(backNavigation: false)
+    CommandeDuJourScreen(backNavigation: false),
+    VenteDuJourScreen(backNavigation: false),
+    const HomeScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -67,14 +67,14 @@ class _RouteStackState extends State<RouteStack>
 Widget bottomNavigationBar(_selectedIndex, _onItemTapped, context) {
   return Container(
     // color: Colors.grey.withOpacity(0.1),
-    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
+    // padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
     child: ClipRRect(
-      // borderRadius: const BorderRadius.only(
-      //   topRight: Radius.circular(30),
-      //   topLeft: Radius.circular(30),
-      //   bottomLeft: Radius.circular(30),
-      //   bottomRight: Radius.circular(30),
-      // ),
+      borderRadius: const BorderRadius.only(
+        topRight: Radius.circular(10),
+        topLeft: Radius.circular(10),
+        bottomLeft: Radius.circular(10),
+        bottomRight: Radius.circular(10),
+      ),
       child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           // backgroundColor: const Color(0xFFffffff),
@@ -91,24 +91,24 @@ Widget bottomNavigationBar(_selectedIndex, _onItemTapped, context) {
                 label: "Accueil",
                 icon: SvgPicture.asset("assets/icons/accueil-trans-grey.svg",
                     width: 20,
-                    color: _selectedIndex == 0 ? Colors.brown : null)),
+                    color: _selectedIndex == 0 ? Colors.brown : Colors.grey)),
             BottomNavigationBarItem(
                 label: "Commande",
                 icon: SvgPicture.asset("assets/icons/bus-fret.svg",
                     width: 20,
-                    color: _selectedIndex == 1 ? Colors.brown : null)),
+                    color: _selectedIndex == 1 ? Colors.brown : Colors.grey)),
             BottomNavigationBarItem(
                 label: "Versement",
                 // icon: Icon(Icons.add_circle_outline, size: 40,color: Colors.grey.withOpacity(0.5),)
                 icon: SvgPicture.asset("assets/icons/inv.svg",
                     width: 20,
-                    color: _selectedIndex == 2 ? Colors.brown : null)),
+                    color: _selectedIndex == 2 ? Colors.brown : Colors.grey)),
             BottomNavigationBarItem(
                 label: "Réglage",
                 // icon: Icon(Icons.add_circle_outline, size: 40,color: Colors.grey.withOpacity(0.5),)
                 icon: SvgPicture.asset("assets/icons/setting-trans-grey.svg",
                     width: 20,
-                    color: _selectedIndex == 3 ? Colors.brown : null)),
+                    color: _selectedIndex == 3 ? Colors.brown : Colors.grey)),
           ]),
     ),
   );

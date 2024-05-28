@@ -17,7 +17,8 @@ import 'package:icecream_service/presentation/widgets/inputs/nameField.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CommandeDuJourScreen extends StatefulWidget {
-  const CommandeDuJourScreen({super.key});
+  CommandeDuJourScreen({super.key, required this.backNavigation});
+   bool backNavigation;
 
   @override
   State<CommandeDuJourScreen> createState() => _CommandeDuJourScreenState();
@@ -66,7 +67,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
       child: Scaffold(
         appBar: AppBarKelasi(
           title: "Commande du jour",
-          leftIcon: "assets/icons/rowback-icon.svg",
+          // leftIcon: "assets/icons/rowback-icon.svg",
           sizeleftIcon: 12,
           onTapFunction: () => Navigator.of(context).pop(),
         ),

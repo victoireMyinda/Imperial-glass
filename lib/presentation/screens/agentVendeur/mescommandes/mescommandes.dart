@@ -65,7 +65,7 @@ class _MesCommandesScreenState extends State<MesCommandesScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>  const CommandeDuJourScreen()),
+                  builder: (context) =>  CommandeDuJourScreen(backNavigation: false)),
             );
           },
           child: Container(
