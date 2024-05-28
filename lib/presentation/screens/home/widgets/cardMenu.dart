@@ -24,10 +24,9 @@ class _CardMenuState extends State<CardMenu> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20.0),
+        borderRadius: BorderRadius.circular(15.0),
         boxShadow: [
           BoxShadow(
             color: const Color.fromARGB(255, 225, 225, 225).withOpacity(0.5),
