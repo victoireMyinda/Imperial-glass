@@ -3,8 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:icecream_service/constants/my_colors.dart';
 import 'package:icecream_service/presentation/screens/agentAdmin/agents/signupagent/signupvendeurstep1.dart';
 import 'package:icecream_service/presentation/widgets/appbarkelasi.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:icecream_service/data/repository/signUp_repository.dart';
+
 
 class DetailAgentScreen extends StatefulWidget {
   Map? data;
@@ -83,7 +82,7 @@ class _DetailAgentScreenState extends State<DetailAgentScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                            Text(
-                            "${widget.data!["first_name"]} ${widget.data!["second_name"]} ${widget.data!["third_name"]}  ",
+                            "${widget.data!["first_name"]} ${widget.data!["second_name"]}",
                             style: const TextStyle(
                               fontSize: 20,
                               color: MyColors.myBrown,
