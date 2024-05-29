@@ -335,7 +335,7 @@ class _CommandeDuJourScreenState extends State<CommandeDuJourScreen> {
                                               context);
                                           Navigator.of(context)
                                               .pushNamedAndRemoveUntil(
-                                                  '/home',
+                                                  '/routestack',
                                                   (Route<dynamic> route) =>
                                                       false);
                                         });

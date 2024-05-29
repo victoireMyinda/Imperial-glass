@@ -307,7 +307,7 @@ class _SignupVendeurStep3State extends State<SignupVendeurStep3> {
                                                 context);
                                             Navigator.of(context)
                                                 .pushNamedAndRemoveUntil(
-                                                    '/home',
+                                                    '/routestack',
                                                     (Route<dynamic> route) =>
                                                         false);
                                           });

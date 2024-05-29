@@ -305,7 +305,7 @@ class _SignupSiteState extends State<SignupSite> {
                                                   context);
                                               Navigator.of(context)
                                                   .pushNamedAndRemoveUntil(
-                                                      '/home',
+                                                      '/routestack',
                                                       (Route<dynamic> route) =>
                                                           false);
                                             });

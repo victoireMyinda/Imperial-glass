@@ -373,7 +373,7 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                                       "stock": ligneOperation
                                     };
 
-                                    // print(data);
+                                     print(data);
 
                                     Map? response = await SignUpRepository
                                         .createOperationCream(data);
@@ -393,7 +393,7 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                                               context);
                                           Navigator.of(context)
                                               .pushNamedAndRemoveUntil(
-                                                  '/home',
+                                                  '/routestack',
                                                   (Route<dynamic> route) =>
                                                       false);
                                         });

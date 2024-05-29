@@ -260,7 +260,7 @@ class _SignupProduitState extends State<SignupProduit> {
                                               context);
                                           Navigator.of(context)
                                               .pushNamedAndRemoveUntil(
-                                                  '/home',
+                                                  '/routestack',
                                                   (Route<dynamic> route) =>
                                                       false);
                                         });
