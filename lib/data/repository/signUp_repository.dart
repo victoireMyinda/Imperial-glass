@@ -25,8 +25,8 @@ class SignUpRepository {
 
     var headers = {'Content-Type': 'application/json'};
 
-    var request = http.Request('POST',
-        Uri.parse("https://iglace.sysmanager.pro/api/v1/auth/signup"));
+    var request = http.Request(
+        'POST', Uri.parse("https://iglace.sysmanager.pro/api/v1/auth/signup"));
 
     request.body = json.encode(data);
 
@@ -181,10 +181,8 @@ class SignUpRepository {
     // String? token = prefs.getString("token");
 
     // var headers = {'Authorization': 'Bearer $token'};
-    var request = http.Request(
-        'GET',
-        Uri.parse(
-            'https://iglace.sysmanager.pro/api/v1/dashboard/sale_site'));
+    var request = http.Request('GET',
+        Uri.parse('https://iglace.sysmanager.pro/api/v1/dashboard/sale_site'));
 
     // request.headers.addAll(headers);
 
@@ -351,10 +349,8 @@ class SignUpRepository {
 
     var headers = {'Content-Type': 'application/json'};
 
-    var request = http.Request(
-        'POST',
-        Uri.parse(
-            "https://iglace.sysmanager.pro/api/v1/dashboard/sale_site"));
+    var request = http.Request('POST',
+        Uri.parse("https://iglace.sysmanager.pro/api/v1/dashboard/sale_site"));
 
     request.body = json.encode(data);
 
@@ -455,10 +451,11 @@ class SignUpRepository {
     Map<String, dynamic> responseJson = json.decode(responseBody);
 
     int statusCode = responseJson['code'];
+    String? message = responseJson['message'];
 
-    if (statusCode == 200) {
+    if (statusCode == 201) {
       Map? responseData = responseJson['data'];
-      String? message = responseJson['message'];
+
       //prefs.setString("token", token.toString());
       return {"status": statusCode, "data": responseData, "message": message};
     } else if (statusCode == 400) {

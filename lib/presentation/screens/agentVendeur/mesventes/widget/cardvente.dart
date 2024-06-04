@@ -41,7 +41,7 @@ class _CardVentesState extends State<CardVentes> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "${widget.data!["operation_nature"]}",
+                    "${widget.data!["operation_nature"]} | ${widget.data!["operation_reason"]}",
                     style: TextStyle(
                       fontSize: 15,
                       color: MyColors.myBrown,
@@ -49,8 +49,9 @@ class _CardVentesState extends State<CardVentes> {
                     ),
                   ),
                   Icon(
-                    Icons.money_sharp,
+                    Icons.attach_money_outlined,
                     color: MyColors.myBrown,
+                    size: 24,
                   ),
                 ],
               ),
@@ -61,10 +62,10 @@ class _CardVentesState extends State<CardVentes> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Quantité totale",
+                    "Site de vente",
                     style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11),
                   ),
-                  Text("${widget.data!["total_quantity"]}",
+                  Text("${widget.data!["sale_site"]}",
                       style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
                 ],
               ),
@@ -75,25 +76,26 @@ class _CardVentesState extends State<CardVentes> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Volume total",
-                    style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11),
+                    "Quantité vendue",
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11),
                   ),
-                  Text("${widget.data!["total_volume"]}   ${widget.data!["unit_name"]}",
+                  Text("${widget.data!["total_quantity"]} ${widget.data!["unit_name"]}",
                       style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
                 ],
               ),
-               SizedBox(
+              SizedBox(
                 height: 10,
               ),
+            
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Somme totale",
+                    "Somme totale vendue",
                     style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11),
                   ),
-                  Text("${widget.data!["total_sum"]}   ${widget.data!["currency_name"]}",
-                      style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
+                  Text("${widget.data!["total_sum"]}  ${widget.data!["currency_name"]}",
+                      style: TextStyle(fontWeight: FontWeight.w500,fontSize: 11, color: Colors.brown)),
                 ],
               ),
               Divider(
@@ -105,9 +107,9 @@ class _CardVentesState extends State<CardVentes> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Date de mise à jour",
+                  Text("Date de la vente",
                       style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11)),
-                  Text("${widget.data!["updated_at"]}",
+                  Text("${widget.data!["created_at"]}",
                       style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11))
                 ],
               ),

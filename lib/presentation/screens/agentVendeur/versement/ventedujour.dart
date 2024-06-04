@@ -17,8 +17,8 @@ import 'package:icecream_service/presentation/widgets/inputs/nameField.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class VenteDuJourScreen extends StatefulWidget {
-   VenteDuJourScreen({super.key, required this.backNavigation});
- bool backNavigation;
+  VenteDuJourScreen({super.key, required this.backNavigation});
+  bool backNavigation;
   @override
   State<VenteDuJourScreen> createState() => _VenteDuJourScreenState();
 }
@@ -373,17 +373,20 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                                       "stock": ligneOperation
                                     };
 
-                                     print(data);
+                                    //  print(data);
+
+                                    TransAcademiaLoadingDialog.show(context);
 
                                     Map? response = await SignUpRepository
                                         .createOperationCream(data);
 
-                                    if (response["status"] == 200) {
+                                    String? message = response["message"];
+
+                                    if (response["status"] == 201) {
                                       TransAcademiaLoadingDialog.stop(context);
-                                      String? messageSucces =
-                                          response["message"];
+
                                       TransAcademiaDialogSuccess.show(
-                                          context, messageSucces, "Auth");
+                                          context, message, "Auth");
 
                                       try {
                                         Future.delayed(
@@ -405,7 +408,7 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                                       TransAcademiaLoadingDialog.stop(context);
                                       TransAcademiaDialogError.show(
                                         context,
-                                        response["message"],
+                                        "le prix renseigné n'équivaut pas à ce que vous devez normalement renseigner",
                                         "login",
                                       );
                                       Future.delayed(
@@ -415,8 +418,8 @@ class _VenteDuJourScreenState extends State<VenteDuJourScreen> {
                                       });
                                     } else {
                                       TransAcademiaLoadingDialog.stop(context);
-                                      TransAcademiaDialogError.show(context,
-                                          response["message"], "login");
+                                      TransAcademiaDialogError.show(
+                                          context, message, "login");
                                     }
                                   },
                                   child: const ButtonTransAcademia(
