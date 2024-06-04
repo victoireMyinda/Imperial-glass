@@ -27,7 +27,7 @@ class _CardCommandesState extends State<CardCommandes> {
         padding: const EdgeInsets.all(10.0),
         child: Container(
           padding: EdgeInsets.all(20),
-          height: 180,
+          height: 200,
           decoration: BoxDecoration(
             color: Colors.white,
             // border: Border.all(color: MyColors.mylite),
@@ -37,30 +37,58 @@ class _CardCommandesState extends State<CardCommandes> {
           ),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+               Row(
+               
                 children: [
                   Text(
                     "${widget.data!["description"]}",
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: MyColors.myBrown,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12,color: MyColors.myBrown,),
                   ),
-                  Icon(
-                    Icons.shopping_cart_outlined,
-                    color: MyColors.myBrown,
-                  ),
+                  
                 ],
               ),
-              Divider(
+               Divider(
                 thickness: 1,
+              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Text(
+              //       "${widget.data!["estimated_price"]} Franc congolais",
+              //       style: TextStyle(
+              //           fontSize: 11,
+                        
+              //           fontWeight: FontWeight.bold),
+              //     ),
+              //     Icon(
+              //       Icons.shopping_cart_outlined,
+              //       color: MyColors.myBrown,
+              //     ),
+              //   ],
+              // ),
+              // Divider(
+              //   thickness: 1,
+              // ),
+                Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Prix total de la commande",
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11),
+                  ),
+                  Text("${widget.data!["estimated_price"]} FC", 
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 11)),
+                ],
+              ),
+              SizedBox(
+                height: 10,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Commande",
+                    "Commandée",
                     style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11),
                   ),
                   Text("${widget.data!["order_at"]}",

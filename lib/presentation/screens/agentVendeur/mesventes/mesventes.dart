@@ -51,7 +51,7 @@ class _MesVentesState extends State<MesVentes> {
       child: Scaffold(
           // backgroundColor: Colors.grey.withOpacity(0.1),
           appBar: AppBarKelasi(
-            title: "Mes ventes",
+            title: "Historique de ventes",
             leftIcon: "assets/icons/rowback-icon.svg",
             visibleAvatar: false,
             sizeleftIcon: 12,
