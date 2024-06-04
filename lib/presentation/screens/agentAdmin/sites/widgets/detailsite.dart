@@ -5,16 +5,13 @@ import 'package:icecream_service/presentation/widgets/appbarkelasi.dart';
 
 class DetailSitesScreen extends StatefulWidget {
   Map? data;
-  DetailSitesScreen({
-    super.key, required this.data
-  });
+  DetailSitesScreen({super.key, required this.data});
 
   @override
   State<DetailSitesScreen> createState() => _DetailSitesScreenState();
 }
 
 class _DetailSitesScreenState extends State<DetailSitesScreen> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -49,7 +46,6 @@ class _DetailSitesScreenState extends State<DetailSitesScreen> {
                         image: AssetImage('assets/images/site.jpg'),
                         fit: BoxFit.cover,
                       ),
-                   
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -60,6 +56,7 @@ class _DetailSitesScreenState extends State<DetailSitesScreen> {
                   // color: Colors.grey,
                   child: Column(
                     children: [
+                      
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -98,13 +95,27 @@ class _DetailSitesScreenState extends State<DetailSitesScreen> {
                           ),
                         ],
                       ),
+                      const SizedBox(height: 20,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Nom du site",
+                            style: TextStyle(fontWeight: FontWeight.w300),
+                          ),
+                          Text("${widget.data!["name"]}",
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w300)),
+                        ],
+                      ),
                       const Divider(
                         thickness: 1,
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                       Row(
+                      
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
@@ -112,71 +123,8 @@ class _DetailSitesScreenState extends State<DetailSitesScreen> {
                             style: TextStyle(fontWeight: FontWeight.w300),
                           ),
                           Text("${widget.data!["location"]}",
-                              style: const TextStyle(fontWeight: FontWeight.w300)),
-                        ],
-                      ),
-                      const Divider(
-                        thickness: 1,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
-                            "Province",
-                            style: TextStyle(fontWeight: FontWeight.w300),
-                          ),
-                          Text("Kinshasa",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
-                        ],
-                      ),
-                      const Divider(
-                        thickness: 1,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text("Ville",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("Kinshasa",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
-                        ],
-                      ),
-                      const Divider(
-                        thickness: 1,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text("Commune",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("Masina",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
-                        ],
-                      ),
-                     
-                        const Divider(
-                        thickness: 1,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text("Agent affecté",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("Victoire myinda",
-                              style: TextStyle(fontWeight: FontWeight.w300)),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w300)),
                         ],
                       ),
                       const Divider(
@@ -188,10 +136,29 @@ class _DetailSitesScreenState extends State<DetailSitesScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text("Date de mise à jour",
+                          const Text(
+                            "Téléphone",
+                            style: TextStyle(fontWeight: FontWeight.w300),
+                          ),
+                          Text("${widget.data!["contacts"]}",
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w300)),
+                        ],
+                      ),
+                      const Divider(
+                        thickness: 1,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text("Date de creation",
                               style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("${widget.data!["updated_at"]}",
-                              style: const TextStyle(fontWeight: FontWeight.w300))
+                          Text("${widget.data!["created_at"]}",
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w300))
                         ],
                       ),
                     ],
