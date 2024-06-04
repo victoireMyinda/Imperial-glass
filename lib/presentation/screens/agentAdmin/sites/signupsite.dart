@@ -45,7 +45,9 @@ class _SignupSiteState extends State<SignupSite> {
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                     const SizedBox(height: 70,),
                       Container(
                         margin: const EdgeInsets.all(8),
                         padding: const EdgeInsets.all(5),
@@ -97,7 +99,7 @@ class _SignupSiteState extends State<SignupSite> {
                               ),
                             ),
                             const SizedBox(height: 20),
-                            const SizedBox(height: 10),
+                            
                             BlocBuilder<SignupCubit, SignupState>(
                                 builder: (context, state) {
                               return Container(
@@ -114,7 +116,7 @@ class _SignupSiteState extends State<SignupSite> {
                                     ),
                                   ));
                             }),
-                            const SizedBox(height: 10),
+                              const SizedBox(height: 20),
                             BlocBuilder<SignupCubit, SignupState>(
                                 builder: (context, state) {
                               return Container(
@@ -132,7 +134,7 @@ class _SignupSiteState extends State<SignupSite> {
                                     ),
                                   ));
                             }),
-                            const SizedBox(height: 10),
+                              const SizedBox(height: 20),
                             BlocBuilder<SignupCubit, SignupState>(
                                 builder: (context, state) {
                               return Container(
@@ -150,28 +152,28 @@ class _SignupSiteState extends State<SignupSite> {
                                     ),
                                   ));
                             }),
-                            const SizedBox(height: 10),
-                            const TransAcademiaDropdown(
-                              items: "provinceData",
-                              value: "province",
-                              label: "Choisir la province",
-                              hintText: "Choisir la province",
-                            ),
-                            const SizedBox(height: 10),
-                            const TransAcademiaDropdown(
-                              items: "villeData",
-                              value: "ville",
-                              label: "Choisir la ville",
-                              hintText: "Choisir la ville",
-                            ),
-                            const SizedBox(height: 10),
-                            const TransAcademiaDropdown(
-                              items: "communeData",
-                              value: "commune",
-                              label: "Choisir la commune",
-                              hintText: "Choisir la commune",
-                            ),
-                            const SizedBox(height: 10),
+                            // const SizedBox(height: 10),
+                            // const TransAcademiaDropdown(
+                            //   items: "provinceData",
+                            //   value: "province",
+                            //   label: "Choisir la province",
+                            //   hintText: "Choisir la province",
+                            // ),
+                            // const SizedBox(height: 10),
+                            // const TransAcademiaDropdown(
+                            //   items: "villeData",
+                            //   value: "ville",
+                            //   label: "Choisir la ville",
+                            //   hintText: "Choisir la ville",
+                            // ),
+                            // const SizedBox(height: 10),
+                            // const TransAcademiaDropdown(
+                            //   items: "communeData",
+                            //   value: "commune",
+                            //   label: "Choisir la commune",
+                            //   hintText: "Choisir la commune",
+                            // ),
+                              const SizedBox(height: 20),
                             Container(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),
@@ -328,7 +330,7 @@ class _SignupSiteState extends State<SignupSite> {
                               ),
                             ),
                             SizedBox(
-                              height: getProportionateScreenHeight(15),
+                              height: getProportionateScreenHeight(30),
                             ),
                           ],
                         ),

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:icecream_service/constants/my_colors.dart';
 import 'package:icecream_service/data/repository/signUp_repository.dart';
 import 'package:icecream_service/presentation/screens/agentAdmin/produits/widget/cardlistPlaceholder.dart';
+import 'package:icecream_service/presentation/screens/agentVendeur/commande/commande.dart';
 import 'package:icecream_service/presentation/screens/agentVendeur/mesventes/widget/cardvente.dart';
+import 'package:icecream_service/presentation/screens/agentVendeur/versement/ventedujour.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../widgets/appbarkelasi.dart';
@@ -60,13 +62,13 @@ class _MesVentesState extends State<MesVentes> {
             onTapFunction: () => Navigator.of(context).pop(),
           ),
             floatingActionButton: InkWell(
-          // onTap: () {
-          //   Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) =>  const CommandeDuJourScreen()),
-          //   );
-          // },
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>   VenteDuJourScreen(backNavigation: false,)),
+            );
+          },
           child: Container(
             width: 50,
             height: 50,
