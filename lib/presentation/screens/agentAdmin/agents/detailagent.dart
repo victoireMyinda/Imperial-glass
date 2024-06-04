@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:icecream_service/business_logic/cubit/signup/cubit/signup_cubit.dart';
 import 'package:icecream_service/constants/my_colors.dart';
+import 'package:icecream_service/data/repository/signUp_repository.dart';
+import 'package:icecream_service/presentation/screens/agentAdmin/agents/affectation.dart';
 import 'package:icecream_service/presentation/screens/agentAdmin/agents/signupagent/signupvendeurstep1.dart';
 import 'package:icecream_service/presentation/widgets/appbarkelasi.dart';
-
+import 'package:icecream_service/presentation/widgets/buttons/buttonTransAcademia.dart';
+import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogError.dart';
+import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogSuccess.dart';
+import 'package:icecream_service/presentation/widgets/dialog/loading.dialog.dart';
 
 class DetailAgentScreen extends StatefulWidget {
   Map? data;
-  DetailAgentScreen({
-    super.key, required this.data
-  });
+  DetailAgentScreen({super.key, required this.data});
 
   @override
   State<DetailAgentScreen> createState() => _DetailAgentScreenState();
 }
 
 class _DetailAgentScreenState extends State<DetailAgentScreen> {
-  
   // bool isLoading = true;
 
   // @override
@@ -61,8 +65,8 @@ class _DetailAgentScreenState extends State<DetailAgentScreen> {
                 const SizedBox(height: 20),
                 Center(
                   child: Container(
-                    height: 130,
-                    width: 130,
+                    height: 100,
+                    width: 100,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                     ),
@@ -72,7 +76,6 @@ class _DetailAgentScreenState extends State<DetailAgentScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
                 Container(
                   padding: const EdgeInsets.all(20),
                   // color: Colors.grey,
@@ -81,7 +84,7 @@ class _DetailAgentScreenState extends State<DetailAgentScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                           Text(
+                          Text(
                             "${widget.data!["first_name"]} ${widget.data!["second_name"]}",
                             style: const TextStyle(
                               fontSize: 20,
@@ -124,11 +127,12 @@ class _DetailAgentScreenState extends State<DetailAgentScreen> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children:  [
+                        children: [
                           const Text("Téléphone",
                               style: TextStyle(fontWeight: FontWeight.w300)),
                           Text("${widget.data!["phone"]}",
-                              style: const TextStyle(fontWeight: FontWeight.w300)),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w300)),
                         ],
                       ),
                       const Divider(
@@ -205,7 +209,8 @@ class _DetailAgentScreenState extends State<DetailAgentScreen> {
                           const Text("Grade",
                               style: TextStyle(fontWeight: FontWeight.w300)),
                           Text("${widget.data!["grade"]}",
-                              style: const TextStyle(fontWeight: FontWeight.w300)),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w300)),
                         ],
                       ),
                       const Divider(
@@ -220,7 +225,8 @@ class _DetailAgentScreenState extends State<DetailAgentScreen> {
                           const Text("Fonction",
                               style: TextStyle(fontWeight: FontWeight.w300)),
                           Text("${widget.data!["function"]}",
-                              style: const TextStyle(fontWeight: FontWeight.w300)),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w300)),
                         ],
                       ),
                       const Divider(
@@ -231,11 +237,12 @@ class _DetailAgentScreenState extends State<DetailAgentScreen> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children:  [
-                         const  Text("Mail",
+                        children: [
+                          const Text("Mail",
                               style: TextStyle(fontWeight: FontWeight.w300)),
                           Text("${widget.data!["email"]}",
-                              style: const TextStyle(fontWeight: FontWeight.w300)),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w300)),
                         ],
                       ),
                       const Divider(
@@ -249,11 +256,29 @@ class _DetailAgentScreenState extends State<DetailAgentScreen> {
                         children: [
                           const Text("Date de mise à jour",
                               style: TextStyle(fontWeight: FontWeight.w300)),
-                          Text("${widget.data!["updated_at"]}"
-                          ,
-                              style: const TextStyle(fontWeight: FontWeight.w300))
+                          Text("${widget.data!["updated_at"]}",
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w300))
                         ],
                       ),
+                       const SizedBox(
+                        height: 20,
+                      ),
+                      BlocBuilder<SignupCubit, SignupState>(
+                          builder: (context, state) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      AffectationAgent(data: widget.data)),
+                            );
+                          },
+                          child: const ButtonTransAcademia(
+                              width: 320, title: "Affeter cet agent"),
+                        );
+                      })
                     ],
                   ),
                 )

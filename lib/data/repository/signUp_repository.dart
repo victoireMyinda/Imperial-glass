@@ -467,6 +467,49 @@ class SignUpRepository {
     }
   }
 
+  static Future<Map<String, dynamic>> affectationAgent(Map data, id) async {
+    // Vérifier la connexion Internet
+    try {
+      final response = await InternetAddress.lookup('www.google.com');
+      if (response.isNotEmpty) {
+        if (kDebugMode) {
+          print("connected");
+        }
+      }
+    } on SocketException catch (err) {
+      return {"status": 0, "message": "Pas de connexion internet"};
+    }
+
+    var headers = {'Content-Type': 'application/json'};
+
+    var request = http.Request(
+        'PUT',
+        Uri.parse(
+            "https://iglace.sysmanager.pro/api/v1/dashboard/assignment/${id}"));
+
+    request.body = json.encode(data);
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    String responseBody = await response.stream.bytesToString();
+
+    Map<String, dynamic> responseJson = json.decode(responseBody);
+
+    int statusCode = responseJson['code'];
+    String? message = responseJson['message'];
+
+    if (statusCode == 200) {
+      Map? responseData = responseJson['data'];
+
+      return {"status": statusCode, "data": responseData, "message": message};
+    } else {
+      String? message = responseJson['message'];
+      return {"status": statusCode, "message": message};
+    }
+  }
+
   static Future<Map<String, dynamic>> getCommandesByIdAgent(String? id) async {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // String? token = prefs.getString("token");
