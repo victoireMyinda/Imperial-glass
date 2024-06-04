@@ -501,9 +501,9 @@ class SignUpRepository {
     String? message = responseJson['message'];
 
     if (statusCode == 200) {
-      Map? responseData = responseJson['data'];
+      // Map? responseData = responseJson['data'];
 
-      return {"status": statusCode, "data": responseData, "message": message};
+      return {"status": statusCode,  "message": message};
     } else {
       String? message = responseJson['message'];
       return {"status": statusCode, "message": message};

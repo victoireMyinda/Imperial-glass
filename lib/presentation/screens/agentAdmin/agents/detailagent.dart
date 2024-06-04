@@ -3,14 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:icecream_service/business_logic/cubit/signup/cubit/signup_cubit.dart';
 import 'package:icecream_service/constants/my_colors.dart';
-import 'package:icecream_service/data/repository/signUp_repository.dart';
 import 'package:icecream_service/presentation/screens/agentAdmin/agents/affectation.dart';
 import 'package:icecream_service/presentation/screens/agentAdmin/agents/signupagent/signupvendeurstep1.dart';
 import 'package:icecream_service/presentation/widgets/appbarkelasi.dart';
 import 'package:icecream_service/presentation/widgets/buttons/buttonTransAcademia.dart';
-import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogError.dart';
-import 'package:icecream_service/presentation/widgets/dialog/TransAcademiaDialogSuccess.dart';
-import 'package:icecream_service/presentation/widgets/dialog/loading.dialog.dart';
 
 class DetailAgentScreen extends StatefulWidget {
   Map? data;
@@ -262,7 +258,7 @@ class _DetailAgentScreenState extends State<DetailAgentScreen> {
                         ],
                       ),
                        const SizedBox(
-                        height: 20,
+                        height: 40,
                       ),
                       BlocBuilder<SignupCubit, SignupState>(
                           builder: (context, state) {

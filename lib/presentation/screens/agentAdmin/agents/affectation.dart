@@ -26,6 +26,8 @@ class _AffectationAgentState extends State<AffectationAgent> {
   void initState() {
     super.initState();
 
+    // Map? test = widget.data;
+
     BlocProvider.of<SignupCubit>(context).loadSiteCream();
   }
 
@@ -80,9 +82,10 @@ class _AffectationAgentState extends State<AffectationAgent> {
                               "ID_sale_site": int.tryParse(state.field!["site"])
                             };
 
+                            // print(data);
+
                             Map? response =
-                                await SignUpRepository.affectationAgent(data,
-                                    int.tryParse(widget.data!["agent_ID"]));
+                                await SignUpRepository.affectationAgent(data, widget.data!["ID"]);
                             print(response);
 
                             int status = response["status"];
