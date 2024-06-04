@@ -86,7 +86,7 @@ class _AffectationAgentState extends State<AffectationAgent> {
 
                             Map? response =
                                 await SignUpRepository.affectationAgent(data, widget.data!["ID"]);
-                            print(response);
+                            // print(response);
 
                             int status = response["status"];
                             String? message = response["message"];
