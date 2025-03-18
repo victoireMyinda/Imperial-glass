@@ -84,7 +84,20 @@ class SignUpRepository {
         "message": message,
         "data": data
       };
-    } else {
+    }else if (statusCode == 404) {
+      // String? token = responseJson['token'];
+      String? message = responseJson['message'];
+      Map? data = responseJson['data'];
+
+      // prefs.setString("token", token.toString());
+      return {
+        // "token": token,
+        "status": statusCode,
+        "message": message,
+        "data": data
+      };
+    }
+     else {
       String message = responseJson['message'];
       return {"status": statusCode, "message": message};
     }

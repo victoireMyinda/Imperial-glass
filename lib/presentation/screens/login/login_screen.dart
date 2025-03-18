@@ -334,7 +334,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   } catch (e) {
                                     print("Exception during navigation: $e");
                                   }
-                                } else if (response["status"] == 400) {
+                                } else if (response["status"] == 404) {
                                   TransAcademiaLoadingDialog.stop(context);
                                   TransAcademiaDialogError.show(
                                     context,
